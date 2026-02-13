@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { Modal as RNModal, View, Text } from 'react-native';
 
-import Button from './Button/Button';
+import Button from 'components/Button';
 
 interface ModalProps {
   isOpen: boolean;

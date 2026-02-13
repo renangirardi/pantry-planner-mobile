@@ -7,7 +7,7 @@ import { createUser, editUser } from '../services/user-service';
 import { User } from '../interfaces/User';
 
 import Input from './Input';
-import Button from './Button/Button';
+import Button from './Button';
 import RadioButtons from './RadioButtons';
 
 interface UserFormProps {

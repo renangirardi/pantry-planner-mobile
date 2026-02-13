@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import { useRouter } from 'expo-router';
 
 import { User } from '../interfaces/User';
-import Button from './Button/Button';
+import Button from './Button';
 
 interface UserListItemProps {
   user: User;

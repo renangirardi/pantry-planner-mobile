@@ -5,7 +5,7 @@ import Toast from 'react-native-toast-message';
 import { useAuth } from 'context/AuthContext';
 
 import Input from './Input';
-import Button from './Button/Button';
+import Button from './Button';
 
 export default function LoginForm() {
   const { signIn, user } = useAuth();

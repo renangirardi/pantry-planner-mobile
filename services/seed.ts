@@ -5,7 +5,25 @@ import { Market } from 'interfaces/Market';
 const initialMarkets: Market[] = [
   {
     id: '1',
-    name: 'Zaffari',
+    name: 'Zaffari Bourbon Ipiranga',
+    aisles: [
+      { id: 'c1', name: 'Hortifruti', number: 1 },
+      { id: 'c2', name: 'Mercearia', number: 2 },
+      { id: 'c3', name: 'Pet Shop', number: 3 },
+    ],
+  },
+  {
+    id: '2',
+    name: 'Bistek Nilo Peçanha',
+    aisles: [
+      { id: 'c1', name: 'Hortifruti', number: 1 },
+      { id: 'c2', name: 'Mercearia', number: 2 },
+      { id: 'c3', name: 'Pet Shop', number: 3 },
+    ],
+  },
+  {
+    id: '3',
+    name: 'Zaffari Bourbon Country',
     aisles: [
       { id: 'c1', name: 'Hortifruti', number: 1 },
       { id: 'c2', name: 'Mercearia', number: 2 },

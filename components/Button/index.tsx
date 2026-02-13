@@ -17,12 +17,12 @@ export default function Button({ children, variant, disabled, onPress, icon, isL
   const variantClassesBtn = {
     primary: 'bg-blue-600 active:bg-blue-800 border-transparent',
     danger: 'bg-red-800 active:bg-red-950 border-transparent',
-    secondary: 'bg-transparent border border-blue-600 active:bg-blue-800',
+    secondary: 'bg-transparent border border-blue-500 active:bg-blue-800',
   };
 
   const getContentColor = (pressed: boolean) => {
     if (variant === 'secondary') {
-      return pressed ? '#ffffff' : '#16a34a';
+      return pressed ? '#ffffff' : '#3b82f6';
     }
     return '#ffffff';
   };

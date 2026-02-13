@@ -5,7 +5,7 @@ import Toast from 'react-native-toast-message';
 
 import { createPost, updatePost, deletePost } from 'services/post-service';
 
-import Button from 'components/Button/Button';
+import Button from 'components/Button';
 import Input from 'components/Input';
 import TextArea from 'components/TextArea';
 import Modal from 'components/Modal';
