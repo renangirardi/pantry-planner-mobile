@@ -3,7 +3,7 @@ import { View, Text, Pressable } from 'react-native';
 
 import { Post } from 'interfaces/Post';
 
-import Button from 'components/Button';
+import Button from 'components/Button/Button';
 
 interface PostListItemProps {
   post: Post;

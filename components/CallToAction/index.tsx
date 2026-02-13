@@ -6,24 +6,37 @@ type FeatherIconName = keyof typeof Feather.glyphMap;
 
 type Props = {
   children: ReactNode;
-  variant: 'primary' | 'danger' | 'secondary';
+  variant: 'shoppingList' | 'meals' | 'recipes' | 'pantryItems' | 'markets';
   disabled?: boolean;
   onPress?: () => void;
   icon?: FeatherIconName;
   isLoading?: boolean;
 };
 
-export default function Button({ children, variant, disabled, onPress, icon, isLoading }: Props) {
-  const variantClasses = {
-    primary: 'bg-green-600 active:bg-green-800 border-transparent',
-    danger: 'bg-red-800 active:bg-red-950 border-transparent',
-    secondary: 'bg-transparent border border-green-600 active:bg-green-800',
-  };
+export default function CallToAction({
+  children,
+  variant,
+  disabled,
+  onPress,
+  icon,
+  isLoading,
+}: Props) {
+  const variantClassesBtn = {
+      shoppingList: 'bg-blue-600 active:bg-blue-800 border-transparent',
+      meals: 'bg-green-600 active:bg-green-800 border-transparent',
+      recipes: 'bg-purple-600 active:bg-purple-800 border-transparent',
+      pantryItems: 'bg-yellow-600 active:bg-yellow-800 border-transparent',
+      markets: 'bg-orange-600 active:bg-orange-800 border-transparent',
+    },
+    variantClassesTxt = {
+      shoppingList: 'text-base',
+      meals: 'text-base',
+      recipes: 'text-base',
+      pantryItems: 'text-base',
+      markets: 'text-base',
+    };
 
   const getContentColor = (pressed: boolean) => {
-    if (variant === 'secondary') {
-      return pressed ? '#ffffff' : '#16a34a';
-    }
     return '#ffffff';
   };
 
@@ -32,14 +45,14 @@ export default function Button({ children, variant, disabled, onPress, icon, isL
       onPress={onPress}
       disabled={disabled || isLoading}
       className={`
-        min-h-12 flex-row items-center justify-center rounded-md border px-4 py-3
-        ${variantClasses[variant]}
+        min-h-12 flex-row items-center justify-center rounded-md border px-4 py-10
+        ${variantClassesBtn[variant]}
         ${disabled || isLoading ? 'opacity-50' : ''}
       `}>
       {({ pressed }) => (
         <>
           <Text
-            className="mr-2 text-center text-base font-semibold"
+            className={`mr-2 text-center ${variantClassesTxt[variant]} font-semibold`}
             style={{ color: getContentColor(pressed) }}>
             {isLoading ? 'Loading...' : children}
           </Text>

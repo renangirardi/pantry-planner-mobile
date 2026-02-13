@@ -6,5 +6,5 @@ type Props = {
 };
 
 export default function ContentBox({ children }: Props) {
-  return <View className="mb-6 rounded-lg pb-10 pt-10 shadow-md ">{children}</View>;
+  return <View className="flex w-full mt-8 bg-zinc-800 p-4 rounded-lg border border-zinc-700">{children}</View>;
 }

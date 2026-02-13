@@ -24,14 +24,14 @@ export default function PageTitle({ children, needBackButton = false, backHref }
 
   return (
     <View className="mb-8 flex-row items-center justify-between">
-      <Text className="mr-4 flex-1 text-2xl font-bold leading-tight text-zinc-100">{children}</Text>
+      <Text className="text-3xl font-bold text-blue-500 mb-4">{children}</Text>
 
       {needBackButton && (
         <Pressable
           onPress={handleBack}
           className="flex flex-row items-center gap-2 py-2 active:opacity-50">
           <Feather name="arrow-left" size={18} color="#16a34a" />
-          <Text className="text-base font-semibold text-green-600">Back</Text>
+          <Text className="text-base font-semibold text-blue-600">Back</Text>
         </Pressable>
       )}
     </View>
