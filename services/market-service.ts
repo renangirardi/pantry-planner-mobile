@@ -10,18 +10,22 @@ export async function getMarketById(id: string): Promise<Market | undefined> {
   return markets.find((m) => m.id === id);
 }
 
-export async function createMarket(newMarket: Market): Promise<void> {
+export async function createMarket(newMarket: Partial<Market>): Promise<void> {
   const markets = await getMarkets();
-  markets.push(newMarket);
+  const newId = Date.now().toString();
+  markets.push({ ...newMarket, id: newId } as Market);
   await setStorageData(STORAGE_KEYS.MARKETS, markets);
 }
 
-export async function updateMarket(marketUpdated: Market): Promise<void> {
+export async function updateMarket(
+  marketId: string,
+  marketUpdated: Partial<Market>
+): Promise<void> {
   const markets = await getMarkets();
-  const index = markets.findIndex((m) => m.id === marketUpdated.id);
+  const index = markets.findIndex((m) => m.id === marketId);
 
   if (index !== -1) {
-    markets[index] = marketUpdated;
+    markets[index] = { ...markets[index], ...marketUpdated };
     await setStorageData(STORAGE_KEYS.MARKETS, markets);
   }
 }

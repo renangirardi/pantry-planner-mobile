@@ -33,7 +33,7 @@ export default function MarketListItem({
           <Button
             variant="secondary"
             icon="edit-2"
-            onPress={() => router.push(`/markets/edit/${market.id}`)}>
+            onPress={() => router.push(`/markets/${market.id}`)}>
             Edit
           </Button>
         </View>

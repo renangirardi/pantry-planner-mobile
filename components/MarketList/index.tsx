@@ -7,7 +7,7 @@ import { Market } from 'interfaces/Market';
 import { deleteMarket } from 'services/market-service';
 
 import Modal from 'components/Modal';
-import MarketListItem from 'components/MarketListItem';
+import MarketListItem from './MarketListItem';
 
 interface MarketListProps {
   markets: Market[];
