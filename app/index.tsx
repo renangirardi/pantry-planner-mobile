@@ -28,6 +28,17 @@ export default function Home() {
             </CallToAction>
 
             <CallToAction
+              variant="pantryItems"
+              icon="shopping-bag"
+              onPress={() => router.push('/pantry-items')}>
+              Register new pantry items
+            </CallToAction>
+
+            <CallToAction variant="markets" icon="map-pin" onPress={() => router.push('/markets')}>
+              Enter a new favorite market
+            </CallToAction>
+
+            <CallToAction
               disabled={true}
               variant="meals"
               icon="calendar"
@@ -41,18 +52,6 @@ export default function Home() {
               icon="book"
               onPress={() => router.push('/recipes')}>
               Add new recipes
-            </CallToAction>
-
-            <CallToAction
-              disabled={true}
-              variant="pantryItems"
-              icon="shopping-bag"
-              onPress={() => router.push('/pantry-items')}>
-              Register new pantry items
-            </CallToAction>
-
-            <CallToAction variant="markets" icon="map-pin" onPress={() => router.push('/markets')}>
-              Enter a new favorite market
             </CallToAction>
           </View>
         </View>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { useRouter } from 'expo-router';
 import Toast from 'react-native-toast-message';
-import { Feather } from '@expo/vector-icons'; // Import para os ícones
+import { Feather } from '@expo/vector-icons';
 
 import { createMarket, updateMarket, deleteMarket } from 'services/market-service';
 import { Aisle } from 'interfaces/Aisle';

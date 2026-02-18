@@ -21,7 +21,7 @@ export async function updateItem(itemUpdated: Item): Promise<void> {
   const index = items.findIndex((i) => i.id === itemUpdated.id);
 
   if (index !== -1) {
-    items[index] = itemUpdated;
+    items[index] = { ...items[index], ...itemUpdated };
     await setStorageData(STORAGE_KEYS.ITEMS, items);
   }
 }

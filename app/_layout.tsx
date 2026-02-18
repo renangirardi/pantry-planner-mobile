@@ -51,6 +51,7 @@ export default function Layout() {
               drawerIcon: ({ color, size }) => (
                 <Feather name="calendar" size={size} color={color} />
               ),
+              drawerItemStyle: { display: 'none' },
             }}></Drawer.Screen>
 
           <Drawer.Screen
@@ -59,6 +60,7 @@ export default function Layout() {
               drawerLabel: 'Recipes',
               title: 'Recipes',
               drawerIcon: ({ color, size }) => <Feather name="book" size={size} color={color} />,
+              drawerItemStyle: { display: 'none' },
             }}></Drawer.Screen>
 
           <Drawer.Screen
@@ -85,6 +87,36 @@ export default function Layout() {
               drawerLabel: 'My Profile',
               title: 'My Profile',
               drawerIcon: ({ color, size }) => <Feather name="user" size={size} color={color} />,
+              drawerItemStyle: { display: 'none' },
+            }}></Drawer.Screen>
+
+          {/* The following screens are hidden from the drawer but are needed for navigation */}
+          <Drawer.Screen
+            name="markets/[id]/index"
+            options={{
+              title: 'Market Details',
+              drawerItemStyle: { display: 'none' },
+            }}></Drawer.Screen>
+
+          <Drawer.Screen
+            name="markets/create-new/index"
+            options={{
+              title: 'Create New Market',
+              drawerItemStyle: { display: 'none' },
+            }}></Drawer.Screen>
+
+          <Drawer.Screen
+            name="pantry-items/[id]/index"
+            options={{
+              title: 'Item Details',
+              drawerItemStyle: { display: 'none' },
+            }}></Drawer.Screen>
+
+          <Drawer.Screen
+            name="pantry-items/create-new/index"
+            options={{
+              title: 'Create New Item',
+              drawerItemStyle: { display: 'none' },
             }}></Drawer.Screen>
         </Drawer>
       </SafeAreaView>

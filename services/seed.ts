@@ -7,34 +7,44 @@ const initialMarkets: Market[] = [
     id: '1',
     name: 'Zaffari Bourbon Ipiranga',
     aisles: [
-      { id: 'c1', name: 'Hortifruti', number: 1 },
-      { id: 'c2', name: 'Mercearia', number: 2 },
-      { id: 'c3', name: 'Pet Shop', number: 3 },
+      { id: 'c1', name: 'Hortifruti', number: '1' },
+      { id: 'c2', name: 'Mercearia', number: '2' },
+      { id: 'c3', name: 'Pet Shop', number: '3' },
     ],
   },
   {
     id: '2',
     name: 'Bistek Nilo Peçanha',
     aisles: [
-      { id: 'c1', name: 'Hortifruti', number: 1 },
-      { id: 'c2', name: 'Mercearia', number: 2 },
-      { id: 'c3', name: 'Pet Shop', number: 3 },
+      { id: 'c4', name: 'Hortifruti', number: '1' },
+      { id: 'c5', name: 'Mercearia', number: '2' },
+      { id: 'c6', name: 'Pet Shop', number: '3' },
     ],
   },
   {
     id: '3',
     name: 'Zaffari Bourbon Country',
     aisles: [
-      { id: 'c1', name: 'Hortifruti', number: 1 },
-      { id: 'c2', name: 'Mercearia', number: 2 },
-      { id: 'c3', name: 'Pet Shop', number: 3 },
+      { id: 'c7', name: 'Hortifruti', number: '1' },
+      { id: 'c8', name: 'Mercearia', number: '2' },
+      { id: 'c9', name: 'Pet Shop', number: '3' },
     ],
   },
 ];
 
 const initialItems = [
-  { id: 'i1', name: 'Farinha de Mandioca', locations: [{ marketId: '1', aisleId: 'c1' }] },
-  { id: 'i2', name: 'Ração para o Buba', locations: [{ marketId: '1', aisleId: 'c3' }] },
+  {
+    id: 'i1',
+    name: 'Farinha de Mandioca',
+    locations: [{ marketId: '1', aisleId: 'c1' }],
+    brand: 'Yoki',
+  },
+  {
+    id: 'i2',
+    name: 'Ração para o Buba',
+    locations: [{ marketId: '1', aisleId: 'c2' }],
+    brand: 'Premier',
+  },
 ];
 
 export async function populateDatabaseWhenEmpty() {
