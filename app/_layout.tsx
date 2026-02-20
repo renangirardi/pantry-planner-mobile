@@ -118,6 +118,27 @@ export default function Layout() {
               title: 'Create New Item',
               drawerItemStyle: { display: 'none' },
             }}></Drawer.Screen>
+
+          <Drawer.Screen
+            name="shopping-list/[id]/index"
+            options={{
+              title: 'Shopping List Details',
+              drawerItemStyle: { display: 'none' },
+            }}></Drawer.Screen>
+
+          <Drawer.Screen
+            name="shopping-list/create-new/index"
+            options={{
+              title: 'Create New Shopping List',
+              drawerItemStyle: { display: 'none' },
+            }}></Drawer.Screen>
+
+          <Drawer.Screen
+            name="shopping-list/shop-now/[id]/index"
+            options={{
+              title: "Let's Shop!",
+              drawerItemStyle: { display: 'none' },
+            }}></Drawer.Screen>
         </Drawer>
       </SafeAreaView>
     </GestureHandlerRootView>

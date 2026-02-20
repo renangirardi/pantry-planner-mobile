@@ -1,6 +1,9 @@
 import { createItem } from './item-service';
 import { getMarkets, createMarket } from './market-service';
+import { createShoppingList } from './shopping-list-service';
 import { Market } from 'interfaces/Market';
+import { Item } from 'interfaces/Item';
+import { ShoppingList } from 'interfaces/ShoppingList';
 
 const initialMarkets: Market[] = [
   {
@@ -17,7 +20,7 @@ const initialMarkets: Market[] = [
     name: 'Bistek Nilo Peçanha',
     aisles: [
       { id: 'c4', name: 'Hortifruti', number: '1' },
-      { id: 'c5', name: 'Mercearia', number: '2' },
+      { id: 'c5', name: 'Plásticos', number: '2' },
       { id: 'c6', name: 'Pet Shop', number: '3' },
     ],
   },
@@ -27,12 +30,12 @@ const initialMarkets: Market[] = [
     aisles: [
       { id: 'c7', name: 'Hortifruti', number: '1' },
       { id: 'c8', name: 'Mercearia', number: '2' },
-      { id: 'c9', name: 'Pet Shop', number: '3' },
+      { id: 'c9', name: 'Açogue', number: '3' },
     ],
   },
 ];
 
-const initialItems = [
+const initialItems: Item[] = [
   {
     id: 'i1',
     name: 'Farinha de Mandioca',
@@ -44,6 +47,23 @@ const initialItems = [
     name: 'Ração para o Buba',
     locations: [{ marketId: '1', aisleId: 'c2' }],
     brand: 'Premier',
+  },
+];
+
+export const initialShoppingLists: ShoppingList[] = [
+  {
+    id: 'l1',
+    name: 'Compras da Semana',
+    marketId: '1',
+    itemsIds: ['i1', 'i2'],
+    createdAt: new Date('2026-02-15T10:30:00.000Z').toISOString(),
+  },
+  {
+    id: 'l2',
+    name: 'Jantar Especial com a Daniela',
+    marketId: '3',
+    itemsIds: ['i1'],
+    createdAt: new Date().toISOString(),
   },
 ];
 
@@ -60,6 +80,10 @@ export async function populateDatabaseWhenEmpty() {
 
       for (const item of initialItems) {
         await createItem(item);
+      }
+
+      for (const shoppingList of initialShoppingLists) {
+        await createShoppingList(shoppingList);
       }
 
       console.log('Mock created successfully!');

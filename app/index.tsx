@@ -20,7 +20,6 @@ export default function Home() {
 
           <View className="flex w-full flex-col gap-6 space-y-4">
             <CallToAction
-              disabled={true}
               variant="shoppingList"
               icon="shopping-cart"
               onPress={() => router.push('/shopping-list')}>
