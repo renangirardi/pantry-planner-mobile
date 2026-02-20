@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, SectionList, ActivityIndicator, TouchableOpacity, Alert } from 'react-native';
+import React, { useEffect, useState, useCallback } from 'react';
+import { View, Text, SectionList, ActivityIndicator, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useLocalSearchParams, useRouter } from 'expo-router';
+import { useLocalSearchParams, useRouter, useFocusEffect } from 'expo-router';
 import { Feather } from '@expo/vector-icons';
 import Toast from 'react-native-toast-message';
 
@@ -34,41 +34,45 @@ export default function ActiveShopping() {
 
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    async function fetchAndGroupData() {
-      if (!id) return;
+  useFocusEffect(
+    useCallback(() => {
+      async function fetchAndGroupData() {
+        if (!id) return;
 
-      try {
-        const listId = Array.isArray(id) ? id[0] : id;
-        const currentList = await getShoppingListById(listId);
+        setIsLoading(true);
+        setCheckedItems([]);
 
-        if (!currentList) {
-          Toast.show({ type: 'error', text1: 'List not found.' });
-          router.push('/shopping-list/');
-          return;
+        try {
+          const listId = Array.isArray(id) ? id[0] : id;
+          const currentList = await getShoppingListById(listId);
+
+          if (!currentList) {
+            Toast.show({ type: 'error', text1: 'List not found.' });
+            router.back();
+            return;
+          }
+
+          const fetchedMarkets = await getMarkets();
+          const fetchedItems = await getItems();
+
+          setList(currentList);
+          setMarkets(fetchedMarkets);
+          setAllItems(fetchedItems);
+
+          setCheckedItems(currentList.checkedItemsIds || []);
+
+          setSections(groupItemsForShopping(currentList, fetchedMarkets, fetchedItems));
+        } catch (error) {
+          console.error(error);
+          Toast.show({ type: 'error', text1: 'Failed to load shopping list.' });
+        } finally {
+          setIsLoading(false);
         }
-
-        const fetchedMarkets = await getMarkets();
-        const fetchedItems = await getItems();
-
-        setList(currentList);
-        setMarkets(fetchedMarkets);
-        setAllItems(fetchedItems);
-
-        // CORREÇÃO DO BUG: Puxa o estado diretamente do banco!
-        setCheckedItems(currentList.checkedItemsIds || []);
-
-        setSections(groupItemsForShopping(currentList, fetchedMarkets, fetchedItems));
-      } catch (error) {
-        console.error(error);
-        Toast.show({ type: 'error', text1: 'Failed to load shopping list.' });
-      } finally {
-        setIsLoading(false);
       }
-    }
 
-    fetchAndGroupData();
-  }, [id]);
+      fetchAndGroupData();
+    }, [id])
+  );
 
   const handleToggleCheck = async (itemId: string) => {
     const newChecked = checkedItems.includes(itemId)
@@ -104,12 +108,9 @@ export default function ActiveShopping() {
   const handleConfirmFinish = async () => {
     setIsFinishing(true);
     try {
-      if (list) {
-        await updateShoppingList({ ...list, checkedItemsIds: [] });
-      }
       setIsFinishModalOpen(false);
       Toast.show({ type: 'success', text1: 'Shopping Complete! 🎉' });
-      router.replace({ pathname: '/shopping-lists/', params: { status: 'finished' } });
+      router.replace('/shopping-list/');
     } catch (error) {
       console.error(error);
       Toast.show({ type: 'error', text1: 'Error finishing list' });

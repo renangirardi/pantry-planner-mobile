@@ -8,12 +8,14 @@ interface ShoppingListListItemProps {
   list: ShoppingList;
   onStartShopping: (id: string) => void;
   onOptionsClick: (list: ShoppingList) => void;
+  onRepeatShopping: (list: ShoppingList) => void; // <-- Nova função aqui!
 }
 
 export default function ShoppingListListItem({
   list,
   onStartShopping,
   onOptionsClick,
+  onRepeatShopping,
 }: ShoppingListListItemProps) {
   const formattedDate = new Date(list.createdAt).toLocaleDateString('en-US', {
     month: 'short',
@@ -22,9 +24,28 @@ export default function ShoppingListListItem({
   });
 
   const itemCount = list.itemsIds?.length || 0;
-
   const checkedCount = list.checkedItemsIds?.length || 0;
+
+  // --- LÓGICA DE ESTADOS DA LISTA ---
+  const isFinished = itemCount > 0 && checkedCount === itemCount;
   const isInProgress = checkedCount > 0 && checkedCount < itemCount;
+
+  // Variáveis visuais do botão
+  let btnClass = 'bg-green-600 active:bg-green-700';
+  let iconName: any = 'shopping-cart';
+  let btnText = 'Start Shopping';
+  let onPressAction = () => onStartShopping(list.id);
+
+  if (isFinished) {
+    btnClass = 'bg-indigo-600 active:bg-indigo-700'; // Cor roxa/azul escuro
+    iconName = 'refresh-cw';
+    btnText = 'Repeat List';
+    onPressAction = () => onRepeatShopping(list);
+  } else if (isInProgress) {
+    btnClass = 'bg-amber-600 active:bg-amber-700'; // Cor laranja
+    iconName = 'play-circle';
+    btnText = 'Continue Shopping';
+  }
 
   return (
     <View className="flex-col border-b border-zinc-800 bg-zinc-900/50 p-4">
@@ -35,7 +56,8 @@ export default function ShoppingListListItem({
           </Text>
           <Text className="text-sm font-light text-zinc-400">
             {itemCount} {itemCount === 1 ? 'item' : 'items'}
-            {isInProgress && ` (${checkedCount} done)`} • {formattedDate}
+            {isInProgress && ` (${checkedCount} done)`}
+            {isFinished && ` (All done!)`} • {formattedDate}
           </Text>
         </View>
 
@@ -48,14 +70,10 @@ export default function ShoppingListListItem({
 
       <View className="mt-4">
         <TouchableOpacity
-          onPress={() => onStartShopping(list.id)}
-          className={`w-full flex-row items-center justify-center gap-2 rounded-md py-3 transition-colors ${
-            isInProgress ? 'bg-amber-600 active:bg-amber-700' : 'bg-green-600 active:bg-green-700'
-          }`}>
-          <Feather name={isInProgress ? 'play-circle' : 'shopping-cart'} size={18} color="white" />
-          <Text className="text-base font-bold text-white">
-            {isInProgress ? 'Continue Shopping' : 'Start Shopping'}
-          </Text>
+          onPress={onPressAction}
+          className={`w-full flex-row items-center justify-center gap-2 rounded-md py-3 transition-colors ${btnClass}`}>
+          <Feather name={iconName} size={18} color="white" />
+          <Text className="text-base font-bold text-white">{btnText}</Text>
         </TouchableOpacity>
       </View>
     </View>

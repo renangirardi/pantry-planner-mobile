@@ -6,7 +6,11 @@ import { Feather } from '@expo/vector-icons';
 import * as Crypto from 'expo-crypto';
 
 import { ShoppingList } from 'interfaces/ShoppingList';
-import { deleteShoppingList, createShoppingList } from 'services/shopping-list-service';
+import {
+  deleteShoppingList,
+  createShoppingList,
+  updateShoppingList,
+} from 'services/shopping-list-service';
 
 import Modal from 'components/Modal';
 import ShoppingListListItem from './ShoppingListListItem';
@@ -25,6 +29,18 @@ export default function ShoppingListsList({ lists }: ShoppingListsListProps) {
 
   const handleStartShopping = (id: string) => {
     router.push(`/shopping-list/shop-now/${id}`);
+  };
+
+  const handleRepeatShopping = async (list: ShoppingList) => {
+    try {
+      const resetList = { ...list, checkedItemsIds: [] };
+      await updateShoppingList(resetList);
+
+      router.push(`/shopping-list/shop-now/${list.id}`);
+    } catch (error) {
+      console.error(error);
+      Toast.show({ type: 'error', text1: 'Error restarting the list.' });
+    }
   };
 
   const openOptions = (list: ShoppingList) => {
@@ -108,6 +124,7 @@ export default function ShoppingListsList({ lists }: ShoppingListsListProps) {
             list={item}
             onStartShopping={handleStartShopping}
             onOptionsClick={openOptions}
+            onRepeatShopping={handleRepeatShopping} // <-- Passando a função nova aqui!
           />
         )}
         ListEmptyComponent={
