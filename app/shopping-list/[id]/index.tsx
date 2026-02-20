@@ -8,7 +8,6 @@ import {
   ActivityIndicator,
   Text,
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import Toast from 'react-native-toast-message';
 
@@ -31,8 +30,6 @@ export default function EditShoppingList() {
       if (!id) return;
 
       try {
-        // O Expo Router às vezes passa o ID como array se houver rotas complexas,
-        // isso garante que pegamos a string correta.
         const listId = Array.isArray(id) ? id[0] : id;
 
         const data = await getShoppingListById(listId);
@@ -55,7 +52,7 @@ export default function EditShoppingList() {
 
   return (
     <Container>
-      <SafeAreaView className="flex-1 p-6">
+      <View className="flex-1 p-6">
         <StatusBar barStyle="default" />
 
         <KeyboardAvoidingView
@@ -85,7 +82,7 @@ export default function EditShoppingList() {
             </ContentBox>
           </ScrollView>
         </KeyboardAvoidingView>
-      </SafeAreaView>
+      </View>
     </Container>
   );
 }

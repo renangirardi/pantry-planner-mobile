@@ -1,6 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { ScrollView, StatusBar, KeyboardAvoidingView, Platform } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { ScrollView, StatusBar, KeyboardAvoidingView, Platform, View } from 'react-native';
 import { useFocusEffect } from 'expo-router';
 
 import ContentBox from 'components/ContentBox';
@@ -18,7 +17,7 @@ export default function CreateNewShoppingList() {
 
   return (
     <Container>
-      <SafeAreaView className="flex-1 p-6">
+      <View className="flex-1 p-6">
         <StatusBar barStyle="default" />
 
         <KeyboardAvoidingView
@@ -33,7 +32,7 @@ export default function CreateNewShoppingList() {
             </ContentBox>
           </ScrollView>
         </KeyboardAvoidingView>
-      </SafeAreaView>
+      </View>
     </Container>
   );
 }

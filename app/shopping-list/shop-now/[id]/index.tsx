@@ -130,7 +130,7 @@ export default function ActiveShopping() {
   const totalItemsCount = list?.itemsIds?.length || 0;
 
   return (
-    <SafeAreaView className="flex-1 bg-zinc-950">
+    <View className="flex-1 bg-zinc-950">
       <View className="flex-row items-center border-b border-zinc-800 bg-zinc-900 px-4 py-4 shadow-md">
         <View className="flex-1">
           <Text className="text-xl font-bold text-white" numberOfLines={1}>
@@ -208,6 +208,6 @@ export default function ActiveShopping() {
             : `You still have ${totalItemsCount - checkedItems.length} items left. End anyway?`}
         </Text>
       </Modal>
-    </SafeAreaView>
+    </View>
   );
 }

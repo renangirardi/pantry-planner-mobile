@@ -1,6 +1,5 @@
 import React from 'react';
-import { ScrollView, StatusBar, KeyboardAvoidingView, Platform } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { ScrollView, StatusBar, KeyboardAvoidingView, Platform, View } from 'react-native';
 
 import ContentBox from 'components/ContentBox';
 import ItemForm from 'components/ItemForm';
@@ -9,7 +8,7 @@ import Container from 'components/Container';
 export default function CreateNewItem() {
   return (
     <Container>
-      <SafeAreaView className="flex-1 p-6">
+      <View className="flex-1 p-6">
         <StatusBar barStyle="default" />
 
         <KeyboardAvoidingView
@@ -24,7 +23,7 @@ export default function CreateNewItem() {
             </ContentBox>
           </ScrollView>
         </KeyboardAvoidingView>
-      </SafeAreaView>
+      </View>
     </Container>
   );
 }

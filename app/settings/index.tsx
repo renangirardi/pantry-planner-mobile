@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import Toast from 'react-native-toast-message';
 import { Feather } from '@expo/vector-icons';
@@ -71,7 +70,7 @@ export default function Settings() {
 
   return (
     <Container>
-      <SafeAreaView className="flex-1 p-6">
+      <View className="flex-1 p-6">
         <ScrollView showsVerticalScrollIndicator={false}>
           <ContentBox>
             <View className="mb-6">
@@ -105,7 +104,7 @@ export default function Settings() {
             <Text className="text-center text-xs text-zinc-600">Pantry Planner v1.0.0</Text>
           </View>
         </ScrollView>
-      </SafeAreaView>
+      </View>
 
       <Modal
         isOpen={isExportModalOpen}

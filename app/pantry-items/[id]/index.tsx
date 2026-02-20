@@ -8,7 +8,6 @@ import {
   ActivityIndicator,
   Text,
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import Toast from 'react-native-toast-message';
 
@@ -53,7 +52,7 @@ export default function EditItem() {
 
   return (
     <Container>
-      <SafeAreaView className="flex-1 p-6">
+      <View className="flex-1 p-6">
         <StatusBar barStyle="default" />
 
         <KeyboardAvoidingView
@@ -79,7 +78,7 @@ export default function EditItem() {
             </ContentBox>
           </ScrollView>
         </KeyboardAvoidingView>
-      </SafeAreaView>
+      </View>
     </Container>
   );
 }
