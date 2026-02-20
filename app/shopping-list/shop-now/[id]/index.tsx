@@ -131,12 +131,6 @@ export default function ActiveShopping() {
   return (
     <SafeAreaView className="flex-1 bg-zinc-950">
       <View className="flex-row items-center border-b border-zinc-800 bg-zinc-900 px-4 py-4 shadow-md">
-        <TouchableOpacity
-          onPress={() => router.push('/shopping-list/')}
-          className="mr-4 rounded-full bg-zinc-800 p-2">
-          <Feather name="arrow-left" size={24} color="#e4e4e7" />
-        </TouchableOpacity>
-
         <View className="flex-1">
           <Text className="text-xl font-bold text-white" numberOfLines={1}>
             {list?.name}

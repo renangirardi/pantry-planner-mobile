@@ -20,10 +20,6 @@ export default function CreateNewItem() {
             className="flex-1"
             contentContainerStyle={{ paddingBottom: 40 }}
             keyboardShouldPersistTaps="handled">
-            <PageTitle needBackButton={true} backHref="/pantry-items/">
-              Enter a new Item
-            </PageTitle>
-
             <ContentBox>
               <ItemForm isEditing={false} initialData={{ name: '' }} />
             </ContentBox>

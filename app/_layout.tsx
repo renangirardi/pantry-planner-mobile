@@ -8,11 +8,14 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Feather } from '@expo/vector-icons';
 import { useEffect } from 'react';
 import { populateDatabaseWhenEmpty } from 'services/seed';
+import { useRouter } from 'expo-router';
 
 export default function Layout() {
   useEffect(() => {
     populateDatabaseWhenEmpty();
   }, []);
+
+  const router = useRouter();
 
   return (
     <GestureHandlerRootView className="flex-1">
@@ -20,8 +23,18 @@ export default function Layout() {
         <StatusBar style="light" />
         <Drawer
           screenOptions={{
-            headerStyle: { backgroundColor: '#09090b' },
+            headerTitleAlign: 'center',
+            headerStyle: {
+              backgroundColor: '#09090b',
+              elevation: 0,
+              shadowOpacity: 0,
+              borderBottomWidth: 1,
+              borderBottomColor: '#27272a',
+            },
             headerTintColor: '#f4f4f5',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
             drawerActiveTintColor: '#3b82f6',
             drawerInactiveTintColor: '#ffffff',
             drawerStyle: { backgroundColor: '#18181b' },
@@ -32,7 +45,6 @@ export default function Layout() {
               drawerLabel: 'Home',
               title: 'Pantry Planner',
               drawerIcon: ({ color, size }) => <Feather name="home" size={size} color={color} />,
-              headerRight: () => <Text className="text-white">Olá</Text>,
             }}></Drawer.Screen>
 
           <Drawer.Screen
@@ -106,29 +118,57 @@ export default function Layout() {
           <Drawer.Screen
             name="markets/[id]/index"
             options={{
-              title: 'Favorite Markets',
+              title: 'Edit Market',
               drawerItemStyle: { display: 'none' },
+              headerLeft: () => (
+                <TouchableOpacity
+                  onPress={() => router.replace('/markets/')}
+                  className="ml-4 rounded-full p-2 active:bg-zinc-700">
+                  <Feather name="arrow-left" size={24} color="#e4e4e7" />
+                </TouchableOpacity>
+              ),
             }}></Drawer.Screen>
 
           <Drawer.Screen
             name="markets/create-new/index"
             options={{
-              title: 'Favorite Markets',
+              title: 'New Market',
               drawerItemStyle: { display: 'none' },
+              headerLeft: () => (
+                <TouchableOpacity
+                  onPress={() => router.replace('/markets/')}
+                  className="ml-4 rounded-full p-2 active:bg-zinc-700">
+                  <Feather name="arrow-left" size={24} color="#e4e4e7" />
+                </TouchableOpacity>
+              ),
             }}></Drawer.Screen>
 
           <Drawer.Screen
             name="pantry-items/[id]/index"
             options={{
-              title: 'Pantry Items',
+              title: 'Edit Item',
               drawerItemStyle: { display: 'none' },
+              headerLeft: () => (
+                <TouchableOpacity
+                  onPress={() => router.replace('/pantry-items/')}
+                  className="ml-4 rounded-full p-2 active:bg-zinc-700">
+                  <Feather name="arrow-left" size={24} color="#e4e4e7" />
+                </TouchableOpacity>
+              ),
             }}></Drawer.Screen>
 
           <Drawer.Screen
             name="pantry-items/create-new/index"
             options={{
-              title: 'Pantry Items',
+              title: 'New Item',
               drawerItemStyle: { display: 'none' },
+              headerLeft: () => (
+                <TouchableOpacity
+                  onPress={() => router.replace('/pantry-items/')}
+                  className="ml-4 rounded-full p-2 active:bg-zinc-700">
+                  <Feather name="arrow-left" size={24} color="#e4e4e7" />
+                </TouchableOpacity>
+              ),
             }}></Drawer.Screen>
 
           <Drawer.Screen
@@ -136,13 +176,27 @@ export default function Layout() {
             options={{
               title: 'Shopping List',
               drawerItemStyle: { display: 'none' },
+              headerLeft: () => (
+                <TouchableOpacity
+                  onPress={() => router.replace('/shopping-list/')}
+                  className="ml-4 rounded-full p-2 active:bg-zinc-700">
+                  <Feather name="arrow-left" size={24} color="#e4e4e7" />
+                </TouchableOpacity>
+              ),
             }}></Drawer.Screen>
 
           <Drawer.Screen
             name="shopping-list/create-new/index"
             options={{
-              title: 'Shopping List',
+              title: 'New Shopping List',
               drawerItemStyle: { display: 'none' },
+              headerLeft: () => (
+                <TouchableOpacity
+                  onPress={() => router.replace('/shopping-list/')}
+                  className="ml-4 rounded-full p-2 active:bg-zinc-700">
+                  <Feather name="arrow-left" size={24} color="#e4e4e7" />
+                </TouchableOpacity>
+              ),
             }}></Drawer.Screen>
 
           <Drawer.Screen
@@ -150,6 +204,13 @@ export default function Layout() {
             options={{
               title: "Let's Shop!",
               drawerItemStyle: { display: 'none' },
+              headerLeft: () => (
+                <TouchableOpacity
+                  onPress={() => router.replace('/shopping-list/')}
+                  className="ml-4 rounded-full p-2 active:bg-zinc-700">
+                  <Feather name="arrow-left" size={24} color="#e4e4e7" />
+                </TouchableOpacity>
+              ),
             }}></Drawer.Screen>
         </Drawer>
       </SafeAreaView>

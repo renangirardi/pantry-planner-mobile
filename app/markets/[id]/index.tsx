@@ -64,10 +64,6 @@ export default function EditMarket() {
             className="flex-1"
             contentContainerStyle={{ paddingBottom: 40 }}
             keyboardShouldPersistTaps="handled">
-            <PageTitle needBackButton={true} backHref="/markets/">
-              Edit Market
-            </PageTitle>
-
             <ContentBox>
               {loading ? (
                 <View className="h-60 items-center justify-center">

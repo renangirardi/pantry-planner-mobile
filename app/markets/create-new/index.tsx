@@ -20,10 +20,6 @@ export default function CreateNewMarket() {
             className="flex-1"
             contentContainerStyle={{ paddingBottom: 40 }}
             keyboardShouldPersistTaps="handled">
-            <PageTitle needBackButton={true} backHref="/markets/">
-              Enter a new Market
-            </PageTitle>
-
             <ContentBox>
               <MarketForm isEditing={false} initialData={{ name: '', aisles: [] }} />
             </ContentBox>

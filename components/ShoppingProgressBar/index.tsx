@@ -18,8 +18,7 @@ export default function ShoppingProgressBar({
   const isDone = totalItems > 0 && checkedItems === totalItems;
 
   return (
-    <View className="border-t border-zinc-800 bg-zinc-950 p-4 pb-8 shadow-lg">
-      {/* Textos de Progresso */}
+    <View className="border-t border-zinc-800 bg-zinc-950 p-4 shadow-lg">
       <View className="mb-4 flex-row items-end justify-between">
         <View>
           <Text className="text-xs font-bold uppercase tracking-wider text-zinc-500">Progress</Text>
@@ -32,16 +31,13 @@ export default function ShoppingProgressBar({
         </Text>
       </View>
 
-      {/* Trilha da Barra de Progresso */}
       <View className="mb-6 h-3 w-full overflow-hidden rounded-full bg-zinc-800">
-        {/* Preenchimento Verde da Barra */}
         <View
           className={`h-full rounded-full transition-all duration-300 ${isDone ? 'bg-green-400' : 'bg-green-600'}`}
           style={{ width: `${progressPercentage}%` }}
         />
       </View>
 
-      {/* Botão de Finalizar (Muda de cor quando atinge 100%) */}
       <TouchableOpacity
         onPress={onFinish}
         className={`w-full flex-row items-center justify-center gap-2 rounded-xl py-4 transition-colors ${

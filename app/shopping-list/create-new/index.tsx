@@ -29,10 +29,6 @@ export default function CreateNewShoppingList() {
             className="flex-1"
             contentContainerStyle={{ paddingBottom: 40 }}
             keyboardShouldPersistTaps="handled">
-            <PageTitle needBackButton={true} backHref="/shopping-list/">
-              Create New List
-            </PageTitle>
-
             <ContentBox>
               <ShoppingListForm key={formKey} />
             </ContentBox>
