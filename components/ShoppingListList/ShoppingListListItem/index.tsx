@@ -23,29 +23,39 @@ export default function ShoppingListListItem({
 
   const itemCount = list.itemsIds?.length || 0;
 
-  return (
-    <View className="flex-row items-center justify-between border-b border-zinc-800 bg-zinc-900/50 p-4">
-      <View className="flex-1 flex-col gap-1 pr-4">
-        <Text className="text-lg font-bold text-zinc-100" numberOfLines={1}>
-          {list.name}
-        </Text>
-        <Text className="text-sm font-light text-zinc-400">
-          {itemCount} {itemCount === 1 ? 'item' : 'items'} • {formattedDate}
-        </Text>
-      </View>
+  const checkedCount = list.checkedItemsIds?.length || 0;
+  const isInProgress = checkedCount > 0 && checkedCount < itemCount;
 
-      <View className="flex-row items-center gap-2">
-        <TouchableOpacity
-          onPress={() => onStartShopping(list.id)}
-          className="flex-row items-center justify-center gap-2 rounded-md bg-green-600 px-4 py-2 active:bg-green-700">
-          <Feather name="shopping-cart" size={16} color="white" />
-          <Text className="font-bold text-white">Start Shopping</Text>
-        </TouchableOpacity>
+  return (
+    <View className="flex-col border-b border-zinc-800 bg-zinc-900/50 p-4">
+      <View className="flex-row items-start justify-between">
+        <View className="flex-1 flex-col gap-1 pr-4">
+          <Text className="text-lg font-bold text-zinc-100" numberOfLines={1}>
+            {list.name}
+          </Text>
+          <Text className="text-sm font-light text-zinc-400">
+            {itemCount} {itemCount === 1 ? 'item' : 'items'}
+            {isInProgress && ` (${checkedCount} done)`} • {formattedDate}
+          </Text>
+        </View>
 
         <TouchableOpacity
           onPress={() => onOptionsClick(list)}
-          className="ml-1 items-center justify-center rounded-md p-2 active:bg-zinc-800">
+          className="-mr-2 -mt-2 items-center justify-center rounded-md p-2 active:bg-zinc-800">
           <Feather name="more-vertical" size={24} color="#a1a1aa" />
+        </TouchableOpacity>
+      </View>
+
+      <View className="mt-4">
+        <TouchableOpacity
+          onPress={() => onStartShopping(list.id)}
+          className={`w-full flex-row items-center justify-center gap-2 rounded-md py-3 transition-colors ${
+            isInProgress ? 'bg-amber-600 active:bg-amber-700' : 'bg-green-600 active:bg-green-700'
+          }`}>
+          <Feather name={isInProgress ? 'play-circle' : 'shopping-cart'} size={18} color="white" />
+          <Text className="text-base font-bold text-white">
+            {isInProgress ? 'Continue Shopping' : 'Start Shopping'}
+          </Text>
         </TouchableOpacity>
       </View>
     </View>

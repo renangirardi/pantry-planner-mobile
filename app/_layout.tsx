@@ -94,42 +94,42 @@ export default function Layout() {
           <Drawer.Screen
             name="markets/[id]/index"
             options={{
-              title: 'Market Details',
+              title: 'Favorite Markets',
               drawerItemStyle: { display: 'none' },
             }}></Drawer.Screen>
 
           <Drawer.Screen
             name="markets/create-new/index"
             options={{
-              title: 'Create New Market',
+              title: 'Favorite Markets',
               drawerItemStyle: { display: 'none' },
             }}></Drawer.Screen>
 
           <Drawer.Screen
             name="pantry-items/[id]/index"
             options={{
-              title: 'Item Details',
+              title: 'Pantry Items',
               drawerItemStyle: { display: 'none' },
             }}></Drawer.Screen>
 
           <Drawer.Screen
             name="pantry-items/create-new/index"
             options={{
-              title: 'Create New Item',
+              title: 'Pantry Items',
               drawerItemStyle: { display: 'none' },
             }}></Drawer.Screen>
 
           <Drawer.Screen
             name="shopping-list/[id]/index"
             options={{
-              title: 'Shopping List Details',
+              title: 'Shopping List',
               drawerItemStyle: { display: 'none' },
             }}></Drawer.Screen>
 
           <Drawer.Screen
             name="shopping-list/create-new/index"
             options={{
-              title: 'Create New Shopping List',
+              title: 'Shopping List',
               drawerItemStyle: { display: 'none' },
             }}></Drawer.Screen>
 

@@ -49,7 +49,7 @@ export default function ShoppingLists() {
             Plan your next supermarket run. Create a new list or use an existing one.
           </PageDescription>
 
-          <View className="mb-10 w-full">
+          <View className="mb-10">
             <Button
               variant="primary"
               icon="plus"

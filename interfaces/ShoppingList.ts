@@ -4,4 +4,5 @@ export interface ShoppingList {
   marketId?: string;
   itemsIds?: string[];
   createdAt: string;
+  checkedItemsIds?: string[];
 }

@@ -23,18 +23,18 @@ export default function Home() {
               variant="shoppingList"
               icon="shopping-cart"
               onPress={() => router.push('/shopping-list')}>
-              Start New Shopping List
+              Start a new Shopping List
             </CallToAction>
 
             <CallToAction
               variant="pantryItems"
               icon="shopping-bag"
               onPress={() => router.push('/pantry-items')}>
-              Register new pantry items
+              Register new Pantry Items
             </CallToAction>
 
             <CallToAction variant="markets" icon="map-pin" onPress={() => router.push('/markets')}>
-              Enter a new favorite market
+              Enter a new Favorite Market
             </CallToAction>
 
             <CallToAction
@@ -42,7 +42,7 @@ export default function Home() {
               variant="meals"
               icon="calendar"
               onPress={() => router.push('/meals')}>
-              Plan next week&apos;s meals
+              Plan next week&apos;s Meals
             </CallToAction>
 
             <CallToAction
@@ -50,7 +50,7 @@ export default function Home() {
               variant="recipes"
               icon="book"
               onPress={() => router.push('/recipes')}>
-              Add new recipes
+              Add new Recipes
             </CallToAction>
           </View>
         </View>
