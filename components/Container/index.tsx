@@ -7,7 +7,7 @@ interface ContainerProps extends ViewProps {
 
 export default function Container({ children, showHeader = true, ...props }: ContainerProps) {
   return (
-    <View className="flex flex-1 bg-zinc-900" {...props}>
+    <View className="flex flex-1 bg-zinc-900 " {...props}>
       {children}
     </View>
   );

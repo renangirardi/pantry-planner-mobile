@@ -53,7 +53,7 @@ export default function EditMarket() {
 
   return (
     <Container>
-      <SafeAreaView className="flex-1 bg-zinc-950">
+      <SafeAreaView className="flex-1  p-6">
         <StatusBar barStyle="default" />
 
         <KeyboardAvoidingView
