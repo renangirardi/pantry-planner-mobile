@@ -1,0 +1,26 @@
+{
+  "markets": [
+    {
+      "id": "m1",
+      "name": "Bistek Nilo",
+      "aisles": [{ "id": "m1_c1", "name": "Hortifruti", "number": "1" }]
+    }
+  ],
+  "items": [
+    {
+      "id": "i1",
+      "name": "Banana Caturra",
+      "locations": [{ "marketId": "m1", "aisleId": "m1_c1" }]
+    }
+  ],
+  "shoppingLists": [
+    {
+      "id": "l1",
+      "name": "Rancho do Mês",
+      "marketId": "m1",
+      "itemsIds": ["i1"],
+      "createdAt": "2026-02-18T10:00:00.000Z",
+      "checkedItemsIds": []
+    }
+  ]
+}

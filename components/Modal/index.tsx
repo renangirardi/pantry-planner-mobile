@@ -1,5 +1,5 @@
-import { ReactNode } from 'react';
-import { Modal as RNModal, View, Text } from 'react-native';
+import React from 'react';
+import { View, Text, Modal as RNModal } from 'react-native';
 
 import Button from 'components/Button';
 
@@ -8,8 +8,11 @@ interface ModalProps {
   onClose: () => void;
   onConfirm: () => void;
   title: string;
-  children: ReactNode;
+  children: React.ReactNode;
   isLoading?: boolean;
+  confirmText?: string;
+  confirmVariant?: 'primary' | 'danger';
+  hideFooter?: boolean;
 }
 
 export default function Modal({
@@ -19,30 +22,32 @@ export default function Modal({
   title,
   children,
   isLoading = false,
+  confirmText = 'Delete',
+  confirmVariant = 'danger',
+  hideFooter = false,
 }: ModalProps) {
   return (
-    <RNModal visible={isOpen} transparent={true} animationType="fade" onRequestClose={onClose}>
-      <View className="flex-1 items-center justify-center bg-black/60 p-6">
-        <View className="w-full max-w-sm rounded-2xl border border-zinc-800 bg-zinc-900 p-6 shadow-2xl">
-          <Text className="mb-2 text-xl font-bold text-[#ededed]">{title}</Text>
+    <RNModal visible={isOpen} transparent animationType="fade">
+      <View className="flex-1 items-center justify-center bg-black/70 px-4">
+        <View className="w-full rounded-2xl border border-zinc-800 bg-zinc-900 p-6 shadow-xl">
+          <Text className="mb-4 text-xl font-bold text-zinc-100">{title}</Text>
 
-          <View className="mb-6">
-            <Text className="text-base text-[#ededed]">{children}</Text>
-          </View>
+          <View className={hideFooter ? '' : 'mb-8'}>{children}</View>
 
-          <View className="flex-row justify-end gap-3">
-            <View className="flex-1">
-              <Button variant="secondary" onPress={onClose} disabled={isLoading}>
-                Cancel
-              </Button>
+          {!hideFooter && (
+            <View className="flex-row gap-4">
+              <View className="flex-1">
+                <Button variant="secondary" onPress={onClose} disabled={isLoading}>
+                  Cancel
+                </Button>
+              </View>
+              <View className="flex-1">
+                <Button variant={confirmVariant} onPress={onConfirm} disabled={isLoading}>
+                  {isLoading ? 'Wait...' : confirmText}
+                </Button>
+              </View>
             </View>
-
-            <View className="flex-1">
-              <Button variant="danger" onPress={onConfirm} disabled={isLoading}>
-                {isLoading ? 'Deleting...' : 'Confirm'}
-              </Button>
-            </View>
-          </View>
+          )}
         </View>
       </View>
     </RNModal>

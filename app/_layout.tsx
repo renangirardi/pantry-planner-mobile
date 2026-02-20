@@ -1,4 +1,5 @@
 import '../global.css';
+import { View, Text, SectionList, ActivityIndicator, TouchableOpacity, Alert } from 'react-native';
 
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Drawer } from 'expo-router/drawer';
@@ -31,6 +32,7 @@ export default function Layout() {
               drawerLabel: 'Home',
               title: 'Pantry Planner',
               drawerIcon: ({ color, size }) => <Feather name="home" size={size} color={color} />,
+              headerRight: () => <Text className="text-white">Olá</Text>,
             }}></Drawer.Screen>
 
           <Drawer.Screen
@@ -88,6 +90,16 @@ export default function Layout() {
               title: 'My Profile',
               drawerIcon: ({ color, size }) => <Feather name="user" size={size} color={color} />,
               drawerItemStyle: { display: 'none' },
+            }}></Drawer.Screen>
+
+          <Drawer.Screen
+            name="settings/index"
+            options={{
+              drawerLabel: 'Settings',
+              title: 'Settings',
+              drawerIcon: ({ color, size }) => (
+                <Feather name="settings" size={size} color={color} />
+              ),
             }}></Drawer.Screen>
 
           {/* The following screens are hidden from the drawer but are needed for navigation */}

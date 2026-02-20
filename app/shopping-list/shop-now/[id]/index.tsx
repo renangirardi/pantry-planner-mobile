@@ -15,18 +15,19 @@ import { Market } from 'interfaces/Market';
 import { groupItemsForShopping, ShoppingSection } from 'utils/shopping-helpers';
 import ActiveShoppingListItem from 'components/ActiveShoppingListItem';
 import ShoppingProgressBar from 'components/ShoppingProgressBar';
-import MultiSelectModal from 'components/MultiSelectModal'; // Reaproveitando o Modal!
+import MultiSelectModal from 'components/MultiSelectModal';
+import Modal from 'components/Modal';
 
 export default function ActiveShopping() {
   const { id } = useLocalSearchParams();
   const router = useRouter();
 
-  // Estados
   const [list, setList] = useState<ShoppingList | null>(null);
   const [sections, setSections] = useState<ShoppingSection[]>([]);
   const [checkedItems, setCheckedItems] = useState<string[]>([]);
+  const [isFinishModalOpen, setIsFinishModalOpen] = useState(false);
+  const [isFinishing, setIsFinishing] = useState(false);
 
-  // Para adicionar novos itens
   const [allItems, setAllItems] = useState<Item[]>([]);
   const [markets, setMarkets] = useState<Market[]>([]);
   const [isItemModalOpen, setIsItemModalOpen] = useState(false);
@@ -69,22 +70,18 @@ export default function ActiveShopping() {
     fetchAndGroupData();
   }, [id]);
 
-  // --- MARCAR E DESMARCAR ITENS ---
   const handleToggleCheck = async (itemId: string) => {
     const newChecked = checkedItems.includes(itemId)
       ? checkedItems.filter((id) => id !== itemId)
       : [...checkedItems, itemId];
 
-    // Atualiza a tela instantaneamente
     setCheckedItems(newChecked);
 
-    // Salva no banco de dados em segundo plano (Persistência)
     if (list) {
       await updateShoppingList({ ...list, checkedItemsIds: newChecked });
     }
   };
 
-  // --- ADICIONAR NOVOS ITENS À LISTA ---
   const handleToggleAddList = async (itemId: string) => {
     if (!list) return;
 
@@ -94,39 +91,31 @@ export default function ActiveShopping() {
 
     const updatedList = { ...list, itemsIds: newItemsIds };
 
-    // Atualiza os estados e reagrupa (A mágica do React faz reorganizar sozinho!)
     setList(updatedList);
     setSections(groupItemsForShopping(updatedList, markets, allItems));
 
-    // Salva no banco
     await updateShoppingList(updatedList);
   };
 
-  // --- FINALIZAR ---
   const handleFinishShopping = () => {
-    const totalItems = list?.itemsIds?.length || 0;
+    setIsFinishModalOpen(true);
+  };
 
-    Alert.alert(
-      'Finish Shopping',
-      checkedItems.length === totalItems
-        ? 'Awesome! You got everything on the list. Ready to checkout?'
-        : `You still have ${totalItems - checkedItems.length} items left. End anyway?`,
-      [
-        { text: 'Keep Shopping', style: 'cancel' },
-        {
-          text: 'Finish & Leave',
-          style: 'default',
-          onPress: async () => {
-            // Limpa o progresso para a lista ficar pronta para o próximo mês!
-            if (list) {
-              await updateShoppingList({ ...list, checkedItemsIds: [] });
-            }
-            Toast.show({ type: 'success', text1: 'Shopping Complete! 🎉' });
-            router.replace({ pathname: '/shopping-list/', params: { status: 'finished' } });
-          },
-        },
-      ]
-    );
+  const handleConfirmFinish = async () => {
+    setIsFinishing(true);
+    try {
+      if (list) {
+        await updateShoppingList({ ...list, checkedItemsIds: [] });
+      }
+      setIsFinishModalOpen(false);
+      Toast.show({ type: 'success', text1: 'Shopping Complete! 🎉' });
+      router.replace({ pathname: '/shopping-lists/', params: { status: 'finished' } });
+    } catch (error) {
+      console.error(error);
+      Toast.show({ type: 'error', text1: 'Error finishing list' });
+    } finally {
+      setIsFinishing(false);
+    }
   };
 
   if (isLoading) {
@@ -157,7 +146,6 @@ export default function ActiveShopping() {
           </Text>
         </View>
 
-        {/* NOVO BOTÃO: Adicionar Itens Rápidos */}
         <TouchableOpacity
           onPress={() => setIsItemModalOpen(true)}
           className="ml-2 flex-row items-center justify-center gap-1 rounded-full bg-green-600/20 px-3 py-2 active:bg-green-600/40">
@@ -202,7 +190,6 @@ export default function ActiveShopping() {
         onFinish={handleFinishShopping}
       />
 
-      {/* REAPROVEITANDO SEU MODAL AQUI! */}
       <MultiSelectModal
         visible={isItemModalOpen}
         title="Add Forgotten Items"
@@ -211,6 +198,21 @@ export default function ActiveShopping() {
         onClose={() => setIsItemModalOpen(false)}
         onToggle={handleToggleAddList}
       />
+
+      <Modal
+        isOpen={isFinishModalOpen}
+        onClose={() => setIsFinishModalOpen(false)}
+        onConfirm={handleConfirmFinish}
+        title="Finish Shopping"
+        isLoading={isFinishing}
+        confirmText="Finish"
+        confirmVariant="primary">
+        <Text className="text-base text-zinc-300">
+          {checkedItems.length === totalItemsCount
+            ? 'Awesome! You got everything on the list. Ready to checkout?'
+            : `You still have ${totalItemsCount - checkedItems.length} items left. End anyway?`}
+        </Text>
+      </Modal>
     </SafeAreaView>
   );
 }
