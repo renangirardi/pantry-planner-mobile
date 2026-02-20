@@ -16,8 +16,7 @@ npm-debug.*
 *.orig.*
 web-build/
 
-
-
+data/renan-data.json
 
 ios
 android

@@ -9,10 +9,7 @@
     "experiments": {
       "tsconfigPaths": true
     },
-    "plugins": [
-      "expo-router",
-      "expo-secure-store"
-    ],
+    "plugins": ["expo-router", "expo-secure-store"],
     "orientation": "portrait",
     "icon": "./assets/be-logo.png",
     "userInterfaceStyle": "dark",
@@ -21,14 +18,13 @@
       "resizeMode": "contain",
       "backgroundColor": "#09090b"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "package": "com.renangirardi.pantryplanner",
+      "softwareKeyboardLayoutMode": "resize",
       "adaptiveIcon": {
         "foregroundImage": "./assets/be-logo.png",
         "backgroundColor": "#09090b"
