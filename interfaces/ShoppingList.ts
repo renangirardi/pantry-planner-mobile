@@ -5,4 +5,5 @@ export interface ShoppingList {
   itemsIds?: string[];
   createdAt: string;
   checkedItemsIds?: string[];
+  itemQuantities?: Record<string, string>;
 }

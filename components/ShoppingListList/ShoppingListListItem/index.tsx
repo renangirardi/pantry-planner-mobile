@@ -8,7 +8,7 @@ interface ShoppingListListItemProps {
   list: ShoppingList;
   onStartShopping: (id: string) => void;
   onOptionsClick: (list: ShoppingList) => void;
-  onRepeatShopping: (list: ShoppingList) => void; // <-- Nova função aqui!
+  onRepeatShopping: (list: ShoppingList) => void;
 }
 
 export default function ShoppingListListItem({
@@ -26,23 +26,21 @@ export default function ShoppingListListItem({
   const itemCount = list.itemsIds?.length || 0;
   const checkedCount = list.checkedItemsIds?.length || 0;
 
-  // --- LÓGICA DE ESTADOS DA LISTA ---
   const isFinished = itemCount > 0 && checkedCount === itemCount;
   const isInProgress = checkedCount > 0 && checkedCount < itemCount;
 
-  // Variáveis visuais do botão
   let btnClass = 'bg-green-600 active:bg-green-700';
   let iconName: any = 'shopping-cart';
   let btnText = 'Start Shopping';
   let onPressAction = () => onStartShopping(list.id);
 
   if (isFinished) {
-    btnClass = 'bg-indigo-600 active:bg-indigo-700'; // Cor roxa/azul escuro
+    btnClass = 'bg-indigo-600 active:bg-indigo-700';
     iconName = 'refresh-cw';
     btnText = 'Repeat List';
     onPressAction = () => onRepeatShopping(list);
   } else if (isInProgress) {
-    btnClass = 'bg-amber-600 active:bg-amber-700'; // Cor laranja
+    btnClass = 'bg-amber-600 active:bg-amber-700';
     iconName = 'play-circle';
     btnText = 'Continue Shopping';
   }

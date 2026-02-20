@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, TextInput } from 'react-native';
 import { useRouter } from 'expo-router';
 import Toast from 'react-native-toast-message';
 import { Feather } from '@expo/vector-icons';
@@ -41,6 +41,10 @@ export default function ShoppingListForm({
     itemsIds: initialData?.itemsIds || [],
   });
 
+  const [quantities, setQuantities] = useState<Record<string, string>>(
+    initialData?.itemQuantities || {}
+  );
+
   const [markets, setMarkets] = useState<Market[]>([]);
   const [allItems, setAllItems] = useState<Item[]>([]);
 
@@ -72,6 +76,15 @@ export default function ShoppingListForm({
   const handleItemToggle = (itemId: string) => {
     setFormData((prev) => {
       const isSelected = prev.itemsIds.includes(itemId);
+
+      if (isSelected) {
+        setQuantities((qPrev) => {
+          const newQ = { ...qPrev };
+          delete newQ[itemId];
+          return newQ;
+        });
+      }
+
       return {
         ...prev,
         itemsIds: isSelected
@@ -79,6 +92,10 @@ export default function ShoppingListForm({
           : [...prev.itemsIds, itemId],
       };
     });
+  };
+
+  const handleQuantityChange = (itemId: string, value: string) => {
+    setQuantities((prev) => ({ ...prev, [itemId]: value }));
   };
 
   const handleSubmit = async () => {
@@ -94,6 +111,7 @@ export default function ShoppingListForm({
           name: finalName,
           marketId: formData.marketId,
           itemsIds: formData.itemsIds,
+          itemQuantities: quantities,
         });
         router.replace({ pathname: '/shopping-list/', params: { status: 'updated' } });
       } else {
@@ -102,6 +120,8 @@ export default function ShoppingListForm({
           name: finalName,
           marketId: formData.marketId,
           itemsIds: formData.itemsIds,
+          checkedItemsIds: [],
+          itemQuantities: quantities,
           createdAt: new Date().toISOString(),
         });
         router.replace({ pathname: '/shopping-list/', params: { status: 'created' } });
@@ -173,12 +193,23 @@ export default function ShoppingListForm({
                           ? 'border-b border-zinc-800/80'
                           : ''
                       }`}>
-                      <Text className="flex-1 pr-2 text-base text-zinc-100">
+                      {/* TEXTO DO ITEM - Ocupa o espaço restante à esquerda */}
+                      <Text className="flex-1 pr-2 text-base text-zinc-100" numberOfLines={2}>
                         {item.name}{' '}
                         {item.brand && (
                           <Text className="text-sm text-zinc-500">({item.brand})</Text>
                         )}
                       </Text>
+
+                      {/* INPUT DE QUANTIDADE - Fica à direita, antes do botão de apagar */}
+                      <TextInput
+                        placeholder="Qty (e.g. 2, 500g)"
+                        placeholderTextColor="#52525b"
+                        value={quantities[item.id] || ''}
+                        onChangeText={(text) => handleQuantityChange(item.id, text)}
+                        className="mr-2 w-28 rounded-md border border-zinc-700 bg-zinc-800 px-3 py-2 text-sm text-zinc-100 focus:border-green-500"
+                        returnKeyType="done"
+                      />
 
                       <TouchableOpacity
                         onPress={() => handleItemToggle(item.id)}
@@ -229,6 +260,8 @@ export default function ShoppingListForm({
         title="Add Items"
         options={allItems}
         selectedIds={formData.itemsIds}
+        quantities={quantities}
+        onQuantityChange={handleQuantityChange}
         onClose={() => setItemSelectorOpen(false)}
         onToggle={handleItemToggle}
       />

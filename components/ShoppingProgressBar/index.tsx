@@ -13,7 +13,6 @@ export default function ShoppingProgressBar({
   checkedItems,
   onFinish,
 }: ShoppingProgressBarProps) {
-  // Evita divisão por zero caso a lista esteja vazia
   const progressPercentage = totalItems === 0 ? 0 : Math.round((checkedItems / totalItems) * 100);
   const isDone = totalItems > 0 && checkedItems === totalItems;
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { View, Text, SectionList, ActivityIndicator, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams, useRouter, useFocusEffect } from 'expo-router';
@@ -31,6 +31,7 @@ export default function ActiveShopping() {
   const [allItems, setAllItems] = useState<Item[]>([]);
   const [markets, setMarkets] = useState<Market[]>([]);
   const [isItemModalOpen, setIsItemModalOpen] = useState(false);
+  const [quantities, setQuantities] = useState<Record<string, string>>({});
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -61,6 +62,8 @@ export default function ActiveShopping() {
 
           setCheckedItems(currentList.checkedItemsIds || []);
 
+          setQuantities(currentList.itemQuantities || {});
+
           setSections(groupItemsForShopping(currentList, fetchedMarkets, fetchedItems));
         } catch (error) {
           console.error(error);
@@ -89,16 +92,37 @@ export default function ActiveShopping() {
   const handleToggleAddList = async (itemId: string) => {
     if (!list) return;
 
-    const newItemsIds = list.itemsIds!.includes(itemId)
+    const isSelected = list.itemsIds!.includes(itemId);
+    const newItemsIds = isSelected
       ? list.itemsIds!.filter((id) => id !== itemId)
       : [...list.itemsIds!, itemId];
 
-    const updatedList = { ...list, itemsIds: newItemsIds };
+    const newQuantities = { ...quantities };
+    if (isSelected) {
+      delete newQuantities[itemId];
+    }
+    setQuantities(newQuantities);
+
+    const updatedList = { ...list, itemsIds: newItemsIds, itemQuantities: newQuantities };
 
     setList(updatedList);
     setSections(groupItemsForShopping(updatedList, markets, allItems));
 
     await updateShoppingList(updatedList);
+  };
+
+  const handleQuantityChange = (itemId: string, value: string) => {
+    setQuantities((prev) => ({ ...prev, [itemId]: value }));
+  };
+
+  const handleCloseItemModal = async () => {
+    setIsItemModalOpen(false);
+    if (list) {
+      const updatedList = { ...list, itemQuantities: quantities };
+      setList(updatedList);
+      setSections(groupItemsForShopping(updatedList, markets, allItems));
+      await updateShoppingList(updatedList);
+    }
   };
 
   const handleFinishShopping = () => {
@@ -167,6 +191,7 @@ export default function ActiveShopping() {
               item={item}
               isChecked={checkedItems.includes(item.id)}
               onToggle={handleToggleCheck}
+              quantity={list?.itemQuantities?.[item.id]}
             />
           )}
           ListEmptyComponent={
@@ -190,8 +215,10 @@ export default function ActiveShopping() {
         title="Add Forgotten Items"
         options={allItems}
         selectedIds={list?.itemsIds || []}
-        onClose={() => setIsItemModalOpen(false)}
+        onClose={handleCloseItemModal}
         onToggle={handleToggleAddList}
+        quantities={quantities}
+        onQuantityChange={handleQuantityChange}
       />
 
       <Modal

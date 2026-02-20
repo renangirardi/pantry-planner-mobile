@@ -124,7 +124,7 @@ export default function ShoppingListsList({ lists }: ShoppingListsListProps) {
             list={item}
             onStartShopping={handleStartShopping}
             onOptionsClick={openOptions}
-            onRepeatShopping={handleRepeatShopping} // <-- Passando a função nova aqui!
+            onRepeatShopping={handleRepeatShopping}
           />
         )}
         ListEmptyComponent={

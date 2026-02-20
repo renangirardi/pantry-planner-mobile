@@ -31,14 +31,13 @@ export default function MarketForm({
     aisles:
       initialData.aisles.length > 0
         ? initialData.aisles
-        : [{ id: Date.now().toString(), name: '', number: '' }], // Começa com 1 vazio
+        : [{ id: Date.now().toString(), name: '', number: '' }],
   });
 
   const [isLoading, setIsLoading] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
 
-  // Atualiza nome do mercado
   const handleChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
