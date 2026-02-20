@@ -1,9 +1,8 @@
 import React, { useState, useCallback } from 'react';
 import { ScrollView, StatusBar, KeyboardAvoidingView, Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useFocusEffect } from 'expo-router'; // <-- Importamos isso
+import { useFocusEffect } from 'expo-router';
 
-import PageTitle from 'components/PageTitle';
 import ContentBox from 'components/ContentBox';
 import Container from 'components/Container';
 import ShoppingListForm from 'components/ShoppingListForm';

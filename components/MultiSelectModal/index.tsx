@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Modal as RNModal, FlatList } from 'react-native';
+import { View, Text, TouchableOpacity, Modal as RNModal, FlatList, Pressable } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
 interface MultiSelectModalProps {
@@ -21,8 +21,8 @@ export default function MultiSelectModal({
 }: MultiSelectModalProps) {
   return (
     <RNModal visible={visible} animationType="slide" transparent>
-      <View className="flex-1 justify-end bg-black/80">
-        <View className="h-[70%] rounded-t-3xl bg-zinc-900 p-6 pb-10">
+      <Pressable className="flex-1 justify-end bg-black/80" onPress={onClose}>
+        <Pressable className="h-[70%] rounded-t-3xl bg-zinc-900 p-6 pb-10">
           <View className="mb-4 flex-row items-center justify-between">
             <Text className="text-xl font-bold text-white">{title}</Text>
             <TouchableOpacity onPress={onClose} className="rounded-full bg-green-600 px-4 py-2">
@@ -38,6 +38,7 @@ export default function MultiSelectModal({
             <FlatList
               data={options}
               keyExtractor={(item: any) => item.id}
+              showsVerticalScrollIndicator={false}
               renderItem={({ item }) => {
                 const isSelected = selectedIds.includes(item.id);
                 return (
@@ -59,8 +60,8 @@ export default function MultiSelectModal({
               }}
             />
           )}
-        </View>
-      </View>
+        </Pressable>
+      </Pressable>
     </RNModal>
   );
 }

@@ -6,7 +6,6 @@ import Toast from 'react-native-toast-message';
 import { Feather } from '@expo/vector-icons';
 
 import Container from 'components/Container';
-import PageTitle from 'components/PageTitle';
 import ContentBox from 'components/ContentBox';
 import Button from 'components/Button';
 import Modal from 'components/Modal';
@@ -74,8 +73,6 @@ export default function Settings() {
     <Container>
       <SafeAreaView className="flex-1 bg-zinc-950">
         <ScrollView showsVerticalScrollIndicator={false}>
-          <PageTitle>Settings</PageTitle>
-
           <ContentBox>
             <View className="mb-6">
               <View className="mb-4 flex-row items-center gap-2">

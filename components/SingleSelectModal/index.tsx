@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Modal as RNModal, FlatList } from 'react-native';
+import { View, Text, TouchableOpacity, Modal as RNModal, FlatList, Pressable } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
 interface SingleSelectModalProps {
@@ -19,17 +19,18 @@ export default function SingleSelectModal({
 }: SingleSelectModalProps) {
   return (
     <RNModal visible={visible} animationType="slide" transparent>
-      <View className="flex-1 justify-end bg-black/80">
-        <View className="h-[50%] rounded-t-3xl bg-zinc-900 p-6">
+      <Pressable className="flex-1 justify-end bg-black/80" onPress={onClose}>
+        <Pressable className="h-[50%] rounded-t-3xl bg-zinc-900 p-6 pb-10">
           <View className="mb-4 flex-row items-center justify-between">
             <Text className="text-xl font-bold text-white">{title}</Text>
-            <TouchableOpacity onPress={onClose}>
+            <TouchableOpacity onPress={onClose} className="-mr-2 p-2">
               <Feather name="x" size={24} color="#a1a1aa" />
             </TouchableOpacity>
           </View>
           <FlatList
             data={options}
             keyExtractor={(item: any) => item.id}
+            showsVerticalScrollIndicator={false}
             ListHeaderComponent={
               <TouchableOpacity
                 onPress={() => onSelect(null)}
@@ -45,8 +46,8 @@ export default function SingleSelectModal({
               </TouchableOpacity>
             )}
           />
-        </View>
-      </View>
+        </Pressable>
+      </Pressable>
     </RNModal>
   );
 }

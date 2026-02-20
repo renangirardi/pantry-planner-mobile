@@ -2,7 +2,6 @@ import React from 'react';
 import { ScrollView, StatusBar, KeyboardAvoidingView, Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import PageTitle from 'components/PageTitle';
 import ContentBox from 'components/ContentBox';
 import ItemForm from 'components/ItemForm';
 import Container from 'components/Container';

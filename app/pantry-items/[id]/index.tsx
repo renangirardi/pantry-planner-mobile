@@ -15,7 +15,6 @@ import Toast from 'react-native-toast-message';
 import { getItemById } from 'services/item-service';
 import { Item } from 'interfaces/Item';
 
-import PageTitle from 'components/PageTitle';
 import ContentBox from 'components/ContentBox';
 import Container from 'components/Container';
 import ItemForm from 'components/ItemForm';

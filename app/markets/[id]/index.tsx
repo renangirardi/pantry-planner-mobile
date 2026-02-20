@@ -15,7 +15,6 @@ import Toast from 'react-native-toast-message';
 import { getMarketById } from 'services/market-service';
 import { Market } from 'interfaces/Market';
 
-import PageTitle from 'components/PageTitle';
 import ContentBox from 'components/ContentBox';
 import Container from 'components/Container';
 import MarketForm from 'components/MarketForm';

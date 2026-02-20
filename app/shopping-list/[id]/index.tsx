@@ -15,7 +15,6 @@ import Toast from 'react-native-toast-message';
 import { getShoppingListById } from 'services/shopping-list-service';
 import { ShoppingList } from 'interfaces/ShoppingList';
 
-import PageTitle from 'components/PageTitle';
 import ContentBox from 'components/ContentBox';
 import Container from 'components/Container';
 import ShoppingListForm from 'components/ShoppingListForm';

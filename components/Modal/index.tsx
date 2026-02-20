@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, Modal as RNModal } from 'react-native';
+import { View, Text, Modal as RNModal, Pressable, TouchableOpacity } from 'react-native';
+import { Feather } from '@expo/vector-icons';
 
 import Button from 'components/Button';
 
@@ -27,10 +28,15 @@ export default function Modal({
   hideFooter = false,
 }: ModalProps) {
   return (
-    <RNModal visible={isOpen} transparent animationType="fade">
-      <View className="flex-1 items-center justify-center bg-black/70 px-4">
-        <View className="w-full rounded-2xl border border-zinc-800 bg-zinc-900 p-6 shadow-xl">
-          <Text className="mb-4 text-xl font-bold text-zinc-100">{title}</Text>
+    <RNModal visible={isOpen} transparent animationType="slide">
+      <Pressable className="flex-1 justify-end bg-black/80" onPress={onClose}>
+        <Pressable className="rounded-t-3xl bg-zinc-900 p-6 pb-10 shadow-xl">
+          <View className="mb-4 flex-row items-center justify-between">
+            <Text className="text-xl font-bold text-white">{title}</Text>
+            <TouchableOpacity onPress={onClose} className="-mr-2 p-2">
+              <Feather name="x" size={24} color="#a1a1aa" />
+            </TouchableOpacity>
+          </View>
 
           <View className={hideFooter ? '' : 'mb-8'}>{children}</View>
 
@@ -48,8 +54,8 @@ export default function Modal({
               </View>
             </View>
           )}
-        </View>
-      </View>
+        </Pressable>
+      </Pressable>
     </RNModal>
   );
 }
