@@ -85,6 +85,7 @@ export default function Settings() {
 
               <View className="gap-4">
                 <Button
+                  area="default"
                   variant="primary"
                   onPress={() => setIsExportModalOpen(true)}
                   disabled={isProcessing}>
@@ -92,6 +93,7 @@ export default function Settings() {
                 </Button>
 
                 <Button
+                  area="default"
                   variant="secondary"
                   onPress={() => setIsImportModalOpen(true)}
                   disabled={isProcessing}>
@@ -101,7 +103,7 @@ export default function Settings() {
             </View>
           </ContentBox>
           <View className="mt-8 border-t border-zinc-800 pt-6">
-            <Text className="text-center text-xs text-zinc-600">Pantry Planner v1.0.0</Text>
+            <Text className="text-center text-sm text-zinc-600">Pantry Planner v1.0.0</Text>
           </View>
         </ScrollView>
       </View>
