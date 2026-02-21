@@ -193,7 +193,6 @@ export default function ShoppingListForm({
                           ? 'border-b border-zinc-800/80'
                           : ''
                       }`}>
-                      {/* TEXTO DO ITEM - Ocupa o espaço restante à esquerda */}
                       <Text className="flex-1 pr-2 text-base text-zinc-100" numberOfLines={2}>
                         {item.name}{' '}
                         {item.brand && (
@@ -201,7 +200,6 @@ export default function ShoppingListForm({
                         )}
                       </Text>
 
-                      {/* INPUT DE QUANTIDADE - Fica à direita, antes do botão de apagar */}
                       <TextInput
                         placeholder="Qty (e.g. 2, 500g)"
                         placeholderTextColor="#52525b"
@@ -232,7 +230,7 @@ export default function ShoppingListForm({
 
           <View className="mt-4 flex-row gap-4">
             <View className="flex-1">
-              <Button variant="primary" onPress={handleSubmit} disabled={isLoading}>
+              <Button area="shopping" variant="primary" onPress={handleSubmit} disabled={isLoading}>
                 {isLoading ? 'Saving...' : isEditing ? 'Update List' : 'Save List'}
               </Button>
             </View>

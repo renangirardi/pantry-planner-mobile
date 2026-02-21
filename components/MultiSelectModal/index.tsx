@@ -8,6 +8,7 @@ import {
   Pressable,
   TextInput,
 } from 'react-native';
+import { AREA_THEMES } from 'utils/area-themes';
 import { Feather } from '@expo/vector-icons';
 
 interface MultiSelectModalProps {
@@ -20,6 +21,8 @@ interface MultiSelectModalProps {
   onToggle: (id: string) => void;
   onQuantityChange?: (id: string, value: string) => void;
 }
+
+const theme = AREA_THEMES['shopping'];
 
 export default function MultiSelectModal({
   visible,
@@ -37,7 +40,7 @@ export default function MultiSelectModal({
         <Pressable className="h-[80%] rounded-t-3xl bg-zinc-900 p-6 pb-10">
           <View className="mb-4 flex-row items-center justify-between">
             <Text className="text-xl font-bold text-white">{title}</Text>
-            <TouchableOpacity onPress={onClose} className="rounded-full bg-green-600 px-4 py-2">
+            <TouchableOpacity onPress={onClose} className={`rounded-full bg-teal-600 px-4 py-2`}>
               <Text className="font-bold text-white">Done</Text>
             </TouchableOpacity>
           </View>
@@ -57,13 +60,12 @@ export default function MultiSelectModal({
 
                 return (
                   <View className="border-b border-zinc-800 py-3">
-                    {/* Área Clicável para selecionar/deselecionar */}
                     <TouchableOpacity
                       onPress={() => onToggle(item.id)}
                       className="flex-row items-center justify-between py-1 active:bg-zinc-800">
                       <Text
                         className={`flex-1 pr-2 text-lg ${
-                          isSelected ? 'font-bold text-green-500' : 'text-zinc-200'
+                          isSelected ? 'font-bold text-teal-400' : 'text-zinc-200'
                         }`}>
                         {item.name}{' '}
                         {item.brand ? (
@@ -72,10 +74,9 @@ export default function MultiSelectModal({
                           ''
                         )}
                       </Text>
-                      {isSelected && <Feather name="check-circle" size={24} color="#22c55e" />}
+                      {isSelected && <Feather name="check-circle" size={24} color="#00d5be" />}
                     </TouchableOpacity>
 
-                    {/* INPUT DE QUANTIDADE: Só aparece se o item estiver selecionado */}
                     {isSelected && onQuantityChange && (
                       <View className="mt-2 flex-row pl-2 pr-8">
                         <View className="mr-2 mt-2 border-l-2 border-zinc-700/50 pl-2"></View>

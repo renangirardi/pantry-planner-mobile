@@ -167,9 +167,9 @@ export default function ActiveShopping() {
 
         <TouchableOpacity
           onPress={() => setIsItemModalOpen(true)}
-          className="ml-2 flex-row items-center justify-center gap-1 rounded-full bg-green-600/20 px-3 py-2 active:bg-green-600/40">
-          <Feather name="plus" size={16} color="#4ade80" />
-          <Text className="text-sm font-bold text-green-400">Add</Text>
+          className="ml-2 flex-row items-center justify-center gap-1 rounded-full bg-orange-600/20 px-3 py-2 active:bg-orange-600/40">
+          <Feather name="plus" size={16} color="#ff8904" />
+          <Text className="text-sm font-bold text-orange-400">Add</Text>
         </TouchableOpacity>
       </View>
 
@@ -181,7 +181,7 @@ export default function ActiveShopping() {
           contentContainerStyle={{ paddingBottom: 20 }}
           renderSectionHeader={({ section: { title } }) => (
             <View className="border-b border-zinc-700 bg-zinc-800/90 px-4 py-2 backdrop-blur-md">
-              <Text className="text-sm font-bold uppercase tracking-wider text-green-400">
+              <Text className="text-sm font-bold uppercase tracking-wider text-orange-500">
                 {title}
               </Text>
             </View>

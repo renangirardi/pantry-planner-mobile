@@ -1,26 +1,52 @@
 {
   "markets": [
     {
-      "id": "m1",
+      "id": "bistekNilo",
       "name": "Bistek Nilo",
-      "aisles": [{ "id": "m1_c1", "name": "Hortifruti", "number": "1" }]
+      "aisles": [
+        { "id": "bistekNilo_c1", "name": "Hortifruti", "number": "1" },
+        { "id": "bistekNilo_c2", "name": "Comidas Quentes", "number": "2" },
+        { "id": "bistekNilo_c3", "name": "Padaria", "number": "3" },
+        { "id": "bistekNilo_c4", "name": "Embutidos", "number": "4" },
+        { "id": "bistekNilo_c5", "name": "Desodorantes, Higiêne Masculina", "number": "5" },
+        { "id": "bistekNilo_c6", "name": "Shampoos e Condicionadores", "number": "6" },
+        { "id": "bistekNilo_c7", "name": "Higiêne Oral, Beleza", "number": "7" },
+        { "id": "bistekNilo_c8", "name": "Sabonetes, Higiêne Feminina", "number": "8" },
+        { "id": "bistekNilo_c9", "name": "Fraldas, Higiêne Intantil", "number": "9" },
+        { "id": "bistekNilo_c10", "name": "Iogurtes, Manteiga", "number": "10" },
+        { "id": "bistekNilo_c11", "name": "Papel Higiênico, Banheiro", "number": "11" },
+        { "id": "bistekNilo_c12", "name": "Sacos de Lixo, Vassouras", "number": "12" },
+        { "id": "bistekNilo_c13", "name": "Detergentes, Venenos", "number": "13" },
+        { "id": "bistekNilo_c14", "name": "Sabão para Roupas", "number": "14" },
+        { "id": "bistekNilo_c15", "name": "Amaciantes, Lixeiras", "number": "15" },
+        { "id": "bistekNilo_c16", "name": "Leites, Massas Frescas", "number": "16" },
+        { "id": "bistekNilo_c17", "name": "Queijos", "number": "17" },
+        { "id": "bistekNilo_c18", "name": "Taças, Copos", "number": "18" },
+        { "id": "bistekNilo_c19", "name": "Linha Fitness", "number": "19" },
+        { "id": "bistekNilo_c20", "name": "Brinquedos, Papelaria", "number": "20" },
+        { "id": "bistekNilo_c21", "name": "Dietéticos", "number": "21" },
+        { "id": "bistekNilo_c22", "name": "Alimentos para Pets", "number": "22" },
+        { "id": "bistekNilo_c23", "name": "Tapioca, Biscoito Integral", "number": "23" },
+        { "id": "bistekNilo_c24", "name": "Óleos, Atum, Milho", "number": "24" },
+        { "id": "bistekNilo_c25", "name": "Biscoitos", "number": "25" },
+        { "id": "bistekNilo_c26", "name": "Molhos, Maionese", "number": "26" },
+        { "id": "bistekNilo_c27", "name": "Salgadinhos", "number": "27" },
+        { "id": "bistekNilo_c28", "name": "Massas", "number": "28" },
+        { "id": "bistekNilo_c29", "name": "Balas, Chocolates", "number": "29" },
+        { "id": "bistekNilo_c30", "name": "Açucar, Farinha, Arroz, Feijão", "number": "30" },
+        { "id": "bistekNilo_c31", "name": "Sobremesas", "number": "31" },
+        { "id": "bistekNilo_c32", "name": "Refrigerantes", "number": "32" },
+        { "id": "bistekNilo_c33", "name": "Café em Pó", "number": "33" },
+        { "id": "bistekNilo_c34", "name": "Sucos, Águas", "number": "34" },
+        { "id": "bistekNilo_c35", "name": "Café em Capsula, Erva de Chimarrão", "number": "35" },
+        { "id": "bistekNilo_c36", "name": "Destilados, Chá Gelado", "number": "36" },
+        { "id": "bistekNilo_c37", "name": "Leite em Pó", "number": "37" },
+        { "id": "bistekNilo_c38", "name": "Cervejas", "number": "38" },
+        { "id": "bistekNilo_c39", "name": "Congelados", "number": "39" },
+        { "id": "bistekNilo_c40", "name": "Açougue", "number": "40" }
+      ]
     }
   ],
-  "items": [
-    {
-      "id": "i1",
-      "name": "Banana Caturra",
-      "locations": [{ "marketId": "m1", "aisleId": "m1_c1" }]
-    }
-  ],
-  "shoppingLists": [
-    {
-      "id": "l1",
-      "name": "Rancho do Mês",
-      "marketId": "m1",
-      "itemsIds": ["i1"],
-      "createdAt": "2026-02-18T10:00:00.000Z",
-      "checkedItemsIds": []
-    }
-  ]
+  "items": [],
+  "shoppingLists": []
 }

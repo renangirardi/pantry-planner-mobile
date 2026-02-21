@@ -51,6 +51,7 @@ export default function ShoppingLists() {
 
           <View className="mb-10">
             <Button
+              area="shopping"
               variant="primary"
               icon="plus"
               onPress={() => router.push('/shopping-list/create-new')}>
@@ -64,7 +65,7 @@ export default function ShoppingLists() {
 
           {loading ? (
             <View className="items-center justify-center py-10">
-              <ActivityIndicator size="large" color="#16a34a" />
+              <ActivityIndicator size="large" color="#2b7fff" />
               <Text className="mt-4 text-zinc-500">Loading your lists...</Text>
             </View>
           ) : (

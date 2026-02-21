@@ -25,14 +25,14 @@ export default function ShoppingProgressBar({
             {checkedItems} of {totalItems} items
           </Text>
         </View>
-        <Text className={`text-2xl font-black ${isDone ? 'text-green-500' : 'text-zinc-700'}`}>
+        <Text className={`text-2xl font-black ${isDone ? 'text-orange-500' : 'text-zinc-700'}`}>
           {progressPercentage}%
         </Text>
       </View>
 
       <View className="mb-6 h-3 w-full overflow-hidden rounded-full bg-zinc-800">
         <View
-          className={`h-full rounded-full transition-all duration-300 ${isDone ? 'bg-green-400' : 'bg-green-600'}`}
+          className={`h-full rounded-full transition-all duration-300 ${isDone ? 'bg-orange-500' : 'bg-orange-600'}`}
           style={{ width: `${progressPercentage}%` }}
         />
       </View>
@@ -40,7 +40,7 @@ export default function ShoppingProgressBar({
       <TouchableOpacity
         onPress={onFinish}
         className={`w-full flex-row items-center justify-center gap-2 rounded-xl py-4 transition-colors ${
-          isDone ? 'bg-green-600 active:bg-green-700' : 'bg-zinc-800 active:bg-zinc-700'
+          isDone ? 'bg-orange-600 active:bg-orange-700' : 'bg-zinc-800 active:bg-zinc-700'
         }`}>
         <Feather name={isDone ? 'check' : 'flag'} size={20} color={isDone ? '#fff' : '#a1a1aa'} />
         <Text className={`text-lg font-bold ${isDone ? 'text-white' : 'text-zinc-300'}`}>

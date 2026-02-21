@@ -44,6 +44,7 @@ export default function Markets() {
 
           <View className="mb-10">
             <Button
+              area="pantry"
               variant="primary"
               icon="plus"
               onPress={() => router.push('/pantry-items/create-new')}>

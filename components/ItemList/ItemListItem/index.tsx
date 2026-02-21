@@ -36,6 +36,7 @@ export default function ItemListItem({
       <View className="flex-row items-center gap-2">
         <View className="h-10">
           <Button
+            area="pantry"
             variant="secondary"
             icon="edit-2"
             onPress={() => router.push(`/pantry-items/${item.id}`)}>

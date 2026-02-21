@@ -6,7 +6,7 @@ type FeatherIconName = keyof typeof Feather.glyphMap;
 
 type Props = {
   children: ReactNode;
-  variant: 'shoppingList' | 'meals' | 'recipes' | 'pantryItems' | 'markets';
+  variant: 'shoppingList' | 'pantryItems' | 'markets';
   disabled?: boolean;
   onPress?: () => void;
   icon?: FeatherIconName;
@@ -22,19 +22,10 @@ export default function CallToAction({
   isLoading,
 }: Props) {
   const variantClassesBtn = {
-      shoppingList: 'bg-blue-600 active:bg-blue-800 border-transparent',
-      meals: 'bg-green-600 active:bg-green-800 border-transparent',
-      recipes: 'bg-purple-600 active:bg-purple-800 border-transparent',
-      pantryItems: 'bg-yellow-600 active:bg-yellow-800 border-transparent',
-      markets: 'bg-orange-600 active:bg-orange-800 border-transparent',
-    },
-    variantClassesTxt = {
-      shoppingList: 'text-base',
-      meals: 'text-base',
-      recipes: 'text-base',
-      pantryItems: 'text-base',
-      markets: 'text-base',
-    };
+    shoppingList: 'bg-orange-600 active:bg-orange-800 border-transparent',
+    pantryItems: 'bg-teal-600 active:bg-teal-800 border-transparent',
+    markets: 'bg-yellow-600 active:bg-yellow-800 border-transparent',
+  };
 
   const getContentColor = (pressed: boolean) => {
     return '#ffffff';
@@ -52,7 +43,7 @@ export default function CallToAction({
       {({ pressed }) => (
         <>
           <Text
-            className={`mr-2 text-center ${variantClassesTxt[variant]} font-semibold`}
+            className={`mr-2 text-center text-lg font-semibold`}
             style={{ color: getContentColor(pressed) }}>
             {isLoading ? 'Loading...' : children}
           </Text>

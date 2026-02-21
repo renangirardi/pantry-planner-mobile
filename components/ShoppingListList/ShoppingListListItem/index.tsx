@@ -35,7 +35,7 @@ export default function ShoppingListListItem({
   let onPressAction = () => onStartShopping(list.id);
 
   if (isFinished) {
-    btnClass = 'bg-indigo-600 active:bg-indigo-700';
+    btnClass = 'bg-cyan-600 active:bg-cyan-700';
     iconName = 'refresh-cw';
     btnText = 'Repeat List';
     onPressAction = () => onRepeatShopping(list);
@@ -46,7 +46,7 @@ export default function ShoppingListListItem({
   }
 
   return (
-    <View className="flex-col border-b border-zinc-800 bg-zinc-900/50 p-4">
+    <View className="bg- flex-col border-b border-zinc-800 bg-zinc-900/50 p-4">
       <View className="flex-row items-start justify-between">
         <View className="flex-1 flex-col gap-1 pr-4">
           <Text className="text-lg font-bold text-zinc-100" numberOfLines={1}>

@@ -2,7 +2,8 @@ import { createItem } from './item-service';
 import { getMarkets, createMarket } from './market-service';
 import { createShoppingList } from './shopping-list-service';
 
-import mockData from '../data/mock-data.json';
+//import mockData from 'data/mock-data.json';
+import mockData from 'data/renan-data.json';
 
 export async function populateDatabaseWhenEmpty() {
   try {

@@ -1,5 +1,5 @@
 import '../global.css';
-import { View, Text, SectionList, ActivityIndicator, TouchableOpacity, Alert } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Drawer } from 'expo-router/drawer';
@@ -9,6 +9,8 @@ import { Feather } from '@expo/vector-icons';
 import { useEffect } from 'react';
 import { populateDatabaseWhenEmpty } from 'services/seed';
 import { useRouter } from 'expo-router';
+
+import { AREA_THEMES } from 'utils/area-themes';
 
 export default function Layout() {
   useEffect(() => {
@@ -28,103 +30,134 @@ export default function Layout() {
               backgroundColor: '#09090b',
               elevation: 0,
               shadowOpacity: 0,
-              borderBottomWidth: 1,
+              // Linha base para caso alguma tela fuja do escopo
+              borderBottomWidth: 2,
               borderBottomColor: '#27272a',
             },
             headerTintColor: '#f4f4f5',
             headerTitleStyle: {
               fontWeight: 'bold',
             },
-            drawerActiveTintColor: '#3b82f6',
             drawerInactiveTintColor: '#ffffff',
             drawerStyle: { backgroundColor: '#18181b' },
           }}>
+          {/* ==================== HOME ==================== */}
           <Drawer.Screen
             name="index"
             options={{
               drawerLabel: 'Home',
               title: 'Pantry Planner',
+              headerStyle: {
+                backgroundColor: '#09090b',
+                borderBottomWidth: 2,
+                borderBottomColor: AREA_THEMES.default.hexColor,
+                elevation: 0,
+                shadowOpacity: 0,
+              },
+              drawerActiveBackgroundColor: `${AREA_THEMES.default.hexColor}15`,
+              drawerActiveTintColor: AREA_THEMES.default.hexColor,
               drawerIcon: ({ color, size }) => <Feather name="home" size={size} color={color} />,
             }}></Drawer.Screen>
 
+          {/* ==================== SHOPPING ==================== */}
           <Drawer.Screen
             name="shopping-list/index"
             options={{
               drawerLabel: 'Shopping List',
               title: 'Shopping List',
+              headerStyle: {
+                backgroundColor: '#09090b',
+                borderBottomWidth: 2,
+                borderBottomColor: AREA_THEMES.shopping.hexColor,
+                elevation: 0,
+                shadowOpacity: 0,
+              },
+              drawerActiveBackgroundColor: `${AREA_THEMES.shopping.hexColor}15`,
+              drawerActiveTintColor: AREA_THEMES.shopping.hexColor,
               drawerIcon: ({ color, size }) => (
                 <Feather name="shopping-cart" size={size} color={color} />
               ),
             }}></Drawer.Screen>
 
-          <Drawer.Screen
-            name="meals/index"
-            options={{
-              drawerLabel: 'Meals Planner',
-              title: 'Meals',
-              drawerIcon: ({ color, size }) => (
-                <Feather name="calendar" size={size} color={color} />
-              ),
-              drawerItemStyle: { display: 'none' },
-            }}></Drawer.Screen>
-
-          <Drawer.Screen
-            name="recipes/index"
-            options={{
-              drawerLabel: 'Recipes',
-              title: 'Recipes',
-              drawerIcon: ({ color, size }) => <Feather name="book" size={size} color={color} />,
-              drawerItemStyle: { display: 'none' },
-            }}></Drawer.Screen>
-
+          {/* ==================== PANTRY ==================== */}
           <Drawer.Screen
             name="pantry-items/index"
             options={{
               drawerLabel: 'Pantry Items',
               title: 'Pantry Items',
+              headerStyle: {
+                backgroundColor: '#09090b',
+                borderBottomWidth: 2,
+                borderBottomColor: AREA_THEMES.pantry.hexColor,
+                elevation: 0,
+                shadowOpacity: 0,
+              },
+              drawerActiveBackgroundColor: `${AREA_THEMES.pantry.hexColor}15`,
+              drawerActiveTintColor: AREA_THEMES.pantry.hexColor,
               drawerIcon: ({ color, size }) => (
                 <Feather name="shopping-bag" size={size} color={color} />
               ),
             }}></Drawer.Screen>
 
+          {/* ==================== MARKETS ==================== */}
           <Drawer.Screen
             name="markets/index"
             options={{
               drawerLabel: 'Favorite Markets',
               title: 'Favorite Markets',
+              headerStyle: {
+                backgroundColor: '#09090b',
+                borderBottomWidth: 2,
+                borderBottomColor: AREA_THEMES.market.hexColor,
+                elevation: 0,
+                shadowOpacity: 0,
+              },
+              drawerActiveBackgroundColor: `${AREA_THEMES.market.hexColor}15`,
+              drawerActiveTintColor: AREA_THEMES.market.hexColor,
               drawerIcon: ({ color, size }) => <Feather name="map-pin" size={size} color={color} />,
             }}></Drawer.Screen>
 
-          <Drawer.Screen
-            name="profile/index"
-            options={{
-              drawerLabel: 'My Profile',
-              title: 'My Profile',
-              drawerIcon: ({ color, size }) => <Feather name="user" size={size} color={color} />,
-              drawerItemStyle: { display: 'none' },
-            }}></Drawer.Screen>
-
+          {/* ==================== SETTINGS ==================== */}
           <Drawer.Screen
             name="settings/index"
             options={{
               drawerLabel: 'Settings',
               title: 'Settings',
+              headerStyle: {
+                backgroundColor: '#09090b',
+                borderBottomWidth: 2,
+                borderBottomColor: AREA_THEMES.default.hexColor,
+                elevation: 0,
+                shadowOpacity: 0,
+              },
+              drawerActiveBackgroundColor: `${AREA_THEMES.default.hexColor}15`,
+              drawerActiveTintColor: AREA_THEMES.default.hexColor,
               drawerIcon: ({ color, size }) => (
                 <Feather name="settings" size={size} color={color} />
               ),
             }}></Drawer.Screen>
 
-          {/* The following screens are hidden from the drawer but are needed for navigation */}
+          {/* ============================================================== */}
+          {/* THE FOLLOWING SCREENS ARE HIDDEN BUT MAINTAIN THE THEME COLORS */}
+          {/* ============================================================== */}
+
           <Drawer.Screen
             name="markets/[id]/index"
             options={{
               title: 'Edit Market',
               drawerItemStyle: { display: 'none' },
+              headerStyle: {
+                backgroundColor: '#09090b',
+                borderBottomWidth: 2,
+                borderBottomColor: AREA_THEMES.market.hexColor,
+                elevation: 0,
+                shadowOpacity: 0,
+              },
               headerLeft: () => (
                 <TouchableOpacity
                   onPress={() => router.replace('/markets/')}
                   className="ml-4 rounded-full p-2 active:bg-zinc-700">
-                  <Feather name="arrow-left" size={24} color="#e4e4e7" />
+                  <Feather name="arrow-left" size={24} color={AREA_THEMES.market.hexColor} />
                 </TouchableOpacity>
               ),
             }}></Drawer.Screen>
@@ -134,11 +167,18 @@ export default function Layout() {
             options={{
               title: 'New Market',
               drawerItemStyle: { display: 'none' },
+              headerStyle: {
+                backgroundColor: '#09090b',
+                borderBottomWidth: 2,
+                borderBottomColor: AREA_THEMES.market.hexColor,
+                elevation: 0,
+                shadowOpacity: 0,
+              },
               headerLeft: () => (
                 <TouchableOpacity
                   onPress={() => router.replace('/markets/')}
                   className="ml-4 rounded-full p-2 active:bg-zinc-700">
-                  <Feather name="arrow-left" size={24} color="#e4e4e7" />
+                  <Feather name="arrow-left" size={24} color={AREA_THEMES.market.hexColor} />
                 </TouchableOpacity>
               ),
             }}></Drawer.Screen>
@@ -148,11 +188,18 @@ export default function Layout() {
             options={{
               title: 'Edit Item',
               drawerItemStyle: { display: 'none' },
+              headerStyle: {
+                backgroundColor: '#09090b',
+                borderBottomWidth: 2,
+                borderBottomColor: AREA_THEMES.pantry.hexColor,
+                elevation: 0,
+                shadowOpacity: 0,
+              },
               headerLeft: () => (
                 <TouchableOpacity
                   onPress={() => router.replace('/pantry-items/')}
                   className="ml-4 rounded-full p-2 active:bg-zinc-700">
-                  <Feather name="arrow-left" size={24} color="#e4e4e7" />
+                  <Feather name="arrow-left" size={24} color={AREA_THEMES.pantry.hexColor} />
                 </TouchableOpacity>
               ),
             }}></Drawer.Screen>
@@ -162,11 +209,18 @@ export default function Layout() {
             options={{
               title: 'New Item',
               drawerItemStyle: { display: 'none' },
+              headerStyle: {
+                backgroundColor: '#09090b',
+                borderBottomWidth: 2,
+                borderBottomColor: AREA_THEMES.pantry.hexColor,
+                elevation: 0,
+                shadowOpacity: 0,
+              },
               headerLeft: () => (
                 <TouchableOpacity
                   onPress={() => router.replace('/pantry-items/')}
                   className="ml-4 rounded-full p-2 active:bg-zinc-700">
-                  <Feather name="arrow-left" size={24} color="#e4e4e7" />
+                  <Feather name="arrow-left" size={24} color={AREA_THEMES.pantry.hexColor} />
                 </TouchableOpacity>
               ),
             }}></Drawer.Screen>
@@ -176,11 +230,18 @@ export default function Layout() {
             options={{
               title: 'Shopping List',
               drawerItemStyle: { display: 'none' },
+              headerStyle: {
+                backgroundColor: '#09090b',
+                borderBottomWidth: 2,
+                borderBottomColor: AREA_THEMES.shopping.hexColor,
+                elevation: 0,
+                shadowOpacity: 0,
+              },
               headerLeft: () => (
                 <TouchableOpacity
                   onPress={() => router.replace('/shopping-list/')}
                   className="ml-4 rounded-full p-2 active:bg-zinc-700">
-                  <Feather name="arrow-left" size={24} color="#e4e4e7" />
+                  <Feather name="arrow-left" size={24} color={AREA_THEMES.shopping.hexColor} />
                 </TouchableOpacity>
               ),
             }}></Drawer.Screen>
@@ -190,11 +251,18 @@ export default function Layout() {
             options={{
               title: 'New Shopping List',
               drawerItemStyle: { display: 'none' },
+              headerStyle: {
+                backgroundColor: '#09090b',
+                borderBottomWidth: 2,
+                borderBottomColor: AREA_THEMES.shopping.hexColor,
+                elevation: 0,
+                shadowOpacity: 0,
+              },
               headerLeft: () => (
                 <TouchableOpacity
                   onPress={() => router.replace('/shopping-list/')}
                   className="ml-4 rounded-full p-2 active:bg-zinc-700">
-                  <Feather name="arrow-left" size={24} color="#e4e4e7" />
+                  <Feather name="arrow-left" size={24} color={AREA_THEMES.shopping.hexColor} />
                 </TouchableOpacity>
               ),
             }}></Drawer.Screen>
@@ -204,11 +272,18 @@ export default function Layout() {
             options={{
               title: "Let's Shop!",
               drawerItemStyle: { display: 'none' },
+              headerStyle: {
+                backgroundColor: '#09090b',
+                borderBottomWidth: 2,
+                borderBottomColor: AREA_THEMES.shopping.hexColor,
+                elevation: 0,
+                shadowOpacity: 0,
+              },
               headerLeft: () => (
                 <TouchableOpacity
                   onPress={() => router.replace('/shopping-list/')}
                   className="ml-4 rounded-full p-2 active:bg-zinc-700">
-                  <Feather name="arrow-left" size={24} color="#e4e4e7" />
+                  <Feather name="arrow-left" size={24} color={AREA_THEMES.shopping.hexColor} />
                 </TouchableOpacity>
               ),
             }}></Drawer.Screen>

@@ -4,14 +4,14 @@
     "slug": "pantry-planner-mobile",
     "version": "1.0.0",
     "web": {
-      "favicon": "./assets/be-logo.png"
+      "favicon": "./assets/favicon.png"
     },
     "experiments": {
       "tsconfigPaths": true
     },
     "plugins": ["expo-router", "expo-secure-store"],
     "orientation": "portrait",
-    "icon": "./assets/be-logo.png",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",
     "splash": {
       "image": "./assets/splash.png",
@@ -24,9 +24,9 @@
     },
     "android": {
       "package": "com.renangirardi.pantryplanner",
-      "softwareKeyboardLayoutMode": "resize",
+      "softwareKeyboardLayoutMode": "pan",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/be-logo.png",
+        "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#09090b"
       }
     },

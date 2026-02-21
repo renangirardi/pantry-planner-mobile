@@ -171,7 +171,7 @@ export default function MarketForm({
 
         <View className="mt-4 flex-row gap-4">
           <View className="flex-1">
-            <Button variant="primary" onPress={handleSubmit} disabled={isLoading}>
+            <Button variant="primary" area="market" onPress={handleSubmit} disabled={isLoading}>
               {isLoading ? 'Saving...' : isEditing ? 'Update Market' : 'Create Market'}
             </Button>
           </View>

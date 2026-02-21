@@ -62,7 +62,6 @@ const SelectionModal = ({ visible, title, options, onClose, onSelect }: any) => 
                 onPress={() => onSelect(item)}
                 className="border-b border-zinc-800 py-4 active:bg-zinc-800">
                 <Text className="text-lg text-zinc-200">{item.name}</Text>
-                {/* Mostra numero se for corredor */}
                 {item.number && (
                   <Text className="text-xs text-zinc-500">Aisle Nº {item.number}</Text>
                 )}
@@ -293,7 +292,7 @@ export default function ItemForm({ isEditing = false, initialData = { name: '' }
 
           <View className="mt-4 flex-row gap-4">
             <View className="flex-1">
-              <Button variant="primary" onPress={handleSubmit} disabled={isLoading}>
+              <Button area="pantry" variant="primary" onPress={handleSubmit} disabled={isLoading}>
                 {isLoading ? 'Saving...' : isEditing ? 'Update Item' : 'Create Item'}
               </Button>
             </View>

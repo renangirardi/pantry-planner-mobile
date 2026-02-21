@@ -43,7 +43,7 @@ export default function Modal({
           {!hideFooter && (
             <View className="flex-row gap-4">
               <View className="flex-1">
-                <Button variant="secondary" onPress={onClose} disabled={isLoading}>
+                <Button area="default" variant="secondary" onPress={onClose} disabled={isLoading}>
                   Cancel
                 </Button>
               </View>

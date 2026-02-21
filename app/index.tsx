@@ -36,22 +36,6 @@ export default function Home() {
             <CallToAction variant="markets" icon="map-pin" onPress={() => router.push('/markets')}>
               Enter a new Favorite Market
             </CallToAction>
-
-            <CallToAction
-              disabled={true}
-              variant="meals"
-              icon="calendar"
-              onPress={() => router.push('/meals')}>
-              Plan next week&apos;s Meals
-            </CallToAction>
-
-            <CallToAction
-              disabled={true}
-              variant="recipes"
-              icon="book"
-              onPress={() => router.push('/recipes')}>
-              Add new Recipes
-            </CallToAction>
           </View>
         </View>
       </ScrollView>
