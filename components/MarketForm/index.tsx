@@ -135,7 +135,7 @@ export default function MarketForm({
     } catch (error) {
       console.error(error);
       setShowDeleteModal(false);
-      Toast.show({ type: 'error', text1: 'Deletion failed', text2: 'Could not delete. ❌' });
+      Toast.show({ type: 'customError', text1: 'Deletion failed', text2: 'Could not delete.' });
     } finally {
       setIsDeleting(false);
     }

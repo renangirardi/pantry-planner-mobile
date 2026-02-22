@@ -260,7 +260,7 @@ export default function Layout() {
             }}></Drawer.Screen>
         </Drawer>
       </SafeAreaView>
-      <Toast config={toastConfig} />
+      <Toast config={toastConfig} position="bottom" bottomOffset={80} />
     </GestureHandlerRootView>
   );
 }
