@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, Modal as RNModal, Pressable } from 'react-native';
 import { Feather } from '@expo/vector-icons';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import Button from 'components/Button';
 
@@ -27,10 +28,14 @@ export default function Modal({
   confirmVariant = 'danger',
   hideFooter = false,
 }: ModalProps) {
+  const insets = useSafeAreaInsets();
+
   return (
     <RNModal visible={isOpen} transparent animationType="slide">
       <Pressable className="flex-1 justify-end bg-black/80" onPress={onClose}>
-        <Pressable className="rounded-t-3xl bg-zinc-900 p-6 pb-10 shadow-xl">
+        <Pressable
+          className="rounded-t-3xl bg-zinc-900 p-6 shadow-xl"
+          style={{ paddingBottom: insets.bottom + 24 }}>
           <View className="mb-4 flex-row items-center justify-between">
             <Text className="text-xl font-bold text-white">{title}</Text>
             <Pressable onPress={onClose} className="-mr-2 p-2">
