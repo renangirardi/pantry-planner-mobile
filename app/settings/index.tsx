@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import { useRouter } from 'expo-router';
 import Toast from 'react-native-toast-message';
 import { Feather } from '@expo/vector-icons';
@@ -10,6 +10,7 @@ import Button from 'components/Button';
 import Modal from 'components/Modal';
 
 import { exportDataToShare, exportDataToDevice, importDataFromFile } from 'services/backup-service';
+import ExportButton from 'components/ExportButton';
 
 export default function Settings() {
   const router = useRouter();
@@ -119,31 +120,18 @@ export default function Settings() {
         </Text>
 
         <View className="mb-8 flex-col gap-3">
-          <TouchableOpacity
+          <ExportButton
             onPress={handleExportSave}
-            activeOpacity={0.7}
-            className="flex-row items-center gap-4 rounded-xl border border-zinc-700 bg-zinc-800 p-4">
-            <View className="rounded-full bg-green-500/20 p-2">
-              <Feather name="download" size={20} color="#4ade80" />
-            </View>
-            <View className="flex-1">
-              <Text className="text-base font-bold text-zinc-100">Save to Device</Text>
-              <Text className="text-xs text-zinc-400">Save to your Downloads folder</Text>
-            </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity
+            title="Save to Device"
+            description="Save to your Downloads folder"
+            option="save"
+          />
+          <ExportButton
             onPress={handleExportShare}
-            activeOpacity={0.7}
-            className="flex-row items-center gap-4 rounded-xl border border-zinc-700 bg-zinc-800 p-4">
-            <View className="rounded-full bg-blue-500/20 p-2">
-              <Feather name="share-2" size={20} color="#60a5fa" />
-            </View>
-            <View className="flex-1">
-              <Text className="text-base font-bold text-zinc-100">Share File</Text>
-              <Text className="text-xs text-zinc-400">Send via Email, Drive or WhatsApp</Text>
-            </View>
-          </TouchableOpacity>
+            title="Share File"
+            description="Send via Email, Drive or WhatsApp"
+            option="share"
+          />
         </View>
 
         <Button onPress={() => setIsExportModalOpen(false)} variant="secondary">

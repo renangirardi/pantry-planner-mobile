@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, Pressable } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { Item } from 'interfaces/Item';
 
@@ -17,10 +17,9 @@ export default function ActiveShoppingListItem({
   quantity,
 }: ActiveShoppingListItemProps) {
   return (
-    <TouchableOpacity
-      activeOpacity={0.7}
+    <Pressable
       onPress={() => onToggle(item.id)}
-      className="flex-row items-center border-b border-zinc-800 bg-zinc-900 px-4 py-4">
+      className="flex-row items-center border-b border-zinc-800 bg-zinc-900 px-4 py-4 active:opacity-70">
       <View
         className={`mr-4 h-6 w-6 items-center justify-center rounded-md border ${
           isChecked ? 'border-orange-500 bg-orange-500' : 'border-zinc-500 bg-transparent'
@@ -38,6 +37,6 @@ export default function ActiveShoppingListItem({
           </Text>
         )}
       </View>
-    </TouchableOpacity>
+    </Pressable>
   );
 }

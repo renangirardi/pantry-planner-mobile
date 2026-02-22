@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { View, Text, TouchableOpacity, ScrollView, TextInput } from 'react-native';
+import { View, Text, ScrollView, TextInput, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
 import Toast from 'react-native-toast-message';
 import { Feather } from '@expo/vector-icons';
@@ -209,23 +209,23 @@ export default function ShoppingListForm({
                         returnKeyType="done"
                       />
 
-                      <TouchableOpacity
+                      <Pressable
                         onPress={() => handleItemToggle(item.id)}
                         className="items-center justify-center rounded-md p-2 active:bg-red-900/30">
                         <Feather name="x" size={18} color="#ef4444" />
-                      </TouchableOpacity>
+                      </Pressable>
                     </View>
                   ))}
                 </View>
               )}
             </View>
 
-            <TouchableOpacity
+            <Pressable
               onPress={() => setItemSelectorOpen(true)}
               className="mt-4 flex-row items-center justify-center gap-2 rounded-md border border-dashed border-zinc-600 p-4 active:bg-zinc-800">
               <Feather name="plus-circle" size={20} color="#a1a1aa" />
               <Text className="font-semibold text-zinc-400">Add Items</Text>
-            </TouchableOpacity>
+            </Pressable>
           </View>
 
           <View className="mt-4 flex-row gap-4">

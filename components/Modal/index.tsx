@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Modal as RNModal, Pressable, TouchableOpacity } from 'react-native';
+import { View, Text, Modal as RNModal, Pressable } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
 import Button from 'components/Button';
@@ -33,9 +33,9 @@ export default function Modal({
         <Pressable className="rounded-t-3xl bg-zinc-900 p-6 pb-10 shadow-xl">
           <View className="mb-4 flex-row items-center justify-between">
             <Text className="text-xl font-bold text-white">{title}</Text>
-            <TouchableOpacity onPress={onClose} className="-mr-2 p-2">
+            <Pressable onPress={onClose} className="-mr-2 p-2">
               <Feather name="x" size={24} color="#a1a1aa" />
-            </TouchableOpacity>
+            </Pressable>
           </View>
 
           <View className={hideFooter ? '' : 'mb-8'}>{children}</View>

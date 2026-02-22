@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, ScrollView, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
 import Toast from 'react-native-toast-message';
 import { Feather } from '@expo/vector-icons';
@@ -153,21 +153,21 @@ export default function MarketForm({
                   />
                 </View>
 
-                <TouchableOpacity
+                <Pressable
                   onPress={() => handleRemoveAisle(index)}
                   className="mb-1 h-12 w-12 items-center justify-center rounded-md border border-red-900 bg-red-900/30 active:bg-red-900/50">
                   <Feather name="trash-2" size={20} color="#ef4444" />
-                </TouchableOpacity>
+                </Pressable>
               </View>
             ))}
           </View>
 
-          <TouchableOpacity
+          <Pressable
             onPress={handleAddAisle}
             className="mt-4 flex-row items-center justify-center gap-2 rounded-md border border-dashed border-zinc-600 p-4 active:bg-zinc-800">
             <Feather name="plus-circle" size={20} color="#a1a1aa" />
             <Text className="font-semibold text-zinc-400">Add another aisle</Text>
-          </TouchableOpacity>
+          </Pressable>
         </View>
 
         <View className="mt-4 flex-row gap-4">

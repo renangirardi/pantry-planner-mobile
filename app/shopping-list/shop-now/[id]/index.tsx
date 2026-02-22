@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { View, Text, SectionList, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { View, Text, SectionList, ActivityIndicator, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams, useRouter, useFocusEffect } from 'expo-router';
 import { Feather } from '@expo/vector-icons';
@@ -165,12 +165,12 @@ export default function ActiveShopping() {
           </Text>
         </View>
 
-        <TouchableOpacity
+        <Pressable
           onPress={() => setIsItemModalOpen(true)}
           className="ml-2 flex-row items-center justify-center gap-1 rounded-full bg-orange-600/20 px-3 py-2 active:bg-orange-600/40">
           <Feather name="plus" size={16} color="#ff8904" />
           <Text className="text-sm font-bold text-orange-400">Add</Text>
-        </TouchableOpacity>
+        </Pressable>
       </View>
 
       <View className="flex-1">

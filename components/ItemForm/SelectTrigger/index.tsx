@@ -4,7 +4,7 @@ import { Feather } from '@expo/vector-icons';
 
 interface SelectTriggerProps {
   label: string;
-  value: string;
+  value?: string;
   placeholder: string;
   onPress: () => void;
   disabled?: boolean;
@@ -23,12 +23,10 @@ export default function SelectTrigger({
       <Pressable
         onPress={onPress}
         disabled={disabled}
-        className={`min-h-[56px] flex-row items-center justify-between rounded-md border bg-zinc-900 px-4 py-3 ${
+        className={`h-14 flex-row items-center justify-between rounded-md border bg-zinc-900 px-4 active:opacity-80 ${
           disabled ? 'border-zinc-800 opacity-50' : 'border-zinc-700 active:bg-zinc-800'
         }`}>
-        <Text className={value ? 'flex-1 text-zinc-100' : 'text-zinc-500'}>
-          {value || placeholder}
-        </Text>
+        <Text className={value ? 'text-zinc-100' : 'text-zinc-500'}>{value || placeholder}</Text>
         <Feather name="chevron-down" size={20} color="#71717a" />
       </Pressable>
     </View>

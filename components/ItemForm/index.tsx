@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { View, Text, TouchableOpacity, ScrollView, Modal as RNModal, FlatList } from 'react-native';
+import { View, Text, Pressable, ScrollView } from 'react-native';
 import { useRouter } from 'expo-router';
 import Toast from 'react-native-toast-message';
 import { Feather } from '@expo/vector-icons';
@@ -9,11 +9,13 @@ import { createItem, updateItem, deleteItem } from 'services/item-service';
 import { getMarkets } from 'services/market-service';
 import { Market } from 'interfaces/Market';
 import { ItemLocation } from 'interfaces/ItemLocation';
+import { Item } from 'interfaces/Item';
 
 import Button from 'components/Button';
 import Input from 'components/Input';
 import Modal from 'components/Modal';
-import { Item } from 'interfaces/Item';
+import SelectionModal from './SelectionModal';
+import ItemLocationCard from './ItemLocationCard';
 
 interface ItemFormProps {
   isEditing?: boolean;
@@ -24,55 +26,6 @@ interface ItemFormProps {
     locations?: ItemLocation[];
   };
 }
-
-const SelectTrigger = ({ label, value, placeholder, onPress, disabled = false }: any) => (
-  <View className="gap-1">
-    <Text className="text-sm font-bold text-zinc-400">{label}</Text>
-    <TouchableOpacity
-      onPress={onPress}
-      disabled={disabled}
-      className={`h-14 flex-row items-center justify-between rounded-md border bg-zinc-900 px-4 ${
-        disabled ? 'border-zinc-800 opacity-50' : 'border-zinc-700 active:bg-zinc-800'
-      }`}>
-      <Text className={value ? 'text-zinc-100' : 'text-zinc-500'}>{value || placeholder}</Text>
-      <Feather name="chevron-down" size={20} color="#71717a" />
-    </TouchableOpacity>
-  </View>
-);
-
-const SelectionModal = ({ visible, title, options, onClose, onSelect }: any) => (
-  <RNModal visible={visible} animationType="slide" transparent>
-    <View className="flex-1 justify-end bg-black/80">
-      <View className="h-[50%] rounded-t-3xl bg-zinc-900 p-6">
-        <View className="mb-4 flex-row items-center justify-between">
-          <Text className="text-xl font-bold text-white">{title}</Text>
-          <TouchableOpacity onPress={onClose}>
-            <Feather name="x" size={24} color="#a1a1aa" />
-          </TouchableOpacity>
-        </View>
-
-        {options.length === 0 ? (
-          <Text className="mt-10 text-center text-zinc-500">No options available.</Text>
-        ) : (
-          <FlatList
-            data={options}
-            keyExtractor={(item: any) => item.id}
-            renderItem={({ item }) => (
-              <TouchableOpacity
-                onPress={() => onSelect(item)}
-                className="border-b border-zinc-800 py-4 active:bg-zinc-800">
-                <Text className="text-lg text-zinc-200">{item.name}</Text>
-                {item.number && (
-                  <Text className="text-xs text-zinc-500">Aisle Nº {item.number}</Text>
-                )}
-              </TouchableOpacity>
-            )}
-          />
-        )}
-      </View>
-    </View>
-  </RNModal>
-);
 
 export default function ItemForm({ isEditing = false, initialData = { name: '' } }: ItemFormProps) {
   const router = useRouter();
@@ -252,42 +205,23 @@ export default function ItemForm({ isEditing = false, initialData = { name: '' }
 
             <View className="gap-4">
               {formData.locations?.map((loc, index) => (
-                <View key={index} className="rounded-lg border border-zinc-800 bg-zinc-900/50 p-3">
-                  <View className="mb-2 flex-row items-center justify-between">
-                    <Text className="text-xs font-bold uppercase text-zinc-500">
-                      Location #{index + 1}
-                    </Text>
-                    <TouchableOpacity onPress={() => handleRemoveLocation(index)}>
-                      <Feather name="trash-2" size={18} color="#ef4444" />
-                    </TouchableOpacity>
-                  </View>
-
-                  <View className="gap-3">
-                    <SelectTrigger
-                      label="Market"
-                      placeholder="Select a market..."
-                      value={getLabelFor('MARKET', loc)}
-                      onPress={() => openSelector('MARKET', index)}
-                    />
-
-                    <SelectTrigger
-                      label="Aisle"
-                      placeholder={loc.marketId ? 'Select an aisle...' : 'Select a market first'}
-                      value={getLabelFor('AISLE', loc)}
-                      disabled={!loc.marketId}
-                      onPress={() => openSelector('AISLE', index)}
-                    />
-                  </View>
-                </View>
+                <ItemLocationCard
+                  key={index}
+                  index={index}
+                  location={loc}
+                  onRemove={handleRemoveLocation}
+                  getLabelFor={getLabelFor}
+                  openSelector={openSelector}
+                />
               ))}
             </View>
 
-            <TouchableOpacity
+            <Pressable
               onPress={handleAddLocation}
-              className="mt-4 flex-row items-center justify-center gap-2 rounded-md border border-dashed border-zinc-600 p-4 active:bg-zinc-800">
+              className="mt-4 flex-row items-center justify-center gap-2 rounded-md border border-dashed border-zinc-600 p-4 active:bg-zinc-800 active:opacity-70">
               <Feather name="plus-circle" size={20} color="#a1a1aa" />
               <Text className="font-semibold text-zinc-400">Add Location</Text>
-            </TouchableOpacity>
+            </Pressable>
           </View>
 
           <View className="mt-4 flex-row gap-4">

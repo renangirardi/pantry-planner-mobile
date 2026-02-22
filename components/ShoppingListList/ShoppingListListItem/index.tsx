@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, Pressable } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
 import { ShoppingList } from 'interfaces/ShoppingList';
@@ -59,20 +59,20 @@ export default function ShoppingListListItem({
           </Text>
         </View>
 
-        <TouchableOpacity
+        <Pressable
           onPress={() => onOptionsClick(list)}
           className="-mr-2 -mt-2 items-center justify-center rounded-md p-2 active:bg-zinc-800">
           <Feather name="more-vertical" size={24} color="#a1a1aa" />
-        </TouchableOpacity>
+        </Pressable>
       </View>
 
       <View className="mt-4">
-        <TouchableOpacity
+        <Pressable
           onPress={onPressAction}
           className={`w-full flex-row items-center justify-center gap-2 rounded-md py-3 transition-colors ${btnClass}`}>
           <Feather name={iconName} size={18} color="white" />
           <Text className="text-base font-bold text-white">{btnText}</Text>
-        </TouchableOpacity>
+        </Pressable>
       </View>
     </View>
   );

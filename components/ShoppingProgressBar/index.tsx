@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
-import { Feather } from '@expo/vector-icons';
+import { View, Text } from 'react-native';
+
+import Button from 'components/Button';
 
 interface ShoppingProgressBarProps {
   totalItems: number;
@@ -37,16 +38,16 @@ export default function ShoppingProgressBar({
         />
       </View>
 
-      <TouchableOpacity
-        onPress={onFinish}
-        className={`w-full flex-row items-center justify-center gap-2 rounded-xl py-4 transition-colors ${
-          isDone ? 'bg-orange-600 active:bg-orange-700' : 'bg-zinc-800 active:bg-zinc-700'
-        }`}>
-        <Feather name={isDone ? 'check' : 'flag'} size={20} color={isDone ? '#fff' : '#a1a1aa'} />
-        <Text className={`text-lg font-bold ${isDone ? 'text-white' : 'text-zinc-300'}`}>
+      {/* 2. Olha que maravilha o nosso Button em ação! */}
+      <View className="w-full">
+        <Button
+          area="shopping"
+          variant={isDone ? 'primary' : 'secondary'}
+          icon={isDone ? 'check' : 'flag'}
+          onPress={onFinish}>
           {isDone ? 'Finish Shopping!' : 'End Shopping Early'}
-        </Text>
-      </TouchableOpacity>
+        </Button>
+      </View>
     </View>
   );
 }

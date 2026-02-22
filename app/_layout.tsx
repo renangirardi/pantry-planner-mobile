@@ -1,5 +1,4 @@
 import '../global.css';
-import { TouchableOpacity } from 'react-native';
 
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Drawer } from 'expo-router/drawer';
@@ -12,6 +11,7 @@ import { useRouter } from 'expo-router';
 import Toast from 'react-native-toast-message';
 
 import { AREA_THEMES } from 'utils/area-themes';
+import BackButton from 'components/BackButton';
 
 export default function Layout() {
   useEffect(() => {
@@ -155,11 +155,7 @@ export default function Layout() {
                 shadowOpacity: 0,
               },
               headerLeft: () => (
-                <TouchableOpacity
-                  onPress={() => router.replace('/markets/')}
-                  className="ml-4 rounded-full p-2 active:bg-zinc-700">
-                  <Feather name="arrow-left" size={24} color={AREA_THEMES.market.hexColor} />
-                </TouchableOpacity>
+                <BackButton backRoute="/markets/" color={AREA_THEMES.market.hexColor} />
               ),
             }}></Drawer.Screen>
 
@@ -176,11 +172,7 @@ export default function Layout() {
                 shadowOpacity: 0,
               },
               headerLeft: () => (
-                <TouchableOpacity
-                  onPress={() => router.replace('/markets/')}
-                  className="ml-4 rounded-full p-2 active:bg-zinc-700">
-                  <Feather name="arrow-left" size={24} color={AREA_THEMES.market.hexColor} />
-                </TouchableOpacity>
+                <BackButton backRoute="/markets/" color={AREA_THEMES.market.hexColor} />
               ),
             }}></Drawer.Screen>
 
@@ -197,11 +189,7 @@ export default function Layout() {
                 shadowOpacity: 0,
               },
               headerLeft: () => (
-                <TouchableOpacity
-                  onPress={() => router.replace('/pantry-items/')}
-                  className="ml-4 rounded-full p-2 active:bg-zinc-700">
-                  <Feather name="arrow-left" size={24} color={AREA_THEMES.pantry.hexColor} />
-                </TouchableOpacity>
+                <BackButton backRoute="/pantry-items/" color={AREA_THEMES.pantry.hexColor} />
               ),
             }}></Drawer.Screen>
 
@@ -218,11 +206,7 @@ export default function Layout() {
                 shadowOpacity: 0,
               },
               headerLeft: () => (
-                <TouchableOpacity
-                  onPress={() => router.replace('/pantry-items/')}
-                  className="ml-4 rounded-full p-2 active:bg-zinc-700">
-                  <Feather name="arrow-left" size={24} color={AREA_THEMES.pantry.hexColor} />
-                </TouchableOpacity>
+                <BackButton backRoute="/pantry-items/" color={AREA_THEMES.pantry.hexColor} />
               ),
             }}></Drawer.Screen>
 
@@ -239,11 +223,7 @@ export default function Layout() {
                 shadowOpacity: 0,
               },
               headerLeft: () => (
-                <TouchableOpacity
-                  onPress={() => router.replace('/shopping-list/')}
-                  className="ml-4 rounded-full p-2 active:bg-zinc-700">
-                  <Feather name="arrow-left" size={24} color={AREA_THEMES.shopping.hexColor} />
-                </TouchableOpacity>
+                <BackButton backRoute="/shopping-list/" color={AREA_THEMES.shopping.hexColor} />
               ),
             }}></Drawer.Screen>
 
@@ -260,11 +240,7 @@ export default function Layout() {
                 shadowOpacity: 0,
               },
               headerLeft: () => (
-                <TouchableOpacity
-                  onPress={() => router.replace('/shopping-list/')}
-                  className="ml-4 rounded-full p-2 active:bg-zinc-700">
-                  <Feather name="arrow-left" size={24} color={AREA_THEMES.shopping.hexColor} />
-                </TouchableOpacity>
+                <BackButton backRoute="/shopping-list/" color={AREA_THEMES.shopping.hexColor} />
               ),
             }}></Drawer.Screen>
 
@@ -281,11 +257,7 @@ export default function Layout() {
                 shadowOpacity: 0,
               },
               headerLeft: () => (
-                <TouchableOpacity
-                  onPress={() => router.replace('/shopping-list/')}
-                  className="ml-4 rounded-full p-2 active:bg-zinc-700">
-                  <Feather name="arrow-left" size={24} color={AREA_THEMES.shopping.hexColor} />
-                </TouchableOpacity>
+                <BackButton backRoute="/shopping-list/" color={AREA_THEMES.shopping.hexColor} />
               ),
             }}></Drawer.Screen>
         </Drawer>

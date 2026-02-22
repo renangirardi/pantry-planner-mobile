@@ -33,7 +33,7 @@ export const AREA_THEMES: Record<AppArea, any> = {
 
 type FeatherIconName = keyof typeof Feather.glyphMap;
 
-type Props = {
+type ButtonProps = {
   children: ReactNode;
   variant?: 'primary' | 'danger' | 'secondary';
   area?: AppArea;
@@ -51,7 +51,7 @@ export default function Button({
   onPress,
   icon,
   isLoading,
-}: Props) {
+}: ButtonProps) {
   const theme = AREA_THEMES[area];
 
   let variantClassesBtn = '';
