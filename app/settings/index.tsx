@@ -26,11 +26,19 @@ export default function Settings() {
     try {
       const success = await exportDataToShare();
       if (success) {
-        Toast.show({ type: 'success', text1: 'File ready to share! 📤' });
+        Toast.show({
+          type: 'customSuccess',
+          text1: 'File ready to share!',
+          text2: 'Choose an app to send your backup.',
+        });
       }
     } catch (error) {
       console.log('Error: ', error);
-      Toast.show({ type: 'error', text1: 'Error sharing file.' });
+      Toast.show({
+        type: 'customError',
+        text1: 'Error sharing file.',
+        text2: 'Could not share the backup file.',
+      });
     } finally {
       setIsProcessing(false);
     }
@@ -42,11 +50,19 @@ export default function Settings() {
     try {
       const success = await exportDataToDevice();
       if (success) {
-        Toast.show({ type: 'success', text1: 'Saved to your device successfully! 💾' });
+        Toast.show({
+          type: 'customSuccess',
+          text1: 'Saved to your device successfully!',
+          text2: 'Find the backup file in your Downloads folder.',
+        });
       }
     } catch (error) {
       console.log('Error: ', error);
-      Toast.show({ type: 'error', text1: 'Error saving to device.' });
+      Toast.show({
+        type: 'customError',
+        text1: 'Error saving to device.',
+        text2: 'Could not save the backup file.',
+      });
     } finally {
       setIsProcessing(false);
     }
@@ -58,7 +74,11 @@ export default function Settings() {
       const success = await importDataFromFile();
       if (success) {
         setIsImportModalOpen(false);
-        Toast.show({ type: 'success', text1: 'Your data has been restored! 🚀' });
+        Toast.show({
+          type: 'customSuccess',
+          text1: 'Your data has been restored!',
+          text2: 'It is time to shop!',
+        });
         router.replace('/');
       } else {
         setIsImportModalOpen(false);
@@ -66,7 +86,11 @@ export default function Settings() {
     } catch (error) {
       console.log('Error: ', error);
       setIsImportModalOpen(false);
-      Toast.show({ type: 'error', text1: 'The selected file is invalid.' });
+      Toast.show({
+        type: 'customError',
+        text1: 'The selected file is invalid.',
+        text2: 'Please select a valid backup file to import.',
+      });
     } finally {
       setIsProcessing(false);
     }

@@ -69,9 +69,9 @@ export default function MarketForm({
   const handleSubmit = async () => {
     if (!formData.name) {
       Toast.show({
-        type: 'error',
+        type: 'customError',
         text1: 'Validation Error',
-        text2: 'Market name is required. ⚠️',
+        text2: 'Market name is required.',
       });
       return;
     }
@@ -84,17 +84,35 @@ export default function MarketForm({
 
       if (isEditing && initialData.id) {
         await updateMarket(initialData.id, payload);
+        Toast.show({
+          type: 'customSuccess',
+          text1: 'Market Updated!',
+          text2: 'The market was successfully updated.',
+          props: {
+            area: 'market',
+            icon: 'map-pin',
+          },
+        });
         router.replace({ pathname: '/markets/', params: { status: 'updated' } });
       } else {
         await createMarket(payload);
+        Toast.show({
+          type: 'customSuccess',
+          text1: 'Market Created!',
+          text2: 'The market was successfully created.',
+          props: {
+            area: 'market',
+            icon: 'map-pin',
+          },
+        });
         router.replace({ pathname: '/markets/', params: { status: 'created' } });
       }
     } catch (error) {
       console.error(error);
       Toast.show({
-        type: 'error',
+        type: 'customError',
         text1: 'Error saving market',
-        text2: 'Something went wrong. ❌',
+        text2: 'Something went wrong.',
       });
     } finally {
       setIsLoading(false);
@@ -107,6 +125,12 @@ export default function MarketForm({
     try {
       await deleteMarket(initialData.id);
       setShowDeleteModal(false);
+      Toast.show({
+        type: 'customSuccess',
+        text1: 'Market Deleted',
+        text2: `The market "${initialData.name}" has been deleted successfully.`,
+        props: { area: 'market', icon: 'map-pin' },
+      });
       router.replace({ pathname: '/markets/', params: { status: 'deleted' } });
     } catch (error) {
       console.error(error);

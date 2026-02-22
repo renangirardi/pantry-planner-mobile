@@ -8,6 +8,7 @@ import { Feather } from '@expo/vector-icons';
 import { useEffect } from 'react';
 import { populateDatabaseWhenEmpty } from 'services/seed';
 import Toast from 'react-native-toast-message';
+import { toastConfig } from 'utils/toastConfig';
 
 import { AREA_THEMES } from 'utils/area-themes';
 import BackButton from 'components/BackButton';
@@ -259,7 +260,7 @@ export default function Layout() {
             }}></Drawer.Screen>
         </Drawer>
       </SafeAreaView>
-      <Toast />
+      <Toast config={toastConfig} />
     </GestureHandlerRootView>
   );
 }

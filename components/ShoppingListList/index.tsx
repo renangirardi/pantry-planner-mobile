@@ -36,10 +36,21 @@ export default function ShoppingListsList({ lists }: ShoppingListsListProps) {
       const resetList = { ...list, checkedItemsIds: [] };
       await updateShoppingList(resetList);
 
+      Toast.show({
+        type: 'customSuccess',
+        text1: 'List restarted!',
+        text2: `The list "${list.name}" has been reset.`,
+        props: { area: 'shopping-list', icon: 'refresh-cw' },
+      });
+
       router.push(`/shopping-list/shop-now/${list.id}`);
     } catch (error) {
       console.error(error);
-      Toast.show({ type: 'error', text1: 'Error restarting the list.' });
+      Toast.show({
+        type: 'customError',
+        text1: 'Error restarting the list.',
+        text2: 'Please try again.',
+      });
     }
   };
 
@@ -75,12 +86,21 @@ export default function ShoppingListsList({ lists }: ShoppingListsListProps) {
       await createShoppingList(duplicatedList);
 
       closeOptions();
-      Toast.show({ type: 'success', text1: 'List duplicated successfully!' });
+      Toast.show({
+        type: 'customSuccess',
+        text1: 'List duplicated!',
+        text2: `The list "${selectedList.name}" has been duplicated.`,
+        props: { area: 'shopping-list', icon: 'copy' },
+      });
 
       router.setParams({ status: `duplicated-${Date.now()}` });
     } catch (error) {
       console.error(error);
-      Toast.show({ type: 'error', text1: 'Error duplicating list.' });
+      Toast.show({
+        type: 'customError',
+        text1: 'Error duplicating list.',
+        text2: 'Please try again.',
+      });
     } finally {
       setIsProcessing(false);
     }
@@ -102,11 +122,20 @@ export default function ShoppingListsList({ lists }: ShoppingListsListProps) {
       setDeleteVisible(false);
       setSelectedList(null);
 
-      Toast.show({ type: 'success', text1: 'List deleted.' });
+      Toast.show({
+        type: 'customSuccess',
+        text1: 'List deleted!',
+        text2: `The list "${selectedList.name}" has been deleted.`,
+        props: { area: 'shopping-list', icon: 'trash-2' },
+      });
       router.setParams({ status: `deleted-${Date.now()}` });
     } catch (error) {
       console.error(error);
-      Toast.show({ type: 'error', text1: 'Error deleting list.' });
+      Toast.show({
+        type: 'customError',
+        text1: 'Error deleting list.',
+        text2: 'Please try again.',
+      });
     } finally {
       setIsProcessing(false);
     }

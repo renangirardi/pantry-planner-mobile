@@ -113,6 +113,15 @@ export default function ShoppingListForm({
           itemsIds: formData.itemsIds,
           itemQuantities: quantities,
         });
+        Toast.show({
+          type: 'customSuccess',
+          text1: 'List Updated!',
+          text2: 'The shopping list was successfully updated.',
+          props: {
+            area: 'shopping',
+            icon: 'shopping-cart',
+          },
+        });
         router.replace({ pathname: '/shopping-list/', params: { status: 'updated' } });
       } else {
         await createShoppingList({
@@ -124,11 +133,24 @@ export default function ShoppingListForm({
           itemQuantities: quantities,
           createdAt: new Date().toISOString(),
         });
+        Toast.show({
+          type: 'customSuccess',
+          text1: 'List Created!',
+          text2: 'The shopping list was successfully created.',
+          props: {
+            area: 'shopping',
+            icon: 'shopping-cart',
+          },
+        });
         router.replace({ pathname: '/shopping-list/', params: { status: 'created' } });
       }
     } catch (error) {
       console.error(error);
-      Toast.show({ type: 'error', text1: 'Error saving list' });
+      Toast.show({
+        type: 'customError',
+        text1: 'Error saving list',
+        text2: 'Something went wrong.',
+      });
     } finally {
       setIsLoading(false);
     }
@@ -140,11 +162,24 @@ export default function ShoppingListForm({
     try {
       await deleteShoppingList(initialData.id);
       setShowDeleteModal(false);
+      Toast.show({
+        type: 'customSuccess',
+        text1: 'List Deleted!',
+        text2: 'The shopping list was successfully deleted.',
+        props: {
+          area: 'shopping',
+          icon: 'shopping-cart',
+        },
+      });
       router.replace({ pathname: '/shopping-list/', params: { status: 'deleted' } });
     } catch (error) {
       console.error(error);
       setShowDeleteModal(false);
-      Toast.show({ type: 'error', text1: 'Deletion failed' });
+      Toast.show({
+        type: 'customError',
+        text1: 'Deletion failed',
+        text2: 'Could not delete the shopping list.',
+      });
     } finally {
       setIsDeleting(false);
     }

@@ -27,12 +27,18 @@ export default function ItemList({ items }: ItemListProps) {
     try {
       await deleteItem(itemIdToDelete);
 
+      Toast.show({
+        type: 'customSuccess',
+        text1: 'Item deleted',
+        text2: `The item "${itemBeingDeleted?.name}" has been deleted successfully.`,
+        props: { area: 'pantry', icon: 'shopping-bag' },
+      });
       router.setParams({ status: 'item-deleted' });
       setItemIdToDelete(undefined);
     } catch (error) {
       console.error(error);
       Toast.show({
-        type: 'error',
+        type: 'customError',
         text1: 'Error',
         text2: 'Could not delete item.',
       });

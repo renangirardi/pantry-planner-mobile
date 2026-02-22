@@ -37,7 +37,7 @@ export default function EditItem() {
       } catch (error) {
         console.error(error);
         Toast.show({
-          type: 'error',
+          type: 'customError',
           text1: 'Error',
           text2: 'Could not load item data.',
         });

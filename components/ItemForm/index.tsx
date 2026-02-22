@@ -125,7 +125,11 @@ export default function ItemForm({ isEditing = false, initialData = { name: '' }
 
   const handleSubmit = async () => {
     if (!formData.name) {
-      Toast.show({ type: 'error', text1: 'Name is required' });
+      Toast.show({
+        type: 'customError',
+        text1: 'Validation Error',
+        text2: 'Item name is required.',
+      });
       return;
     }
 
@@ -137,16 +141,38 @@ export default function ItemForm({ isEditing = false, initialData = { name: '' }
 
       if (isEditing && initialData.id) {
         await updateItem(payload as Item);
+        Toast.show({
+          type: 'customSuccess',
+          text1: 'Item Updated!',
+          text2: 'The item was successfully updated.',
+          props: {
+            area: 'pantry',
+            icon: 'shopping-bag',
+          },
+        });
         router.replace({ pathname: '/pantry-items/', params: { status: 'updated' } });
       } else {
         const id = Crypto.randomUUID();
         const payloadWithId = { ...payload, id } as Item;
         await createItem(payloadWithId);
+        Toast.show({
+          type: 'customSuccess',
+          text1: 'Item Created!',
+          text2: 'The item was successfully created.',
+          props: {
+            area: 'pantry',
+            icon: 'shopping-bag',
+          },
+        });
         router.replace({ pathname: '/pantry-items/', params: { status: 'created' } });
       }
     } catch (error) {
       console.error(error);
-      Toast.show({ type: 'error', text1: 'Error saving item' });
+      Toast.show({
+        type: 'customError',
+        text1: 'Error saving item',
+        text2: 'Something went wrong.',
+      });
     } finally {
       setIsLoading(false);
     }
@@ -158,11 +184,20 @@ export default function ItemForm({ isEditing = false, initialData = { name: '' }
     try {
       await deleteItem(initialData.id);
       setShowDeleteModal(false);
+      Toast.show({
+        type: 'customSuccess',
+        text1: 'Item Deleted!',
+        text2: 'The item was successfully deleted.',
+        props: {
+          area: 'pantry',
+          icon: 'shopping-bag',
+        },
+      });
       router.replace({ pathname: '/pantry-items/', params: { status: 'deleted' } });
     } catch (error) {
       console.error(error);
       setShowDeleteModal(false);
-      Toast.show({ type: 'error', text1: 'Deletion failed', text2: 'Could not delete. ❌' });
+      Toast.show({ type: 'customError', text1: 'Deletion failed', text2: 'Could not delete.' });
     } finally {
       setIsDeleting(false);
     }

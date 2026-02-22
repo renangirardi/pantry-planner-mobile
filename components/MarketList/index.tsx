@@ -27,6 +27,13 @@ export default function MarketList({ markets }: MarketListProps) {
     try {
       await deleteMarket(marketIdToDelete);
 
+      Toast.show({
+        type: 'customSuccess',
+        text1: 'Market Deleted',
+        text2: `The market "${marketBeingDeleted?.name}" has been deleted successfully.`,
+        props: { area: 'market', icon: 'map-pin' },
+      });
+
       router.setParams({ status: 'market-deleted' });
       setMarketIdToDelete(undefined);
     } catch (error) {

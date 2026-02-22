@@ -37,7 +37,7 @@ export default function EditShoppingList() {
       } catch (error) {
         console.error(error);
         Toast.show({
-          type: 'error',
+          type: 'customError',
           text1: 'Error',
           text2: 'Could not load the shopping list data.',
         });

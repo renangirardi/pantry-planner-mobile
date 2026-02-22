@@ -48,7 +48,11 @@ export default function ActiveShopping() {
           const currentList = await getShoppingListById(listId);
 
           if (!currentList) {
-            Toast.show({ type: 'error', text1: 'List not found.' });
+            Toast.show({
+              type: 'customError',
+              text1: 'List not found.',
+              text2: 'The shopping list you are trying to access does not exist.',
+            });
             router.back();
             return;
           }
@@ -67,7 +71,11 @@ export default function ActiveShopping() {
           setSections(groupItemsForShopping(currentList, fetchedMarkets, fetchedItems));
         } catch (error) {
           console.error(error);
-          Toast.show({ type: 'error', text1: 'Failed to load shopping list.' });
+          Toast.show({
+            type: 'customError',
+            text1: 'Failed to load shopping list.',
+            text2: 'Please try again later.',
+          });
         } finally {
           setIsLoading(false);
         }
@@ -133,11 +141,20 @@ export default function ActiveShopping() {
     setIsFinishing(true);
     try {
       setIsFinishModalOpen(false);
-      Toast.show({ type: 'success', text1: 'Shopping Complete! 🎉' });
+      Toast.show({
+        type: 'customSuccess',
+        text1: 'Shopping Complete! 🎉',
+        text2: 'Great job finishing your shopping. Time to check out!',
+        props: { area: 'shopping', icon: 'shopping-cart' },
+      });
       router.replace('/shopping-list/');
     } catch (error) {
       console.error(error);
-      Toast.show({ type: 'error', text1: 'Error finishing list' });
+      Toast.show({
+        type: 'customError',
+        text1: 'Error finishing list',
+        text2: 'Could not complete the shopping list.',
+      });
     } finally {
       setIsFinishing(false);
     }
