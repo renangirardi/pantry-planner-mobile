@@ -479,7 +479,7 @@
     },
     {
       "id": "l3",
-      "name": "Jantar Especial com a Daniela",
+      "name": "Jantar Especial",
       "marketId": "m3",
       "itemsIds": ["i16", "i18", "i27", "i37", "i38", "i41"],
       "createdAt": "2026-02-20T08:15:00.000Z",

@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, FlatList, Modal as RNModal, Pressable } from 'react-native';
+import { View, Text, FlatList } from 'react-native';
 import { useRouter } from 'expo-router';
 import Toast from 'react-native-toast-message';
-import { Feather } from '@expo/vector-icons';
 import * as Crypto from 'expo-crypto';
 
 import { ShoppingList } from 'interfaces/ShoppingList';
@@ -14,6 +13,7 @@ import {
 
 import Modal from 'components/Modal';
 import ShoppingListListItem from './ShoppingListListItem';
+import ShoppingListOptionsModal from './ShopplingListListOptionsModal';
 
 interface ShoppingListsListProps {
   lists: ShoppingList[];
@@ -168,46 +168,16 @@ export default function ShoppingListsList({ lists }: ShoppingListsListProps) {
         }
       />
 
-      <RNModal visible={optionsVisible} animationType="slide" transparent>
-        <Pressable
-          className="flex-1 justify-end bg-black/60 active:opacity-100"
-          onPress={closeOptions}>
-          <Pressable className="rounded-t-3xl bg-zinc-900 p-6 pb-10 active:opacity-100">
-            <View className="mb-6 flex-row items-center justify-between border-b border-zinc-800 pb-4">
-              <Text className="w-3/4 truncate text-xl font-bold text-white" numberOfLines={1}>
-                {selectedList?.name}
-              </Text>
-              <Pressable onPress={closeOptions} className="rounded-full bg-zinc-800 p-2">
-                <Feather name="x" size={20} color="#a1a1aa" />
-              </Pressable>
-            </View>
-
-            <View className="gap-2">
-              <Pressable
-                onPress={handleEdit}
-                className="flex-row items-center gap-4 rounded-xl p-4 active:bg-zinc-800">
-                <Feather name="edit-2" size={24} color="#e4e4e7" />
-                <Text className="text-lg font-semibold text-zinc-200">Edit List</Text>
-              </Pressable>
-
-              <Pressable
-                onPress={handleDuplicate}
-                disabled={isProcessing}
-                className="flex-row items-center gap-4 rounded-xl p-4 active:bg-zinc-800">
-                <Feather name="copy" size={24} color="#e4e4e7" />
-                <Text className="text-lg font-semibold text-zinc-200">Duplicate List</Text>
-              </Pressable>
-
-              <Pressable
-                onPress={handleDeleteRequest}
-                className="flex-row items-center gap-4 rounded-xl p-4 active:bg-red-900/30">
-                <Feather name="trash-2" size={24} color="#ef4444" />
-                <Text className="text-lg font-semibold text-red-500">Delete List</Text>
-              </Pressable>
-            </View>
-          </Pressable>
-        </Pressable>
-      </RNModal>
+      {/* 2. O modal antigamente gigante agora é apenas esta linha maravilhosa: */}
+      <ShoppingListOptionsModal
+        isVisible={optionsVisible}
+        list={selectedList}
+        onClose={closeOptions}
+        onEdit={handleEdit}
+        onDuplicate={handleDuplicate}
+        onDelete={handleDeleteRequest}
+        isProcessing={isProcessing}
+      />
 
       <Modal
         isOpen={deleteVisible}
