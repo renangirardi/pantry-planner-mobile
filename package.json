@@ -9,7 +9,8 @@
     "lint": "eslint \"**/*.{js,jsx,ts,tsx}\" && prettier -c \"**/*.{js,jsx,ts,tsx,json}\"",
     "format": "eslint \"**/*.{js,jsx,ts,tsx}\" --fix && prettier \"**/*.{js,jsx,ts,tsx,json}\" --write",
     "web": "expo start --web",
-    "eas-build-pre-install": "npm install"
+    "eas-build-pre-install": "npm install",
+    "build:android": "eas build -p android --profile preview --clear-cache"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "2.2.0",
