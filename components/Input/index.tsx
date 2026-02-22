@@ -36,7 +36,7 @@ export default function Input({
         id={id}
         placeholder={placeholder}
         placeholderTextColor="#a1a1aa"
-        className="rounded-lg border border-zinc-700 bg-zinc-800 px-4 py-3 text-zinc-100 focus:border-green-500"
+        className="rounded-lg border border-zinc-700 bg-zinc-800 px-4 py-3 text-zinc-100 focus:border-zinc-500"
         value={value}
         defaultValue={defaultValue}
         onChangeText={onChangeText}

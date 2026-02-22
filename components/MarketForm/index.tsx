@@ -10,6 +10,7 @@ import { Aisle } from 'interfaces/Aisle';
 import Button from 'components/Button';
 import Input from 'components/Input';
 import Modal from 'components/Modal';
+import { Market } from 'interfaces/Market';
 
 interface MarketFormProps {
   isEditing?: boolean;

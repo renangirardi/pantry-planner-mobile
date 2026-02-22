@@ -1,6 +1,6 @@
 import { STORAGE_KEYS, getStorageData, setStorageData } from './storage';
 import { Market } from 'interfaces/Market';
-import Crypto from 'expo-crypto';
+import * as Crypto from 'expo-crypto';
 
 export async function getMarkets(): Promise<Market[]> {
   return getStorageData<Market>(STORAGE_KEYS.MARKETS);
@@ -11,7 +11,7 @@ export async function getMarketById(id: string): Promise<Market | undefined> {
   return markets.find((m) => m.id === id);
 }
 
-export async function createMarket(newMarket: Market): Promise<void> {
+export async function createMarket(newMarket: Partial<Market>): Promise<void> {
   const markets = await getMarkets();
 
   const marketToSave = {
@@ -19,7 +19,7 @@ export async function createMarket(newMarket: Market): Promise<void> {
     id: newMarket.id ? newMarket.id : Crypto.randomUUID(),
   };
 
-  markets.push(marketToSave);
+  markets.push(marketToSave as Market);
   await setStorageData(STORAGE_KEYS.MARKETS, markets);
 }
 

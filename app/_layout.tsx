@@ -9,6 +9,7 @@ import { Feather } from '@expo/vector-icons';
 import { useEffect } from 'react';
 import { populateDatabaseWhenEmpty } from 'services/seed';
 import { useRouter } from 'expo-router';
+import Toast from 'react-native-toast-message';
 
 import { AREA_THEMES } from 'utils/area-themes';
 
@@ -289,6 +290,7 @@ export default function Layout() {
             }}></Drawer.Screen>
         </Drawer>
       </SafeAreaView>
+      <Toast />
     </GestureHandlerRootView>
   );
 }
