@@ -2,7 +2,9 @@ import { STORAGE_KEYS, getStorageData, setStorageData } from './storage';
 import { Item } from 'interfaces/Item';
 
 export async function getItems(): Promise<Item[]> {
-  return getStorageData<Item>(STORAGE_KEYS.ITEMS);
+  const items = (await getStorageData<Item>(STORAGE_KEYS.ITEMS)) || [];
+
+  return items.sort((a, b) => a.name.localeCompare(b.name));
 }
 
 export async function getItemById(id: string): Promise<Item | undefined> {

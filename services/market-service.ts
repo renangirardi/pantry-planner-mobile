@@ -3,7 +3,19 @@ import { Market } from 'interfaces/Market';
 import * as Crypto from 'expo-crypto';
 
 export async function getMarkets(): Promise<Market[]> {
-  return getStorageData<Market>(STORAGE_KEYS.MARKETS);
+  const markets = (await getStorageData<Market>(STORAGE_KEYS.MARKETS)) || [];
+
+  markets.sort((a, b) => a.name.localeCompare(b.name));
+
+  markets.forEach((market) => {
+    if (market.aisles) {
+      market.aisles.sort((a, b) => {
+        return String(a.number).localeCompare(String(b.number), undefined, { numeric: true });
+      });
+    }
+  });
+
+  return markets;
 }
 
 export async function getMarketById(id: string): Promise<Market | undefined> {
