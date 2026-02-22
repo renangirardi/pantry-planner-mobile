@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import { ScrollView, StatusBar, KeyboardAvoidingView, Platform, View } from 'react-native';
 
 import ContentBox from 'components/ContentBox';
 import MarketForm from 'components/MarketForm';
 import Container from 'components/Container';
+import { useFocusEffect } from 'expo-router';
 
 export default function CreateNewMarket() {
+  const [formKey, setFormKey] = useState(Date.now().toString());
+
+  useFocusEffect(
+    useCallback(() => {
+      setFormKey(Date.now().toString());
+    }, [])
+  );
+
   return (
     <Container>
       <View className="flex-1 p-6">
@@ -19,7 +28,7 @@ export default function CreateNewMarket() {
             contentContainerStyle={{ paddingBottom: 40 }}
             keyboardShouldPersistTaps="handled">
             <ContentBox>
-              <MarketForm isEditing={false} initialData={{ name: '', aisles: [] }} />
+              <MarketForm key={formKey} isEditing={false} initialData={{ name: '', aisles: [] }} />
             </ContentBox>
           </ScrollView>
         </KeyboardAvoidingView>
