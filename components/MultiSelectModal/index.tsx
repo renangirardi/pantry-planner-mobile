@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, Text, Modal as RNModal, FlatList, Pressable, TextInput } from 'react-native';
-import { AREA_THEMES } from 'utils/area-themes';
 import { Feather } from '@expo/vector-icons';
 
 interface MultiSelectModalProps {
@@ -13,8 +12,6 @@ interface MultiSelectModalProps {
   onToggle: (id: string) => void;
   onQuantityChange?: (id: string, value: string) => void;
 }
-
-const theme = AREA_THEMES['shopping'];
 
 export default function MultiSelectModal({
   visible,

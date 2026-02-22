@@ -197,7 +197,7 @@ export default function ActiveShopping() {
           ListEmptyComponent={
             <View className="mt-10 items-center justify-center p-10">
               <Text className="text-center text-lg text-zinc-400">
-                This list is empty.{'\n'}Tap "Add" in the corner!
+                This list is empty.{'\n'}Tap &quot;Add&quot; in the corner!
               </Text>
             </View>
           }

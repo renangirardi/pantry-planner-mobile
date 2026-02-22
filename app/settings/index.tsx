@@ -29,6 +29,7 @@ export default function Settings() {
         Toast.show({ type: 'success', text1: 'File ready to share! 📤' });
       }
     } catch (error) {
+      console.log('Error: ', error);
       Toast.show({ type: 'error', text1: 'Error sharing file.' });
     } finally {
       setIsProcessing(false);
@@ -44,6 +45,7 @@ export default function Settings() {
         Toast.show({ type: 'success', text1: 'Saved to your device successfully! 💾' });
       }
     } catch (error) {
+      console.log('Error: ', error);
       Toast.show({ type: 'error', text1: 'Error saving to device.' });
     } finally {
       setIsProcessing(false);
@@ -62,6 +64,7 @@ export default function Settings() {
         setIsImportModalOpen(false);
       }
     } catch (error) {
+      console.log('Error: ', error);
       setIsImportModalOpen(false);
       Toast.show({ type: 'error', text1: 'The selected file is invalid.' });
     } finally {
