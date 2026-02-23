@@ -32,14 +32,13 @@ export default function ShoppingListOptionsModal({
       <Pressable className="flex-1 justify-end bg-black/60 active:opacity-100" onPress={onClose}>
         <Pressable
           className="rounded-t-3xl bg-zinc-900 p-6 shadow-xl active:opacity-100"
-          // Mágica do Safe Area aplicada aqui, somando com um respiro de 24px
           style={{ paddingBottom: insets.bottom + 24 }}>
           <View className="mb-6 flex-row items-center justify-between border-b border-zinc-800 pb-4">
             <Text className="w-3/4 truncate text-xl font-bold text-white" numberOfLines={1}>
               {list.name}
             </Text>
-            <Pressable onPress={onClose} className="rounded-full bg-zinc-800 p-2">
-              <Feather name="x" size={20} color="#a1a1aa" />
+            <Pressable onPress={onClose} className="-mr-2 p-2">
+              <Feather name="x" size={24} color="#a1a1aa" />
             </Pressable>
           </View>
 

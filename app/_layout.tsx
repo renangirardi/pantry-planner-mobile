@@ -29,7 +29,6 @@ export default function Layout() {
               backgroundColor: '#09090b',
               elevation: 0,
               shadowOpacity: 0,
-              // Linha base para caso alguma tela fuja do escopo
               borderBottomWidth: 2,
               borderBottomColor: '#27272a',
             },

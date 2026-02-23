@@ -11,7 +11,7 @@ export const toastConfig = {
 
     return (
       <View
-        className="w-[90%] flex-row items-center gap-4 rounded-xl bg-zinc-800 p-4 shadow-xl"
+        className="ml-4 mr-4 w-[90%] flex-row items-center gap-4 rounded-xl bg-zinc-800 p-4 shadow-xl"
         style={{ borderLeftWidth: 4, borderLeftColor: theme.hexColor }}>
         <Feather name={props?.icon || 'check-circle'} size={24} color={theme.hexColor} />
         <View className="ml-3 flex-1">

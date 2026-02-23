@@ -168,7 +168,6 @@ export default function ShoppingListsList({ lists }: ShoppingListsListProps) {
         }
       />
 
-      {/* 2. O modal antigamente gigante agora é apenas esta linha maravilhosa: */}
       <ShoppingListOptionsModal
         isVisible={optionsVisible}
         list={selectedList}

@@ -38,7 +38,6 @@ export default function ShoppingProgressBar({
         />
       </View>
 
-      {/* 2. Olha que maravilha o nosso Button em ação! */}
       <View className="w-full">
         <Button
           area="shopping"
