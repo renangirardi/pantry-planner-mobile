@@ -12,7 +12,7 @@ export default function Home() {
     <Container>
       <ScrollView>
         <View className="mt-10 flex-1 items-center justify-center p-6">
-          <PageTitle>Hello User!</PageTitle>
+          <PageTitle>Hello Guilherme Lorenzi!</PageTitle>
 
           <PageDescription>
             Welcome to your favorite pantry planner. What would you like to do today?

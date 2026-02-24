@@ -5,4 +5,5 @@ export interface Item {
   name: string;
   brand?: string;
   locations?: ItemLocation[];
+  categoryId: string;
 }

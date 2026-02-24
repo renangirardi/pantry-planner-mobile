@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { ItemLocation } from 'interfaces/ItemLocation';
-import SelectTrigger from '../SelectTrigger';
+import SelectTrigger from 'components/SelectTrigger';
 
 interface ItemLocationCardProps {
   index: number;

@@ -4,6 +4,7 @@ export const STORAGE_KEYS = {
   MARKETS: '@app_markets',
   ITEMS: '@app_items',
   SHOPPINGLISTS: '@app_lists',
+  CATEGORIES: '@app_categories',
 };
 
 export async function getStorageData<T>(key: string): Promise<T[]> {

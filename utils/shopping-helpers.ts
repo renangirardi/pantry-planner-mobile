@@ -1,6 +1,7 @@
 import { Item } from 'interfaces/Item';
 import { Market } from 'interfaces/Market';
 import { ShoppingList } from 'interfaces/ShoppingList';
+import { Category } from 'interfaces/Category';
 
 export interface ShoppingSection {
   title: string;
@@ -11,20 +12,60 @@ export interface ShoppingSection {
 export function groupItemsForShopping(
   list: ShoppingList,
   markets: Market[],
-  allItems: Item[]
+  allItems: Item[],
+  categories: Category[] = []
 ): ShoppingSection[] {
-  const listItems = allItems.filter((item) => list.itemsIds!.includes(item.id));
+  const safeItemsIds = list.itemsIds || [];
+  const listItems = allItems.filter((item) => safeItemsIds.includes(item.id));
 
   const market = markets.find((m) => m.id === list.marketId);
 
   if (!market) {
-    return [
-      {
+    const groupedByCategory = new Map<string, ShoppingSection>();
+    const uncategorizedItems: Item[] = [];
+
+    listItems.forEach((item) => {
+      if (item.categoryId) {
+        const category = categories.find((c) => c.id === item.categoryId);
+
+        if (category) {
+          const catKey = category.id;
+
+          if (!groupedByCategory.has(catKey)) {
+            groupedByCategory.set(catKey, {
+              title: category.name,
+              data: [],
+              aisleNumber: 0,
+            });
+          }
+
+          groupedByCategory.get(catKey)!.data.push(item);
+        } else {
+          uncategorizedItems.push(item);
+        }
+      } else {
+        uncategorizedItems.push(item);
+      }
+    });
+
+    const categorySections = Array.from(groupedByCategory.values()).sort((a, b) =>
+      a.title.localeCompare(b.title)
+    );
+
+    categorySections.forEach((section) => {
+      section.data.sort((a, b) => a.name.localeCompare(b.name));
+    });
+
+    if (uncategorizedItems.length > 0) {
+      uncategorizedItems.sort((a, b) => a.name.localeCompare(b.name));
+      categorySections.push({
         title: 'Other Items',
-        data: listItems.sort((a, b) => a.name.localeCompare(b.name)),
+        data: uncategorizedItems,
         aisleNumber: 9999,
-      },
-    ];
+      });
+    }
+
+    return categorySections;
   }
 
   const grouped = new Map<string, ShoppingSection>();
@@ -34,7 +75,7 @@ export function groupItemsForShopping(
     const locationInMarket = item.locations?.find((loc) => loc.marketId === market.id);
 
     if (locationInMarket && locationInMarket.aisleId) {
-      const aisle = market.aisles.find((a) => a.id === locationInMarket.aisleId);
+      const aisle = market.aisles?.find((a) => a.id === locationInMarket.aisleId);
 
       if (aisle) {
         const aisleKey = aisle.id;

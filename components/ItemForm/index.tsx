@@ -7,14 +7,17 @@ import * as Crypto from 'expo-crypto';
 
 import { createItem, updateItem, deleteItem } from 'services/item-service';
 import { getMarkets } from 'services/market-service';
+import { getCategories } from 'services/category-service';
 import { Market } from 'interfaces/Market';
+import { Category } from 'interfaces/Category';
 import { ItemLocation } from 'interfaces/ItemLocation';
 import { Item } from 'interfaces/Item';
 
 import Button from 'components/Button';
 import Input from 'components/Input';
 import Modal from 'components/Modal';
-import SelectionModal from './SelectionModal';
+import SelectTrigger from 'components/SelectTrigger';
+import SingleSelectModal from 'components/SingleSelectModal';
 import ItemLocationCard from './ItemLocationCard';
 
 interface ItemFormProps {
@@ -23,6 +26,7 @@ interface ItemFormProps {
     id?: string;
     name: string;
     brand?: string;
+    categoryId?: string;
     locations?: ItemLocation[];
   };
 }
@@ -33,10 +37,12 @@ export default function ItemForm({ isEditing = false, initialData = { name: '' }
   const [formData, setFormData] = useState({
     name: initialData.name || '',
     brand: initialData.brand || '',
+    categoryId: initialData.categoryId || '',
     locations: initialData.locations || [],
   });
 
   const [availableMarkets, setAvailableMarkets] = useState<Market[]>([]);
+  const [availableCategories, setAvailableCategories] = useState<Category[]>([]);
 
   const [isLoading, setIsLoading] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -44,16 +50,17 @@ export default function ItemForm({ isEditing = false, initialData = { name: '' }
 
   const [selectorState, setSelectorState] = useState<{
     isOpen: boolean;
-    type: 'MARKET' | 'AISLE' | null;
+    type: 'MARKET' | 'AISLE' | 'CATEGORY' | null;
     rowIndex: number | null;
   }>({ isOpen: false, type: null, rowIndex: null });
 
   useEffect(() => {
-    async function loadMarkets() {
-      const markets = await getMarkets();
+    async function loadData() {
+      const [markets, categories] = await Promise.all([getMarkets(), getCategories()]);
       setAvailableMarkets(markets);
+      setAvailableCategories(categories);
     }
-    loadMarkets();
+    loadData();
   }, []);
 
   const handleChange = (field: string, value: string) => {
@@ -74,7 +81,7 @@ export default function ItemForm({ isEditing = false, initialData = { name: '' }
     }));
   };
 
-  const openSelector = (type: 'MARKET' | 'AISLE', index: number) => {
+  const openSelector = (type: 'MARKET' | 'AISLE' | 'CATEGORY', index: number | null = null) => {
     setSelectorState({ isOpen: true, type, rowIndex: index });
   };
 
@@ -84,6 +91,13 @@ export default function ItemForm({ isEditing = false, initialData = { name: '' }
 
   const handleSelection = (selectedItem: any) => {
     const { type, rowIndex } = selectorState;
+
+    if (type === 'CATEGORY') {
+      setFormData((prev) => ({ ...prev, categoryId: selectedItem.id }));
+      closeSelector();
+      return;
+    }
+
     if (rowIndex === null) return;
 
     const updatedLocations = [...(formData.locations || [])];
@@ -106,13 +120,17 @@ export default function ItemForm({ isEditing = false, initialData = { name: '' }
 
   const currentOptions = useMemo(() => {
     const { type, rowIndex } = selectorState;
-    if (!type || rowIndex === null) return [];
+    if (!type) return [];
+
+    if (type === 'CATEGORY') {
+      return availableCategories;
+    }
 
     if (type === 'MARKET') {
       return availableMarkets;
     }
 
-    if (type === 'AISLE') {
+    if (type === 'AISLE' && rowIndex !== null) {
       const currentLocation = formData.locations?.[rowIndex];
       if (!currentLocation?.marketId) return [];
 
@@ -121,7 +139,7 @@ export default function ItemForm({ isEditing = false, initialData = { name: '' }
     }
 
     return [];
-  }, [selectorState, availableMarkets, formData.locations]);
+  }, [selectorState, availableMarkets, availableCategories, formData.locations]);
 
   const handleSubmit = async () => {
     if (!formData.name) {
@@ -129,6 +147,15 @@ export default function ItemForm({ isEditing = false, initialData = { name: '' }
         type: 'customError',
         text1: 'Validation Error',
         text2: 'Item name is required.',
+      });
+      return;
+    }
+
+    if (!formData.categoryId) {
+      Toast.show({
+        type: 'customError',
+        text1: 'Validation Error',
+        text2: 'Please select a category.',
       });
       return;
     }
@@ -145,10 +172,7 @@ export default function ItemForm({ isEditing = false, initialData = { name: '' }
           type: 'customSuccess',
           text1: 'Item Updated!',
           text2: 'The item was successfully updated.',
-          props: {
-            area: 'pantry',
-            icon: 'shopping-bag',
-          },
+          props: { area: 'pantry', icon: 'shopping-bag' },
         });
         router.replace({ pathname: '/pantry-items/', params: { status: 'updated' } });
       } else {
@@ -159,10 +183,7 @@ export default function ItemForm({ isEditing = false, initialData = { name: '' }
           type: 'customSuccess',
           text1: 'Item Created!',
           text2: 'The item was successfully created.',
-          props: {
-            area: 'pantry',
-            icon: 'shopping-bag',
-          },
+          props: { area: 'pantry', icon: 'shopping-bag' },
         });
         router.replace({ pathname: '/pantry-items/', params: { status: 'created' } });
       }
@@ -188,10 +209,7 @@ export default function ItemForm({ isEditing = false, initialData = { name: '' }
         type: 'customSuccess',
         text1: 'Item Deleted!',
         text2: 'The item was successfully deleted.',
-        props: {
-          area: 'pantry',
-          icon: 'shopping-bag',
-        },
+        props: { area: 'pantry', icon: 'shopping-bag' },
       });
       router.replace({ pathname: '/pantry-items/', params: { status: 'deleted' } });
     } catch (error) {
@@ -215,17 +233,30 @@ export default function ItemForm({ isEditing = false, initialData = { name: '' }
     return '';
   };
 
+  const getCategoryLabel = () => {
+    return availableCategories.find((c) => c.id === formData.categoryId)?.name || '';
+  };
+
   return (
     <>
       <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
-        <View className="gap-6 pb-10">
+        <View className="gap-3 pb-10">
           <Input
             id="name"
             placeholder="Ex: Tomato Sauce"
             value={formData.name}
             onChangeText={(text) => handleChange('name', text)}>
-            Item Name:
+            Item Name: *
           </Input>
+
+          <View className="mb-2">
+            <SelectTrigger
+              label="Category: *"
+              placeholder="Select a category..."
+              value={getCategoryLabel()}
+              onPress={() => openSelector('CATEGORY')}
+            />
+          </View>
 
           <Input
             id="brand"
@@ -276,9 +307,15 @@ export default function ItemForm({ isEditing = false, initialData = { name: '' }
         </View>
       </ScrollView>
 
-      <SelectionModal
+      <SingleSelectModal
         visible={selectorState.isOpen}
-        title={selectorState.type === 'MARKET' ? 'Select Market' : 'Select Aisle'}
+        title={
+          selectorState.type === 'MARKET'
+            ? 'Select Market'
+            : selectorState.type === 'AISLE'
+              ? 'Select Aisle'
+              : 'Select Category'
+        }
         options={currentOptions}
         onClose={closeSelector}
         onSelect={handleSelection}

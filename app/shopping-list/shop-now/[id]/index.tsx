@@ -8,9 +8,11 @@ import Toast from 'react-native-toast-message';
 import { getShoppingListById, updateShoppingList } from 'services/shopping-list-service';
 import { getMarkets } from 'services/market-service';
 import { getItems } from 'services/item-service';
+import { getCategories } from 'services/category-service';
 import { ShoppingList } from 'interfaces/ShoppingList';
 import { Item } from 'interfaces/Item';
 import { Market } from 'interfaces/Market';
+import { Category } from 'interfaces/Category';
 
 import { groupItemsForShopping, ShoppingSection } from 'utils/shopping-helpers';
 import ActiveShoppingListItem from 'components/ActiveShoppingListItem';
@@ -29,6 +31,7 @@ export default function ActiveShopping() {
   const [isFinishing, setIsFinishing] = useState(false);
 
   const [allItems, setAllItems] = useState<Item[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [markets, setMarkets] = useState<Market[]>([]);
   const [isItemModalOpen, setIsItemModalOpen] = useState(false);
   const [quantities, setQuantities] = useState<Record<string, string>>({});
@@ -59,16 +62,19 @@ export default function ActiveShopping() {
 
           const fetchedMarkets = await getMarkets();
           const fetchedItems = await getItems();
+          const fetchedCategories = await getCategories();
 
           setList(currentList);
           setMarkets(fetchedMarkets);
           setAllItems(fetchedItems);
+          setCategories(fetchedCategories);
 
           setCheckedItems(currentList.checkedItemsIds || []);
-
           setQuantities(currentList.itemQuantities || {});
 
-          setSections(groupItemsForShopping(currentList, fetchedMarkets, fetchedItems));
+          setSections(
+            groupItemsForShopping(currentList, fetchedMarkets, fetchedItems, fetchedCategories)
+          );
         } catch (error) {
           console.error(error);
           Toast.show({
@@ -114,7 +120,7 @@ export default function ActiveShopping() {
     const updatedList = { ...list, itemsIds: newItemsIds, itemQuantities: newQuantities };
 
     setList(updatedList);
-    setSections(groupItemsForShopping(updatedList, markets, allItems));
+    setSections(groupItemsForShopping(updatedList, markets, allItems, categories));
 
     await updateShoppingList(updatedList);
   };
@@ -128,7 +134,7 @@ export default function ActiveShopping() {
     if (list) {
       const updatedList = { ...list, itemQuantities: quantities };
       setList(updatedList);
-      setSections(groupItemsForShopping(updatedList, markets, allItems));
+      setSections(groupItemsForShopping(updatedList, markets, allItems, categories));
       await updateShoppingList(updatedList);
     }
   };

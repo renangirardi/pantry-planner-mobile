@@ -6,6 +6,7 @@ import mockData from 'data/mock-data.json';
 //import mockData from 'data/renan-data.json';
 
 export async function populateDatabaseWhenEmpty() {
+  /*
   try {
     const markets = await getMarkets();
 
@@ -29,4 +30,8 @@ export async function populateDatabaseWhenEmpty() {
   } catch (error) {
     console.error('Error populating database:', error);
   }
+    */
+  console.log(
+    'populateDatabaseWhenEmpty is currently disabled to prevent accidental data overwrites. Please enable it in seed.ts if you want to populate the database with mock data.'
+  );
 }
