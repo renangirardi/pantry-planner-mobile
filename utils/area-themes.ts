@@ -1,4 +1,4 @@
-export type AppArea = 'default' | 'shopping' | 'pantry' | 'market';
+export type AppArea = 'default' | 'shopping' | 'pantry' | 'categories' | 'market';
 
 export const AREA_THEMES: Record<AppArea, any> = {
   default: {
@@ -18,6 +18,12 @@ export const AREA_THEMES: Record<AppArea, any> = {
     secondary: 'bg-transparent border border-teal-400 active:bg-teal-600',
     secondaryText: 'text-teal-500',
     hexColor: '#00bba7',
+  },
+  categories: {
+    primary: 'bg-indigo-600 active:bg-indigo-700',
+    secondary: 'bg-transparent border border-indigo-400 active:bg-indigo-600',
+    secondaryText: 'text-indigo-500',
+    hexColor: '#615fff',
   },
   market: {
     primary: 'bg-yellow-600 active:bg-yellow-700',

@@ -56,7 +56,6 @@ export default function Layout() {
               drawerActiveTintColor: AREA_THEMES.default.hexColor,
               drawerIcon: ({ color, size }) => <Feather name="home" size={size} color={color} />,
             }}></Drawer.Screen>
-
           {/* ==================== SHOPPING ==================== */}
           <Drawer.Screen
             name="shopping-list/index"
@@ -76,7 +75,6 @@ export default function Layout() {
                 <Feather name="shopping-cart" size={size} color={color} />
               ),
             }}></Drawer.Screen>
-
           {/* ==================== PANTRY ==================== */}
           <Drawer.Screen
             name="pantry-items/index"
@@ -96,6 +94,23 @@ export default function Layout() {
                 <Feather name="shopping-bag" size={size} color={color} />
               ),
             }}></Drawer.Screen>
+          {/* ==================== CATEGORIES ==================== */}
+          <Drawer.Screen
+            name="categories/index"
+            options={{
+              drawerLabel: 'Categories',
+              title: 'Categories',
+              headerStyle: {
+                backgroundColor: '#09090b',
+                borderBottomWidth: 2,
+                borderBottomColor: AREA_THEMES.categories.hexColor,
+                elevation: 0,
+                shadowOpacity: 0,
+              },
+              drawerActiveBackgroundColor: `${AREA_THEMES.categories.hexColor}15`,
+              drawerActiveTintColor: AREA_THEMES.categories.hexColor,
+              drawerIcon: ({ color, size }) => <Feather name="package" size={size} color={color} />,
+            }}></Drawer.Screen>
 
           {/* ==================== MARKETS ==================== */}
           <Drawer.Screen
@@ -114,7 +129,6 @@ export default function Layout() {
               drawerActiveTintColor: AREA_THEMES.market.hexColor,
               drawerIcon: ({ color, size }) => <Feather name="map-pin" size={size} color={color} />,
             }}></Drawer.Screen>
-
           {/* ==================== SETTINGS ==================== */}
           <Drawer.Screen
             name="settings/index"
@@ -134,11 +148,9 @@ export default function Layout() {
                 <Feather name="settings" size={size} color={color} />
               ),
             }}></Drawer.Screen>
-
           {/* ============================================================== */}
           {/* THE FOLLOWING SCREENS ARE HIDDEN BUT MAINTAIN THE THEME COLORS */}
           {/* ============================================================== */}
-
           <Drawer.Screen
             name="markets/[id]/index"
             options={{
@@ -155,7 +167,6 @@ export default function Layout() {
                 <BackButton backRoute="/markets/" color={AREA_THEMES.market.hexColor} />
               ),
             }}></Drawer.Screen>
-
           <Drawer.Screen
             name="markets/create-new/index"
             options={{
@@ -172,7 +183,6 @@ export default function Layout() {
                 <BackButton backRoute="/markets/" color={AREA_THEMES.market.hexColor} />
               ),
             }}></Drawer.Screen>
-
           <Drawer.Screen
             name="pantry-items/[id]/index"
             options={{
@@ -189,7 +199,6 @@ export default function Layout() {
                 <BackButton backRoute="/pantry-items/" color={AREA_THEMES.pantry.hexColor} />
               ),
             }}></Drawer.Screen>
-
           <Drawer.Screen
             name="pantry-items/create-new/index"
             options={{
@@ -206,7 +215,6 @@ export default function Layout() {
                 <BackButton backRoute="/pantry-items/" color={AREA_THEMES.pantry.hexColor} />
               ),
             }}></Drawer.Screen>
-
           <Drawer.Screen
             name="shopping-list/[id]/index"
             options={{
@@ -223,7 +231,6 @@ export default function Layout() {
                 <BackButton backRoute="/shopping-list/" color={AREA_THEMES.shopping.hexColor} />
               ),
             }}></Drawer.Screen>
-
           <Drawer.Screen
             name="shopping-list/create-new/index"
             options={{
@@ -240,7 +247,6 @@ export default function Layout() {
                 <BackButton backRoute="/shopping-list/" color={AREA_THEMES.shopping.hexColor} />
               ),
             }}></Drawer.Screen>
-
           <Drawer.Screen
             name="shopping-list/shop-now/[id]/index"
             options={{
@@ -255,6 +261,38 @@ export default function Layout() {
               },
               headerLeft: () => (
                 <BackButton backRoute="/shopping-list/" color={AREA_THEMES.shopping.hexColor} />
+              ),
+            }}></Drawer.Screen>
+          <Drawer.Screen
+            name="categories/create-new/index"
+            options={{
+              title: 'Create New Category',
+              drawerItemStyle: { display: 'none' },
+              headerStyle: {
+                backgroundColor: '#09090b',
+                borderBottomWidth: 2,
+                borderBottomColor: AREA_THEMES.categories.hexColor,
+                elevation: 0,
+                shadowOpacity: 0,
+              },
+              headerLeft: () => (
+                <BackButton backRoute="/categories/" color={AREA_THEMES.categories.hexColor} />
+              ),
+            }}></Drawer.Screen>
+          <Drawer.Screen
+            name="categories/[id]/index"
+            options={{
+              title: 'Category Details',
+              drawerItemStyle: { display: 'none' },
+              headerStyle: {
+                backgroundColor: '#09090b',
+                borderBottomWidth: 2,
+                borderBottomColor: AREA_THEMES.categories.hexColor,
+                elevation: 0,
+                shadowOpacity: 0,
+              },
+              headerLeft: () => (
+                <BackButton backRoute="/categories/" color={AREA_THEMES.categories.hexColor} />
               ),
             }}></Drawer.Screen>
         </Drawer>

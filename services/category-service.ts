@@ -56,3 +56,9 @@ export async function deleteCategory(id: string): Promise<void> {
   const filteredCategories = categories.filter((c) => c.id !== id);
   await setStorageData(STORAGE_KEYS.CATEGORIES, filteredCategories);
 }
+
+export async function searchCategories(query: string): Promise<Category[]> {
+  const categories = await getCategories();
+  const lowerQuery = query.toLowerCase();
+  return categories.filter((c) => c.name.toLowerCase().includes(lowerQuery));
+}

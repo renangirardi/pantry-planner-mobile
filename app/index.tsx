@@ -33,6 +33,13 @@ export default function Home() {
               Register new Pantry Items
             </CallToAction>
 
+            <CallToAction
+              variant="categories"
+              icon="package"
+              onPress={() => router.push('/categories')}>
+              Register new Categories
+            </CallToAction>
+
             <CallToAction variant="markets" icon="map-pin" onPress={() => router.push('/markets')}>
               Enter a new Favorite Market
             </CallToAction>

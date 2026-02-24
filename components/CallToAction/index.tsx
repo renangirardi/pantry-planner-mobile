@@ -6,7 +6,7 @@ type FeatherIconName = keyof typeof Feather.glyphMap;
 
 type Props = {
   children: ReactNode;
-  variant: 'shoppingList' | 'pantryItems' | 'markets';
+  variant: 'shoppingList' | 'pantryItems' | 'categories' | 'markets';
   disabled?: boolean;
   onPress?: () => void;
   icon?: FeatherIconName;
@@ -24,6 +24,7 @@ export default function CallToAction({
   const variantClassesBtn = {
     shoppingList: 'bg-orange-600 active:bg-orange-800 border-transparent',
     pantryItems: 'bg-teal-600 active:bg-teal-800 border-transparent',
+    categories: 'bg-indigo-600 active:bg-indigo-800 border-transparent',
     markets: 'bg-yellow-600 active:bg-yellow-800 border-transparent',
   };
 
