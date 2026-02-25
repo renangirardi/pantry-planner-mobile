@@ -100,6 +100,50 @@ export default function Settings() {
     <Container>
       <View className="flex-1 p-6">
         <ScrollView showsVerticalScrollIndicator={false}>
+          {/* Content Management Section */}
+          <ContentBox>
+            <View className="mb-6">
+              <View className="mb-4 flex-row items-center gap-2">
+                <Feather name="settings" size={20} color="#a1a1aa" />
+                <Text className="text-lg font-bold text-zinc-100">Content Management</Text>
+              </View>
+              <Text className="mb-6 text-sm text-zinc-400">
+                Manage your markets, items, and categories. Edit or delete any content you no longer
+                need.
+              </Text>
+
+              <View className="gap-4">
+                <Button
+                  icon="shopping-bag"
+                  area="pantry"
+                  variant="primary"
+                  onPress={() => setIsExportModalOpen(true)}
+                  disabled={isProcessing}>
+                  Manage Items
+                </Button>
+
+                <Button
+                  icon="package"
+                  area="categories"
+                  variant="primary"
+                  onPress={() => setIsExportModalOpen(true)}
+                  disabled={isProcessing}>
+                  Manage Categories
+                </Button>
+
+                <Button
+                  icon="map-pin"
+                  area="market"
+                  variant="primary"
+                  onPress={() => setIsExportModalOpen(true)}
+                  disabled={isProcessing}>
+                  Manage Markets
+                </Button>
+              </View>
+            </View>
+          </ContentBox>
+
+          {/* Data Management Section */}
           <ContentBox>
             <View className="mb-6">
               <View className="mb-4 flex-row items-center gap-2">

@@ -60,7 +60,7 @@ export default function Layout() {
           <Drawer.Screen
             name="shopping-list/index"
             options={{
-              drawerLabel: 'Shopping List',
+              drawerLabel: 'Shopping Lists',
               title: 'Shopping List',
               headerStyle: {
                 backgroundColor: '#09090b',
@@ -75,60 +75,7 @@ export default function Layout() {
                 <Feather name="shopping-cart" size={size} color={color} />
               ),
             }}></Drawer.Screen>
-          {/* ==================== PANTRY ==================== */}
-          <Drawer.Screen
-            name="pantry-items/index"
-            options={{
-              drawerLabel: 'Pantry Items',
-              title: 'Pantry Items',
-              headerStyle: {
-                backgroundColor: '#09090b',
-                borderBottomWidth: 2,
-                borderBottomColor: AREA_THEMES.pantry.hexColor,
-                elevation: 0,
-                shadowOpacity: 0,
-              },
-              drawerActiveBackgroundColor: `${AREA_THEMES.pantry.hexColor}15`,
-              drawerActiveTintColor: AREA_THEMES.pantry.hexColor,
-              drawerIcon: ({ color, size }) => (
-                <Feather name="shopping-bag" size={size} color={color} />
-              ),
-            }}></Drawer.Screen>
-          {/* ==================== CATEGORIES ==================== */}
-          <Drawer.Screen
-            name="categories/index"
-            options={{
-              drawerLabel: 'Categories',
-              title: 'Categories',
-              headerStyle: {
-                backgroundColor: '#09090b',
-                borderBottomWidth: 2,
-                borderBottomColor: AREA_THEMES.categories.hexColor,
-                elevation: 0,
-                shadowOpacity: 0,
-              },
-              drawerActiveBackgroundColor: `${AREA_THEMES.categories.hexColor}15`,
-              drawerActiveTintColor: AREA_THEMES.categories.hexColor,
-              drawerIcon: ({ color, size }) => <Feather name="package" size={size} color={color} />,
-            }}></Drawer.Screen>
 
-          {/* ==================== MARKETS ==================== */}
-          <Drawer.Screen
-            name="markets/index"
-            options={{
-              drawerLabel: 'Favorite Markets',
-              title: 'Favorite Markets',
-              headerStyle: {
-                backgroundColor: '#09090b',
-                borderBottomWidth: 2,
-                borderBottomColor: AREA_THEMES.market.hexColor,
-                elevation: 0,
-                shadowOpacity: 0,
-              },
-              drawerActiveBackgroundColor: `${AREA_THEMES.market.hexColor}15`,
-              drawerActiveTintColor: AREA_THEMES.market.hexColor,
-              drawerIcon: ({ color, size }) => <Feather name="map-pin" size={size} color={color} />,
-            }}></Drawer.Screen>
           {/* ==================== SETTINGS ==================== */}
           <Drawer.Screen
             name="settings/index"
@@ -151,6 +98,23 @@ export default function Layout() {
           {/* ============================================================== */}
           {/* THE FOLLOWING SCREENS ARE HIDDEN BUT MAINTAIN THE THEME COLORS */}
           {/* ============================================================== */}
+          <Drawer.Screen
+            name="markets/index"
+            options={{
+              drawerLabel: 'Favorite Markets',
+              title: 'Favorite Markets',
+              drawerItemStyle: { display: 'none' },
+              headerStyle: {
+                backgroundColor: '#09090b',
+                borderBottomWidth: 2,
+                borderBottomColor: AREA_THEMES.market.hexColor,
+                elevation: 0,
+                shadowOpacity: 0,
+              },
+              drawerActiveBackgroundColor: `${AREA_THEMES.market.hexColor}15`,
+              drawerActiveTintColor: AREA_THEMES.market.hexColor,
+              drawerIcon: ({ color, size }) => <Feather name="map-pin" size={size} color={color} />,
+            }}></Drawer.Screen>
           <Drawer.Screen
             name="markets/[id]/index"
             options={{
@@ -181,6 +145,25 @@ export default function Layout() {
               },
               headerLeft: () => (
                 <BackButton backRoute="/markets/" color={AREA_THEMES.market.hexColor} />
+              ),
+            }}></Drawer.Screen>
+          <Drawer.Screen
+            name="pantry-items/index"
+            options={{
+              drawerLabel: 'Pantry Items',
+              title: 'Pantry Items',
+              drawerItemStyle: { display: 'none' },
+              headerStyle: {
+                backgroundColor: '#09090b',
+                borderBottomWidth: 2,
+                borderBottomColor: AREA_THEMES.pantry.hexColor,
+                elevation: 0,
+                shadowOpacity: 0,
+              },
+              drawerActiveBackgroundColor: `${AREA_THEMES.pantry.hexColor}15`,
+              drawerActiveTintColor: AREA_THEMES.pantry.hexColor,
+              drawerIcon: ({ color, size }) => (
+                <Feather name="shopping-bag" size={size} color={color} />
               ),
             }}></Drawer.Screen>
           <Drawer.Screen
@@ -262,6 +245,23 @@ export default function Layout() {
               headerLeft: () => (
                 <BackButton backRoute="/shopping-list/" color={AREA_THEMES.shopping.hexColor} />
               ),
+            }}></Drawer.Screen>
+          <Drawer.Screen
+            name="categories/index"
+            options={{
+              drawerLabel: 'Categories',
+              title: 'Categories',
+              drawerItemStyle: { display: 'none' },
+              headerStyle: {
+                backgroundColor: '#09090b',
+                borderBottomWidth: 2,
+                borderBottomColor: AREA_THEMES.categories.hexColor,
+                elevation: 0,
+                shadowOpacity: 0,
+              },
+              drawerActiveBackgroundColor: `${AREA_THEMES.categories.hexColor}15`,
+              drawerActiveTintColor: AREA_THEMES.categories.hexColor,
+              drawerIcon: ({ color, size }) => <Feather name="package" size={size} color={color} />,
             }}></Drawer.Screen>
           <Drawer.Screen
             name="categories/create-new/index"

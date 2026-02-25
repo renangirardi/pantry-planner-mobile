@@ -23,25 +23,7 @@ export default function Home() {
               variant="shoppingList"
               icon="shopping-cart"
               onPress={() => router.push('/shopping-list')}>
-              Start a new Shopping List
-            </CallToAction>
-
-            <CallToAction
-              variant="pantryItems"
-              icon="shopping-bag"
-              onPress={() => router.push('/pantry-items')}>
-              Register new Pantry Items
-            </CallToAction>
-
-            <CallToAction
-              variant="categories"
-              icon="package"
-              onPress={() => router.push('/categories')}>
-              Register new Categories
-            </CallToAction>
-
-            <CallToAction variant="markets" icon="map-pin" onPress={() => router.push('/markets')}>
-              Enter a new Favorite Market
+              Let&apos;s go Shopping
             </CallToAction>
           </View>
         </View>
