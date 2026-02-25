@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { View, Text, Pressable, ScrollView } from 'react-native';
-import { useRouter } from 'expo-router';
+import React, { useState, useMemo, useCallback } from 'react';
+import { View, Text, Pressable, ScrollView, Modal as RNModal } from 'react-native';
+import { useFocusEffect, useRouter } from 'expo-router';
 import Toast from 'react-native-toast-message';
 import { Feather } from '@expo/vector-icons';
 import * as Crypto from 'expo-crypto';
@@ -18,6 +18,11 @@ import Input from 'components/Input';
 import Modal from 'components/Modal';
 import SelectTrigger from 'components/SelectTrigger';
 import SingleSelectModal from 'components/SingleSelectModal';
+import ContextualShortcutModal from 'components/ContextualShortcutModal';
+
+import CategoryForm from 'components/CategoryForm';
+import MarketForm from 'components/MarketForm';
+
 import ItemLocationCard from './ItemLocationCard';
 
 interface ItemFormProps {
@@ -44,6 +49,10 @@ export default function ItemForm({ isEditing = false, initialData = { name: '' }
   const [availableMarkets, setAvailableMarkets] = useState<Market[]>([]);
   const [availableCategories, setAvailableCategories] = useState<Category[]>([]);
 
+  // Estados dos Modais Contextuais
+  const [showCategoryModal, setShowCategoryModal] = useState(false);
+  const [showMarketModal, setShowMarketModal] = useState(false);
+
   const [isLoading, setIsLoading] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -54,14 +63,18 @@ export default function ItemForm({ isEditing = false, initialData = { name: '' }
     rowIndex: number | null;
   }>({ isOpen: false, type: null, rowIndex: null });
 
-  useEffect(() => {
-    async function loadData() {
-      const [markets, categories] = await Promise.all([getMarkets(), getCategories()]);
-      setAvailableMarkets(markets);
-      setAvailableCategories(categories);
-    }
-    loadData();
-  }, []);
+  // Isolamos a busca para podermos chamar sob demanda
+  const loadData = async () => {
+    const [markets, categories] = await Promise.all([getMarkets(), getCategories()]);
+    setAvailableMarkets(markets);
+    setAvailableCategories(categories);
+  };
+
+  useFocusEffect(
+    useCallback(() => {
+      loadData();
+    }, [])
+  );
 
   const handleChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -307,6 +320,7 @@ export default function ItemForm({ isEditing = false, initialData = { name: '' }
         </View>
       </ScrollView>
 
+      {/* MODAL DE SELEÇÃO COM OS GATILHOS ATUALIZADOS */}
       <SingleSelectModal
         visible={selectorState.isOpen}
         title={
@@ -319,6 +333,20 @@ export default function ItemForm({ isEditing = false, initialData = { name: '' }
         options={currentOptions}
         onClose={closeSelector}
         onSelect={handleSelection}
+        onCreateNew={
+          selectorState.type === 'MARKET'
+            ? () => setShowMarketModal(true)
+            : selectorState.type === 'CATEGORY'
+              ? () => setShowCategoryModal(true)
+              : undefined
+        }
+        createNewText={
+          selectorState.type === 'MARKET'
+            ? 'Create New Market'
+            : selectorState.type === 'CATEGORY'
+              ? 'Create New Category'
+              : undefined
+        }
       />
 
       <Modal
@@ -329,6 +357,32 @@ export default function ItemForm({ isEditing = false, initialData = { name: '' }
         isLoading={isDeleting}>
         <Text className="text-zinc-200">Are you sure?</Text>
       </Modal>
+
+      {/* NOSSOS MODAIS CONTEXTUAIS OMNIPRESENTES */}
+
+      <ContextualShortcutModal
+        isOpen={showCategoryModal}
+        onClose={() => setShowCategoryModal(false)}
+        title="New Category">
+        <CategoryForm
+          onSuccess={() => {
+            setShowCategoryModal(false);
+            loadData();
+          }}
+        />
+      </ContextualShortcutModal>
+
+      <ContextualShortcutModal
+        isOpen={showMarketModal}
+        onClose={() => setShowMarketModal(false)}
+        title="New Market">
+        <MarketForm
+          onSuccess={() => {
+            setShowMarketModal(false);
+            loadData();
+          }}
+        />
+      </ContextualShortcutModal>
     </>
   );
 }

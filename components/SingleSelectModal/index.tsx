@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Modal as RNModal, FlatList, Pressable } from 'react-native';
+import { View, Text, Pressable, Modal as RNModal, FlatList } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
 interface SingleSelectModalProps {
@@ -7,7 +7,9 @@ interface SingleSelectModalProps {
   title: string;
   options: any[];
   onClose: () => void;
-  onSelect: (item: any | null) => void;
+  onSelect: (item: any) => void;
+  onCreateNew?: () => void;
+  createNewText?: string;
 }
 
 export default function SingleSelectModal({
@@ -16,38 +18,53 @@ export default function SingleSelectModal({
   options,
   onClose,
   onSelect,
+  onCreateNew,
+  createNewText,
 }: SingleSelectModalProps) {
   return (
     <RNModal visible={visible} animationType="slide" transparent>
-      <Pressable className="flex-1 justify-end bg-black/80" onPress={onClose}>
-        <Pressable className="h-[50%] rounded-t-3xl bg-zinc-900 p-6 pb-10">
+      <View className="flex-1 justify-end bg-black/80">
+        <View className="h-[60%] rounded-t-3xl bg-zinc-900 p-6">
           <View className="mb-4 flex-row items-center justify-between">
             <Text className="text-xl font-bold text-white">{title}</Text>
-            <Pressable onPress={onClose} className="-mr-2 p-2">
+            <Pressable onPress={onClose} className="p-2 active:opacity-50">
               <Feather name="x" size={24} color="#a1a1aa" />
             </Pressable>
           </View>
-          <FlatList
-            data={options}
-            keyExtractor={(item: any) => item.id}
-            showsVerticalScrollIndicator={false}
-            ListHeaderComponent={
-              <Pressable
-                onPress={() => onSelect(null)}
-                className="border-b border-zinc-800 py-4 active:bg-zinc-800">
-                <Text className="text-lg font-semibold text-zinc-500">None (Clear Selection)</Text>
-              </Pressable>
-            }
-            renderItem={({ item }) => (
-              <Pressable
-                onPress={() => onSelect(item)}
-                className="border-b border-zinc-800 py-4 active:bg-zinc-800">
-                <Text className="text-lg text-zinc-200">{item.name}</Text>
-              </Pressable>
-            )}
-          />
-        </Pressable>
-      </Pressable>
+
+          {/* BOTÃO DE ATALHO CONTEXTUAL */}
+          {onCreateNew && createNewText && (
+            <Pressable
+              onPress={() => {
+                onClose(); // Fecha o modal antes de navegar
+                setTimeout(onCreateNew, 100); // Dá um pequeno respiro para a animação do modal
+              }}
+              className="mb-4 flex-row items-center justify-center gap-2 rounded-lg border border-dashed border-orange-500/50 bg-orange-500/10 p-4 active:bg-orange-500/20">
+              <Feather name="plus" size={20} color="#f97316" />
+              <Text className="font-bold text-orange-500">{createNewText}</Text>
+            </Pressable>
+          )}
+
+          {options.length === 0 ? (
+            <Text className="mt-10 text-center text-zinc-500">No options available.</Text>
+          ) : (
+            <FlatList
+              data={options}
+              keyExtractor={(item: any) => item.id}
+              renderItem={({ item }) => (
+                <Pressable
+                  onPress={() => onSelect(item)}
+                  className="border-b border-zinc-800 py-4 active:bg-zinc-800 active:opacity-80">
+                  <Text className="text-lg text-zinc-200">{item.name}</Text>
+                  {item.number && (
+                    <Text className="text-xs text-zinc-500">Aisle Nº {item.number}</Text>
+                  )}
+                </Pressable>
+              )}
+            />
+          )}
+        </View>
+      </View>
     </RNModal>
   );
 }

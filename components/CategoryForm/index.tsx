@@ -14,11 +14,13 @@ interface CategoryFormProps {
     id?: string;
     name: string;
   };
+  onSuccess?: () => void;
 }
 
 export default function CategoryForm({
   isEditing = false,
   initialData = { name: '' },
+  onSuccess,
 }: CategoryFormProps) {
   const router = useRouter();
 
@@ -54,7 +56,11 @@ export default function CategoryForm({
           text1: 'Category Created!',
           text2: 'Saved successfully.',
         });
-        router.replace({ pathname: '/categories/', params: { status: 'created' } });
+        if (onSuccess) {
+          onSuccess();
+        } else {
+          router.replace({ pathname: '/categories/', params: { status: 'created' } });
+        }
       }
     } catch (error) {
       console.error(error);
@@ -75,7 +81,7 @@ export default function CategoryForm({
         text1: 'Category Deleted',
         text2: 'Deleted successfully.',
       });
-      router.replace({ pathname: '/categories/', params: { status: 'deleted' } });
+      router.back();
     } catch (error) {
       console.error(error);
       setShowDeleteModal(false);

@@ -18,11 +18,13 @@ interface MarketFormProps {
     name: string;
     aisles: Aisle[];
   };
+  onSuccess?: () => void;
 }
 
 export default function MarketForm({
   isEditing = false,
   initialData = { name: '', aisles: [] },
+  onSuccess,
 }: MarketFormProps) {
   const router = useRouter();
 
@@ -105,7 +107,12 @@ export default function MarketForm({
             icon: 'map-pin',
           },
         });
-        router.replace({ pathname: '/markets/', params: { status: 'created' } });
+
+        if (onSuccess) {
+          onSuccess();
+        } else {
+          router.replace({ pathname: '/markets/', params: { status: 'created' } });
+        }
       }
     } catch (error) {
       console.error(error);
