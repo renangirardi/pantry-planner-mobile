@@ -19,6 +19,7 @@ import ActiveShoppingListItem from 'components/ActiveShoppingListItem';
 import ShoppingProgressBar from 'components/ShoppingProgressBar';
 import MultiSelectModal from 'components/MultiSelectModal';
 import Modal from 'components/Modal';
+import MiniButton from 'components/MiniButton';
 
 export default function ActiveShopping() {
   const { id } = useLocalSearchParams();
@@ -188,12 +189,12 @@ export default function ActiveShopping() {
           </Text>
         </View>
 
-        <Pressable
+        <MiniButton
+          icon="plus"
+          label="Add Items"
           onPress={() => setIsItemModalOpen(true)}
-          className="ml-2 flex-row items-center justify-center gap-1 rounded-full bg-orange-600/20 px-3 py-2 active:bg-orange-600/40">
-          <Feather name="plus" size={16} color="#ff8904" />
-          <Text className="text-sm font-bold text-orange-400">Add</Text>
-        </Pressable>
+          className="ml-2"
+        />
       </View>
 
       <View className="flex-1">

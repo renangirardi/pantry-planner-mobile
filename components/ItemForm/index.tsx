@@ -320,7 +320,6 @@ export default function ItemForm({ isEditing = false, initialData = { name: '' }
         </View>
       </ScrollView>
 
-      {/* MODAL DE SELEÇÃO COM OS GATILHOS ATUALIZADOS */}
       <SingleSelectModal
         visible={selectorState.isOpen}
         title={
@@ -342,10 +341,17 @@ export default function ItemForm({ isEditing = false, initialData = { name: '' }
         }
         createNewText={
           selectorState.type === 'MARKET'
-            ? 'Create New Market'
+            ? 'Add Market'
             : selectorState.type === 'CATEGORY'
-              ? 'Create New Category'
+              ? 'Add Category'
               : undefined
+        }
+        area={
+          selectorState.type === 'MARKET'
+            ? 'market'
+            : selectorState.type === 'CATEGORY'
+              ? 'categories'
+              : 'default'
         }
       />
 

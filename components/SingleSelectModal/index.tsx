@@ -2,6 +2,8 @@ import React from 'react';
 import { View, Text, Pressable, Modal as RNModal, FlatList } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
+import MiniButton from 'components/MiniButton';
+
 interface SingleSelectModalProps {
   visible: boolean;
   title: string;
@@ -10,6 +12,7 @@ interface SingleSelectModalProps {
   onSelect: (item: any) => void;
   onCreateNew?: () => void;
   createNewText?: string;
+  area: 'default' | 'shopping' | 'pantry' | 'categories' | 'market';
 }
 
 export default function SingleSelectModal({
@@ -20,6 +23,7 @@ export default function SingleSelectModal({
   onSelect,
   onCreateNew,
   createNewText,
+  area = 'default',
 }: SingleSelectModalProps) {
   return (
     <RNModal visible={visible} animationType="slide" transparent>
@@ -32,17 +36,17 @@ export default function SingleSelectModal({
             </Pressable>
           </View>
 
-          {/* BOTÃO DE ATALHO CONTEXTUAL */}
           {onCreateNew && createNewText && (
-            <Pressable
+            <MiniButton
+              icon="plus"
+              label={createNewText}
               onPress={() => {
-                onClose(); // Fecha o modal antes de navegar
-                setTimeout(onCreateNew, 100); // Dá um pequeno respiro para a animação do modal
+                onClose();
+                setTimeout(onCreateNew, 100);
               }}
-              className="mb-4 flex-row items-center justify-center gap-2 rounded-lg border border-dashed border-orange-500/50 bg-orange-500/10 p-4 active:bg-orange-500/20">
-              <Feather name="plus" size={20} color="#f97316" />
-              <Text className="font-bold text-orange-500">{createNewText}</Text>
-            </Pressable>
+              className="mb-4"
+              area={area === 'default' ? 'default' : area}
+            />
           )}
 
           {options.length === 0 ? (
