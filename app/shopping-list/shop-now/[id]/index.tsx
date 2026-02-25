@@ -191,6 +191,7 @@ export default function ActiveShopping() {
 
         <MiniButton
           icon="plus"
+          area='shopping'
           label="Add Items"
           onPress={() => setIsItemModalOpen(true)}
           className="ml-2"
