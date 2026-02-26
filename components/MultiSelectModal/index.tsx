@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import Search from 'components/Search';
+import MiniButton from 'components/MiniButton';
 
 interface MultiSelectModalProps {
   visible: boolean;
@@ -21,6 +22,10 @@ interface MultiSelectModalProps {
   onClose: () => void;
   onToggle: (id: string) => void;
   onQuantityChange?: (id: string, value: string) => void;
+  // Novas propriedades para o atalho contextual
+  onCreateNew?: () => void;
+  createNewText?: string;
+  area?: 'default' | 'market' | 'pantry' | 'shopping' | 'categories';
 }
 
 export default function MultiSelectModal({
@@ -32,6 +37,9 @@ export default function MultiSelectModal({
   onClose,
   onToggle,
   onQuantityChange,
+  onCreateNew,
+  createNewText,
+  area = 'default', // Caso você queira usar as cores temáticas no futuro
 }: MultiSelectModalProps) {
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -64,10 +72,26 @@ export default function MultiSelectModal({
             </View>
 
             {options.length > 0 && (
-              <Search
-                placeholder="Search items..."
-                useUrlParams={false}
-                onChange={setSearchQuery}
+              <View className="mb-4">
+                <Search
+                  placeholder="Search items..."
+                  useUrlParams={false}
+                  onChange={setSearchQuery}
+                />
+              </View>
+            )}
+
+            {/* Botão de Atalho Contextual */}
+            {onCreateNew && createNewText && (
+              <MiniButton
+                icon="plus"
+                label={createNewText}
+                onPress={() => {
+                  handleClose();
+                  setTimeout(onCreateNew, 100);
+                }}
+                className="mb-4"
+                area={area === 'default' ? 'default' : area}
               />
             )}
 

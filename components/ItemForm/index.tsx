@@ -34,9 +34,14 @@ interface ItemFormProps {
     categoryId?: string;
     locations?: ItemLocation[];
   };
+  onSuccess?: () => void;
 }
 
-export default function ItemForm({ isEditing = false, initialData = { name: '' } }: ItemFormProps) {
+export default function ItemForm({
+  isEditing = false,
+  initialData = { name: '' },
+  onSuccess,
+}: ItemFormProps) {
   const router = useRouter();
 
   const [formData, setFormData] = useState({
@@ -158,7 +163,7 @@ export default function ItemForm({ isEditing = false, initialData = { name: '' }
     if (!formData.name) {
       Toast.show({
         type: 'customError',
-        text1: 'Validation Error',
+        text1: 'handleSubmit',
         text2: 'Item name is required.',
       });
       return;
@@ -187,7 +192,12 @@ export default function ItemForm({ isEditing = false, initialData = { name: '' }
           text2: 'The item was successfully updated.',
           props: { area: 'pantry', icon: 'shopping-bag' },
         });
-        router.replace({ pathname: '/pantry-items/', params: { status: 'updated' } });
+
+        if (onSuccess) {
+          onSuccess();
+        } else {
+          router.replace({ pathname: '/pantry-items/', params: { status: 'updated' } });
+        }
       } else {
         const id = Crypto.randomUUID();
         const payloadWithId = { ...payload, id } as Item;
@@ -198,7 +208,12 @@ export default function ItemForm({ isEditing = false, initialData = { name: '' }
           text2: 'The item was successfully created.',
           props: { area: 'pantry', icon: 'shopping-bag' },
         });
-        router.replace({ pathname: '/pantry-items/', params: { status: 'created' } });
+
+        if (onSuccess) {
+          onSuccess();
+        } else {
+          router.replace({ pathname: '/pantry-items/', params: { status: 'created' } });
+        }
       }
     } catch (error) {
       console.error(error);

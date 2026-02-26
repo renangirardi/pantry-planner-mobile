@@ -9,6 +9,8 @@ import {
 } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import Toast from 'react-native-toast-message';
+import { toastConfig } from 'utils/toastConfig';
 
 interface ContextualShortcutModalProps {
   isOpen: boolean;
@@ -49,6 +51,7 @@ export default function ContextualShortcutModal({
           </View>
         </View>
       </KeyboardAvoidingView>
+      <Toast config={toastConfig} />
     </RNModal>
   );
 }

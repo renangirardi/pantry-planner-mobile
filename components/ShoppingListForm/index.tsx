@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import { View, Text, ScrollView, TextInput, Pressable } from 'react-native';
-import { useRouter } from 'expo-router';
+import { useRouter, useFocusEffect } from 'expo-router';
 import Toast from 'react-native-toast-message';
 import { Feather } from '@expo/vector-icons';
 import * as Crypto from 'expo-crypto';
@@ -23,6 +23,10 @@ import Modal from 'components/Modal';
 import SelectTrigger from 'components/SelectTrigger';
 import SingleSelectModal from 'components/SingleSelectModal';
 import MultiSelectModal from 'components/MultiSelectModal';
+import ContextualShortcutModal from 'components/ContextualShortcutModal';
+
+import MarketForm from 'components/MarketForm';
+import ItemForm from 'components/ItemForm';
 
 interface ShoppingListFormProps {
   isEditing?: boolean;
@@ -48,6 +52,10 @@ export default function ShoppingListForm({
   const [markets, setMarkets] = useState<Market[]>([]);
   const [allItems, setAllItems] = useState<Item[]>([]);
 
+  // Estados dos Modais Contextuais
+  const [showMarketModal, setShowMarketModal] = useState(false);
+  const [showItemModal, setShowItemModal] = useState(false);
+
   const [isLoading, setIsLoading] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -55,15 +63,19 @@ export default function ShoppingListForm({
   const [marketSelectorOpen, setMarketSelectorOpen] = useState(false);
   const [itemSelectorOpen, setItemSelectorOpen] = useState(false);
 
-  useEffect(() => {
-    async function loadData() {
-      const fetchedMarkets = await getMarkets();
-      const fetchedItems = await getItems();
-      setMarkets(fetchedMarkets);
-      setAllItems(fetchedItems);
-    }
-    loadData();
-  }, []);
+  // Função isolada para recarregar dados
+  const loadData = async () => {
+    const fetchedMarkets = await getMarkets();
+    const fetchedItems = await getItems();
+    setMarkets(fetchedMarkets);
+    setAllItems(fetchedItems);
+  };
+
+  useFocusEffect(
+    useCallback(() => {
+      loadData();
+    }, [])
+  );
 
   const handleMarketSelect = (market: Market | null) => {
     setFormData((prev) => ({
@@ -286,6 +298,9 @@ export default function ShoppingListForm({
         options={markets}
         onClose={() => setMarketSelectorOpen(false)}
         onSelect={handleMarketSelect}
+        onCreateNew={() => setShowMarketModal(true)}
+        createNewText="Add Market"
+        area="market"
       />
 
       <MultiSelectModal
@@ -297,6 +312,9 @@ export default function ShoppingListForm({
         onQuantityChange={handleQuantityChange}
         onClose={() => setItemSelectorOpen(false)}
         onToggle={handleItemToggle}
+        onCreateNew={() => setShowItemModal(true)}
+        createNewText="Add Item"
+        area="pantry"
       />
 
       <Modal
@@ -307,6 +325,31 @@ export default function ShoppingListForm({
         isLoading={isDeleting}>
         <Text className="text-zinc-200">Are you sure you want to delete this list?</Text>
       </Modal>
+
+      {/* MODAIS CONTEXTUAIS */}
+      <ContextualShortcutModal
+        isOpen={showMarketModal}
+        onClose={() => setShowMarketModal(false)}
+        title="New Market">
+        <MarketForm
+          onSuccess={() => {
+            setShowMarketModal(false);
+            loadData();
+          }}
+        />
+      </ContextualShortcutModal>
+
+      <ContextualShortcutModal
+        isOpen={showItemModal}
+        onClose={() => setShowItemModal(false)}
+        title="New Item">
+        <ItemForm
+          onSuccess={() => {
+            setShowItemModal(false);
+            loadData();
+          }}
+        />
+      </ContextualShortcutModal>
     </>
   );
 }
