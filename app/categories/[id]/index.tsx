@@ -17,6 +17,7 @@ import { Category } from 'interfaces/Category';
 import ContentBox from 'components/ContentBox';
 import Container from 'components/Container';
 import CategoryForm from 'components/CategoryForm';
+import MessageBar from 'components/MessageBar';
 
 export default function EditCategory() {
   const { id } = useLocalSearchParams();
@@ -44,6 +45,12 @@ export default function EditCategory() {
 
   return (
     <Container>
+      <MessageBar
+        id="tutorial-edit-category"
+        title="Editing a Category"
+        message="If you change a category's name, all pantry items currently linked to it will automatically reflect the new name. No need to update them one by one!"
+      />
+
       <View className="flex-1 p-6">
         <StatusBar barStyle="default" />
         <KeyboardAvoidingView

@@ -17,6 +17,7 @@ import { Market } from 'interfaces/Market';
 import ContentBox from 'components/ContentBox';
 import Container from 'components/Container';
 import MarketForm from 'components/MarketForm';
+import MessageBar from 'components/MessageBar';
 
 export default function EditMarket() {
   const { id } = useLocalSearchParams();
@@ -52,6 +53,12 @@ export default function EditMarket() {
 
   return (
     <Container>
+      <MessageBar
+        id="tutorial-edit-market"
+        title="Editing a Market"
+        message="Need to reorganize? Updating aisle names or their order here will automatically update all the items and shopping lists linked to this market!"
+      />
+
       <View className="flex-1 p-6">
         <StatusBar barStyle="default" />
 

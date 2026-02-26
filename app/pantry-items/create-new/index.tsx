@@ -5,6 +5,7 @@ import { useFocusEffect } from 'expo-router';
 import ContentBox from 'components/ContentBox';
 import ItemForm from 'components/ItemForm';
 import Container from 'components/Container';
+import MessageBar from 'components/MessageBar';
 
 export default function CreateNewItem() {
   const [formKey, setFormKey] = useState(Date.now().toString());
@@ -17,9 +18,15 @@ export default function CreateNewItem() {
 
   return (
     <Container>
-      <View className="flex-1 p-6">
-        <StatusBar barStyle="default" />
+      <MessageBar
+        id="tutorial-create-item"
+        title="Add a New Item"
+        message="Always assign a Category to your items for basic sorting. You can also map exactly where to find it by adding specific Market aisles!"
+      />
 
+      <View className="flex-1 p-6">
+        x
+        <StatusBar barStyle="default" />
         <KeyboardAvoidingView
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
           className="flex-1">

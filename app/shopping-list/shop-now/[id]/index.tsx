@@ -20,6 +20,7 @@ import ShoppingProgressBar from 'components/ShoppingProgressBar';
 import MultiSelectModal from 'components/MultiSelectModal';
 import Modal from 'components/Modal';
 import MiniButton from 'components/MiniButton';
+import MessageBar from 'components/MessageBar';
 
 export default function ActiveShopping() {
   const { id } = useLocalSearchParams();
@@ -179,6 +180,11 @@ export default function ActiveShopping() {
 
   return (
     <View className="flex-1 bg-zinc-950">
+      <MessageBar
+        id="tutorial-active-shopping"
+        title="Shopping Mode"
+        message="Tap items as you pick them up to cross them off. Forgot something? Use the Add button in the corner to quickly add items directly to your list without leaving this screen."
+      />
       <View className="flex-row items-center border-b border-zinc-800 bg-zinc-900 px-4 py-4 shadow-md">
         <View className="flex-1">
           <Text className="text-xl font-bold text-white" numberOfLines={1}>
@@ -191,7 +197,7 @@ export default function ActiveShopping() {
 
         <MiniButton
           icon="plus"
-          area='shopping'
+          area="shopping"
           label="Add Items"
           onPress={() => setIsItemModalOpen(true)}
           className="ml-2"

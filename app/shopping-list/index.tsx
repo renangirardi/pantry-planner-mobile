@@ -10,6 +10,7 @@ import Container from 'components/Container';
 import PageDescription from 'components/PageDescription';
 import Button from 'components/Button';
 import ShoppingListsList from 'components/ShoppingListList';
+import MessageBar from 'components/MessageBar';
 
 export default function ShoppingLists() {
   const router = useRouter();
@@ -43,6 +44,12 @@ export default function ShoppingLists() {
 
   return (
     <Container>
+      <MessageBar
+        id="tutorial-shopping-lists"
+        title="Smart Shopping Lists"
+        message="Create a new list and link it to a specific Market to automatically sort your items by aisles. If you leave the market blank, your list will be neatly grouped by Categories instead."
+      />
+
       <ScrollView showsVerticalScrollIndicator={false}>
         <View className="mt-10 flex-1 items-center justify-center p-6">
           <PageDescription>

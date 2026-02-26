@@ -17,6 +17,7 @@ import { Item } from 'interfaces/Item';
 import ContentBox from 'components/ContentBox';
 import Container from 'components/Container';
 import ItemForm from 'components/ItemForm';
+import MessageBar from 'components/MessageBar';
 
 export default function EditItem() {
   const { id } = useLocalSearchParams();
@@ -52,6 +53,12 @@ export default function EditItem() {
 
   return (
     <Container>
+      <MessageBar
+        id="tutorial-edit-item"
+        title="Editing an Item"
+        message="Update the item's category or map it to a new market aisle. Changes made here will automatically apply to your future shopping lists!"
+      />
+
       <View className="flex-1 p-6">
         <StatusBar barStyle="default" />
 

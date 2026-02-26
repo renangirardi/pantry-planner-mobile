@@ -10,6 +10,7 @@ import PageDescription from 'components/PageDescription';
 import Button from 'components/Button';
 import ItemList from 'components/ItemList';
 import { getItems, searchItems } from 'services/item-service';
+import MessageBar from 'components/MessageBar';
 
 export default function Markets() {
   const router = useRouter();
@@ -38,6 +39,12 @@ export default function Markets() {
 
   return (
     <Container>
+      <MessageBar
+        id="tutorial-pantry-items"
+        title="Your Master Pantry"
+        message="This is your main database. Register all the groceries you usually buy, assign them to categories or specific market aisles, and they'll organize your future shopping lists like magic!"
+      />
+
       <ScrollView>
         <View className="mt-10 flex-1 items-center justify-center p-6">
           <PageDescription>Search for your items or register a new one.</PageDescription>

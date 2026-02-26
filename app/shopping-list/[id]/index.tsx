@@ -17,6 +17,7 @@ import { ShoppingList } from 'interfaces/ShoppingList';
 import ContentBox from 'components/ContentBox';
 import Container from 'components/Container';
 import ShoppingListForm from 'components/ShoppingListForm';
+import MessageBar from 'components/MessageBar';
 
 export default function EditShoppingList() {
   const { id } = useLocalSearchParams();
@@ -52,6 +53,12 @@ export default function EditShoppingList() {
 
   return (
     <Container>
+      <MessageBar
+        id="tutorial-edit-shopping-list"
+        title="Editing Your List"
+        message="You can update the list name, change the linked market, or manage your items. If you change the market, your items will automatically reorganize to match the new aisles!"
+      />
+
       <View className="flex-1 p-6">
         <StatusBar barStyle="default" />
 

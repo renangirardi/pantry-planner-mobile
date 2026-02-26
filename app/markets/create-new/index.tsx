@@ -5,6 +5,7 @@ import ContentBox from 'components/ContentBox';
 import MarketForm from 'components/MarketForm';
 import Container from 'components/Container';
 import { useFocusEffect } from 'expo-router';
+import MessageBar from 'components/MessageBar';
 
 export default function CreateNewMarket() {
   const [formKey, setFormKey] = useState(Date.now().toString());
@@ -17,6 +18,12 @@ export default function CreateNewMarket() {
 
   return (
     <Container>
+      <MessageBar
+        id="tutorial-create-market"
+        title="Map Your Market"
+        message="Add the aisles in the exact order you usually walk through the store. This is the secret to getting your shopping lists perfectly sorted so you never have to backtrack!"
+      />
+
       <View className="flex-1 p-6">
         <StatusBar barStyle="default" />
 

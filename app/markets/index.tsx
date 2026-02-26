@@ -10,6 +10,7 @@ import PageDescription from 'components/PageDescription';
 import Button from 'components/Button';
 import MarketList from 'components/MarketList';
 import { getMarkets, searchMarkets } from 'services/market-service';
+import MessageBar from 'components/MessageBar';
 
 export default function Markets() {
   const router = useRouter();
@@ -38,6 +39,12 @@ export default function Markets() {
 
   return (
     <Container>
+      <MessageBar
+        id="tutorial-markets-list"
+        title="Your Go-To Markets"
+        message="Add the supermarkets you visit most. Create aisles in the exact same order you walk through the store, and your shopping lists will sort themselves perfectly!"
+      />
+
       <ScrollView>
         <View className="mt-10 flex-1 items-center justify-center p-6">
           <PageDescription>Search for your favorite markets or a new one.</PageDescription>

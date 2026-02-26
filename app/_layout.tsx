@@ -111,6 +111,9 @@ export default function Layout() {
                 elevation: 0,
                 shadowOpacity: 0,
               },
+              headerLeft: () => (
+                <BackButton backRoute="/settings" color={AREA_THEMES.market.hexColor} />
+              ),
               drawerActiveBackgroundColor: `${AREA_THEMES.market.hexColor}15`,
               drawerActiveTintColor: AREA_THEMES.market.hexColor,
               drawerIcon: ({ color, size }) => <Feather name="map-pin" size={size} color={color} />,
@@ -160,6 +163,9 @@ export default function Layout() {
                 elevation: 0,
                 shadowOpacity: 0,
               },
+              headerLeft: () => (
+                <BackButton backRoute="/settings" color={AREA_THEMES.pantry.hexColor} />
+              ),
               drawerActiveBackgroundColor: `${AREA_THEMES.pantry.hexColor}15`,
               drawerActiveTintColor: AREA_THEMES.pantry.hexColor,
               drawerIcon: ({ color, size }) => (
@@ -259,6 +265,9 @@ export default function Layout() {
                 elevation: 0,
                 shadowOpacity: 0,
               },
+              headerLeft: () => (
+                <BackButton backRoute="/settings" color={AREA_THEMES.categories.hexColor} />
+              ),
               drawerActiveBackgroundColor: `${AREA_THEMES.categories.hexColor}15`,
               drawerActiveTintColor: AREA_THEMES.categories.hexColor,
               drawerIcon: ({ color, size }) => <Feather name="package" size={size} color={color} />,

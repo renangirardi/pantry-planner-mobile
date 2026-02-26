@@ -4,6 +4,7 @@
 .env.production.local
 .env.local
 
+data
 node_modules/
 .expo/
 dist/
@@ -16,7 +17,7 @@ npm-debug.*
 *.orig.*
 web-build/
 
-data/renan-data.json
+
 
 ios
 android

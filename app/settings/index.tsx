@@ -8,9 +8,11 @@ import Container from 'components/Container';
 import ContentBox from 'components/ContentBox';
 import Button from 'components/Button';
 import Modal from 'components/Modal';
+import MessageBar from 'components/MessageBar'; // <-- Added MessageBar import
+import ExportButton from 'components/ExportButton';
 
 import { exportDataToShare, exportDataToDevice, importDataFromFile } from 'services/backup-service';
-import ExportButton from 'components/ExportButton';
+import { resetAllTutorials } from 'services/tutorial-service'; // <-- Added service import
 
 export default function Settings() {
   const router = useRouter();
@@ -19,6 +21,7 @@ export default function Settings() {
 
   const [isImportModalOpen, setIsImportModalOpen] = useState(false);
   const [isExportModalOpen, setIsExportModalOpen] = useState(false);
+  const [isResetTutorialModalOpen, setIsResetTutorialModalOpen] = useState(false); // <-- Added state for reset modal
 
   const handleExportShare = async () => {
     setIsProcessing(true);
@@ -96,10 +99,39 @@ export default function Settings() {
     }
   };
 
+  const handleConfirmResetTutorials = async () => {
+    setIsProcessing(true);
+    try {
+      await resetAllTutorials();
+      setIsResetTutorialModalOpen(false);
+      Toast.show({
+        type: 'customSuccess',
+        text1: 'Tutorials Reset!',
+        text2: 'Helpful hints will now show up across the app.',
+      });
+      router.replace('/');
+    } catch (error) {
+      console.error(error);
+      Toast.show({
+        type: 'customError',
+        text1: 'Error resetting tutorials.',
+        text2: 'Please try again later.',
+      });
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
   return (
     <Container>
-      <View className="flex-1 p-6">
-        <ScrollView showsVerticalScrollIndicator={false}>
+      <MessageBar
+        id="tutorial-settings"
+        title="App Settings"
+        message="Manage your data and content from here. We highly recommend exporting a backup of your data occasionally, especially if you have mapped out large supermarkets!"
+      />
+
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View className="flex-1 p-6">
           {/* Content Management Section */}
           <ContentBox>
             <View className="mb-6">
@@ -117,7 +149,7 @@ export default function Settings() {
                   icon="shopping-bag"
                   area="pantry"
                   variant="primary"
-                  onPress={() => setIsExportModalOpen(true)}
+                  onPress={() => router.push('/pantry-items')}
                   disabled={isProcessing}>
                   Manage Items
                 </Button>
@@ -126,7 +158,7 @@ export default function Settings() {
                   icon="package"
                   area="categories"
                   variant="primary"
-                  onPress={() => setIsExportModalOpen(true)}
+                  onPress={() => router.push('/categories')}
                   disabled={isProcessing}>
                   Manage Categories
                 </Button>
@@ -135,7 +167,7 @@ export default function Settings() {
                   icon="map-pin"
                   area="market"
                   variant="primary"
-                  onPress={() => setIsExportModalOpen(true)}
+                  onPress={() => router.push('/markets')}
                   disabled={isProcessing}>
                   Manage Markets
                 </Button>
@@ -174,11 +206,35 @@ export default function Settings() {
               </View>
             </View>
           </ContentBox>
-          <View className="mt-8 border-t border-zinc-800 pt-6">
+
+          {/* Tutorial Reset Section */}
+          <ContentBox>
+            <View className="mb-6">
+              <View className="mb-4 flex-row items-center gap-2">
+                <Feather name="info" size={20} color="#a1a1aa" />
+                <Text className="text-lg font-bold text-zinc-100">Tutorial Reset</Text>
+              </View>
+              <Text className="mb-6 text-sm text-zinc-400">
+                Bring back all the helpful hint banners across the app. This is great if you want a
+                quick refresher on how things work.
+              </Text>
+
+              <View className="gap-4">
+                <Button
+                  area="default"
+                  variant="secondary"
+                  onPress={() => setIsResetTutorialModalOpen(true)}
+                  disabled={isProcessing}>
+                  Reset Tutorial Messages
+                </Button>
+              </View>
+            </View>
+          </ContentBox>
+          <View className="mt-8 border-t border-zinc-800 pb-6 pt-6">
             <Text className="text-center text-sm text-zinc-600">Pantry Planner v1.0.0</Text>
           </View>
-        </ScrollView>
-      </View>
+        </View>
+      </ScrollView>
 
       <Modal
         isOpen={isExportModalOpen}
@@ -216,11 +272,26 @@ export default function Settings() {
         onConfirm={handleConfirmImport}
         title="Import Warning"
         confirmText="Yes, Replace"
-        confirmVariant="danger">
+        confirmVariant="danger"
+        isLoading={isProcessing}>
         <Text className="text-base text-zinc-300">
           Importing a backup file will{' '}
           <Text className="font-bold text-red-400">replace and delete</Text> all your current data.
           Do you wish to continue?
+        </Text>
+      </Modal>
+
+      <Modal
+        isOpen={isResetTutorialModalOpen}
+        onClose={() => setIsResetTutorialModalOpen(false)}
+        onConfirm={handleConfirmResetTutorials}
+        title="Reset Tutorials?"
+        confirmText="Yes, Reset"
+        confirmVariant="primary"
+        isLoading={isProcessing}>
+        <Text className="text-base text-zinc-300">
+          This will make all the blue helpful hint banners reappear at the top of the screens. Do
+          you wish to continue?
         </Text>
       </Modal>
     </Container>

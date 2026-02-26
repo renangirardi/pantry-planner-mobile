@@ -10,6 +10,7 @@ import Container from 'components/Container';
 import PageDescription from 'components/PageDescription';
 import Button from 'components/Button';
 import CategoryList from 'components/CategoryList'; // <-- Importando a nova lista
+import MessageBar from 'components/MessageBar';
 
 export default function Categories() {
   const router = useRouter();
@@ -38,6 +39,11 @@ export default function Categories() {
 
   return (
     <Container>
+      <MessageBar
+        id="tutorial-categories-list"
+        title="Organize Your Pantry"
+        message="Categories keep your master pantry tidy. Also, if you create a Shopping List without assigning a specific market, your items will automatically be grouped using these categories!"
+      />
       <ScrollView>
         <View className="mt-10 flex-1 items-center justify-center p-6">
           <PageDescription>Manage your pantry and shopping item categories.</PageDescription>
