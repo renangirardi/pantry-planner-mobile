@@ -1,30 +1,11 @@
 import { STORAGE_KEYS, getStorageData, setStorageData } from './storage';
 import { Item } from 'interfaces/Item';
-import { getCategories } from './category-service';
 import * as Crypto from 'expo-crypto';
-import defaultData from 'data/default-data.json';
 
 export async function getItems(): Promise<Item[]> {
-  let items = (await getStorageData<Item>(STORAGE_KEYS.ITEMS)) || [];
+  const items = (await getStorageData<Item>(STORAGE_KEYS.ITEMS)) || [];
 
-  if (items.length === 0) {
-    const categories = await getCategories();
-
-    const initialItems = defaultData.items.map((defItem) => {
-      const matchedCategory = categories.find((c) => c.name === defItem.categoryName);
-
-      return {
-        id: Crypto.randomUUID(),
-        name: defItem.name,
-        categoryId: matchedCategory ? matchedCategory.id : undefined,
-        locations: [],
-      } as Item;
-    });
-
-    await setStorageData(STORAGE_KEYS.ITEMS, initialItems);
-    items = initialItems;
-  }
-
+  // Apenas lê e ordena.
   return items.sort((a, b) => a.name.localeCompare(b.name));
 }
 

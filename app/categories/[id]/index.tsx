@@ -50,32 +50,33 @@ export default function EditCategory() {
         title="Editing a Category"
         message="If you change a category's name, all pantry items currently linked to it will automatically reflect the new name. No need to update them one by one!"
       />
-
-      <View className="flex-1 p-6">
-        <StatusBar barStyle="default" />
-        <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-          className="flex-1">
-          <ScrollView
-            className="flex-1"
-            contentContainerStyle={{ paddingBottom: 40 }}
-            keyboardShouldPersistTaps="handled">
-            <ContentBox>
-              {loading ? (
-                <View className="h-60 items-center justify-center">
-                  <ActivityIndicator size="large" color="#16a34a" />
-                </View>
-              ) : category ? (
-                <CategoryForm key={category.id} isEditing={true} initialData={category} />
-              ) : (
-                <View className="h-40 items-center justify-center">
-                  <Text className="text-red-500">Category not found.</Text>
-                </View>
-              )}
-            </ContentBox>
-          </ScrollView>
-        </KeyboardAvoidingView>
-      </View>
+      <ScrollView>
+        <View className="flex-1 p-6">
+          <StatusBar barStyle="default" />
+          <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            className="flex-1">
+            <ScrollView
+              className="flex-1"
+              contentContainerStyle={{ paddingBottom: 40 }}
+              keyboardShouldPersistTaps="handled">
+              <ContentBox>
+                {loading ? (
+                  <View className="h-60 items-center justify-center">
+                    <ActivityIndicator size="large" color="#16a34a" />
+                  </View>
+                ) : category ? (
+                  <CategoryForm key={category.id} isEditing={true} initialData={category} />
+                ) : (
+                  <View className="h-40 items-center justify-center">
+                    <Text className="text-red-500">Category not found.</Text>
+                  </View>
+                )}
+              </ContentBox>
+            </ScrollView>
+          </KeyboardAvoidingView>
+        </View>
+      </ScrollView>
     </Container>
   );
 }

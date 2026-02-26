@@ -23,23 +23,28 @@ export default function CreateNewMarket() {
         title="Map Your Market"
         message="Add the aisles in the exact order you usually walk through the store. This is the secret to getting your shopping lists perfectly sorted so you never have to backtrack!"
       />
+      <ScrollView>
+        <View className="flex-1 p-6">
+          <StatusBar barStyle="default" />
 
-      <View className="flex-1 p-6">
-        <StatusBar barStyle="default" />
-
-        <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-          className="flex-1">
-          <ScrollView
-            className="flex-1"
-            contentContainerStyle={{ paddingBottom: 40 }}
-            keyboardShouldPersistTaps="handled">
-            <ContentBox>
-              <MarketForm key={formKey} isEditing={false} initialData={{ name: '', aisles: [] }} />
-            </ContentBox>
-          </ScrollView>
-        </KeyboardAvoidingView>
-      </View>
+          <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            className="flex-1">
+            <ScrollView
+              className="flex-1"
+              contentContainerStyle={{ paddingBottom: 40 }}
+              keyboardShouldPersistTaps="handled">
+              <ContentBox>
+                <MarketForm
+                  key={formKey}
+                  isEditing={false}
+                  initialData={{ name: '', aisles: [] }}
+                />
+              </ContentBox>
+            </ScrollView>
+          </KeyboardAvoidingView>
+        </View>
+      </ScrollView>
     </Container>
   );
 }

@@ -23,22 +23,23 @@ export default function CreateNewCategory() {
         title="Creating Categories"
         message="Keep things simple! Broad categories like 'Dairy' or 'Produce' work best to quickly filter your items and organize generic shopping trips."
       />
-
-      <View className="flex-1 p-6">
-        <StatusBar barStyle="default" />
-        <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-          className="flex-1">
-          <ScrollView
-            className="flex-1"
-            contentContainerStyle={{ paddingBottom: 40 }}
-            keyboardShouldPersistTaps="handled">
-            <ContentBox>
-              <CategoryForm key={formKey} isEditing={false} />
-            </ContentBox>
-          </ScrollView>
-        </KeyboardAvoidingView>
-      </View>
+      <ScrollView>
+        <View className="flex-1 p-6">
+          <StatusBar barStyle="default" />
+          <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            className="flex-1">
+            <ScrollView
+              className="flex-1"
+              contentContainerStyle={{ paddingBottom: 40 }}
+              keyboardShouldPersistTaps="handled">
+              <ContentBox>
+                <CategoryForm key={formKey} isEditing={false} />
+              </ContentBox>
+            </ScrollView>
+          </KeyboardAvoidingView>
+        </View>
+      </ScrollView>
     </Container>
   );
 }

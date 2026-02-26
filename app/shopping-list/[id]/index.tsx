@@ -58,38 +58,39 @@ export default function EditShoppingList() {
         title="Editing Your List"
         message="You can update the list name, change the linked market, or manage your items. If you change the market, your items will automatically reorganize to match the new aisles!"
       />
+      <ScrollView>
+        <View className="flex-1 p-6">
+          <StatusBar barStyle="default" />
 
-      <View className="flex-1 p-6">
-        <StatusBar barStyle="default" />
-
-        <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-          className="flex-1">
-          <ScrollView
-            className="flex-1"
-            contentContainerStyle={{ paddingBottom: 40 }}
-            keyboardShouldPersistTaps="handled">
-            <ContentBox>
-              {loading ? (
-                <View className="h-60 items-center justify-center">
-                  <ActivityIndicator size="large" color="#16a34a" />
-                  <Text className="mt-4 text-zinc-500">Loading list data...</Text>
-                </View>
-              ) : shoppingList ? (
-                <ShoppingListForm
-                  key={shoppingList.id}
-                  isEditing={true}
-                  initialData={shoppingList}
-                />
-              ) : (
-                <View className="h-40 items-center justify-center">
-                  <Text className="text-red-500">Shopping list not found.</Text>
-                </View>
-              )}
-            </ContentBox>
-          </ScrollView>
-        </KeyboardAvoidingView>
-      </View>
+          <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            className="flex-1">
+            <ScrollView
+              className="flex-1"
+              contentContainerStyle={{ paddingBottom: 40 }}
+              keyboardShouldPersistTaps="handled">
+              <ContentBox>
+                {loading ? (
+                  <View className="h-60 items-center justify-center">
+                    <ActivityIndicator size="large" color="#16a34a" />
+                    <Text className="mt-4 text-zinc-500">Loading list data...</Text>
+                  </View>
+                ) : shoppingList ? (
+                  <ShoppingListForm
+                    key={shoppingList.id}
+                    isEditing={true}
+                    initialData={shoppingList}
+                  />
+                ) : (
+                  <View className="h-40 items-center justify-center">
+                    <Text className="text-red-500">Shopping list not found.</Text>
+                  </View>
+                )}
+              </ContentBox>
+            </ScrollView>
+          </KeyboardAvoidingView>
+        </View>
+      </ScrollView>
     </Container>
   );
 }

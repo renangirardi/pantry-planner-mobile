@@ -23,23 +23,24 @@ export default function CreateNewItem() {
         title="Add a New Item"
         message="Always assign a Category to your items for basic sorting. You can also map exactly where to find it by adding specific Market aisles!"
       />
-
-      <View className="flex-1 p-6">
-        x
-        <StatusBar barStyle="default" />
-        <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-          className="flex-1">
-          <ScrollView
-            className="flex-1"
-            contentContainerStyle={{ paddingBottom: 40 }}
-            keyboardShouldPersistTaps="handled">
-            <ContentBox>
-              <ItemForm key={formKey} isEditing={false} initialData={{ name: '' }} />
-            </ContentBox>
-          </ScrollView>
-        </KeyboardAvoidingView>
-      </View>
+      <ScrollView>
+        <View className="flex-1 p-6">
+          x
+          <StatusBar barStyle="default" />
+          <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            className="flex-1">
+            <ScrollView
+              className="flex-1"
+              contentContainerStyle={{ paddingBottom: 40 }}
+              keyboardShouldPersistTaps="handled">
+              <ContentBox>
+                <ItemForm key={formKey} isEditing={false} initialData={{ name: '' }} />
+              </ContentBox>
+            </ScrollView>
+          </KeyboardAvoidingView>
+        </View>
+      </ScrollView>
     </Container>
   );
 }

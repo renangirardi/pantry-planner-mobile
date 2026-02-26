@@ -1,27 +1,17 @@
-import { createItem } from './item-service';
-import { getMarkets, createMarket } from './market-service';
-import { createShoppingList } from './shopping-list-service';
-
-import mockData from 'data/mock-data.json';
-//import mockData from 'data/renan-data.json';
+import { STORAGE_KEYS, getStorageData, setStorageData } from './storage';
+import mockData from 'data/default-data.json';
 
 export async function populateDatabaseWhenEmpty() {
-  /*
   try {
-    const markets = await getMarkets();
+    const markets = (await getStorageData(STORAGE_KEYS.MARKETS)) || [];
 
     if (markets.length === 0) {
       console.log('Empty database, creating mass mock...');
 
-      for (const market of mockData.markets) {
-        await createMarket(market);
-      }
-      for (const item of mockData.items) {
-        await createItem(item as any);
-      }
-      for (const shoppingList of mockData.shoppingLists) {
-        await createShoppingList(shoppingList as any);
-      }
+      await setStorageData(STORAGE_KEYS.MARKETS, mockData.markets);
+      await setStorageData(STORAGE_KEYS.CATEGORIES, mockData.categories);
+      await setStorageData(STORAGE_KEYS.ITEMS, mockData.items);
+      await setStorageData(STORAGE_KEYS.SHOPPINGLISTS, mockData.shoppingLists);
 
       console.log('Massive Mock created successfully! 🎉');
     } else {
@@ -30,8 +20,4 @@ export async function populateDatabaseWhenEmpty() {
   } catch (error) {
     console.error('Error populating database:', error);
   }
-    */
-  console.log(
-    'populateDatabaseWhenEmpty is currently disabled to prevent accidental data overwrites. Please enable it in seed.ts if you want to populate the database with mock data.'
-  );
 }

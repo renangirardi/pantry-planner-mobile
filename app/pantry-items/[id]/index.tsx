@@ -58,34 +58,35 @@ export default function EditItem() {
         title="Editing an Item"
         message="Update the item's category or map it to a new market aisle. Changes made here will automatically apply to your future shopping lists!"
       />
+      <ScrollView>
+        <View className="flex-1 p-6">
+          <StatusBar barStyle="default" />
 
-      <View className="flex-1 p-6">
-        <StatusBar barStyle="default" />
-
-        <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-          className="flex-1">
-          <ScrollView
-            className="flex-1"
-            contentContainerStyle={{ paddingBottom: 40 }}
-            keyboardShouldPersistTaps="handled">
-            <ContentBox>
-              {loading ? (
-                <View className="h-60 items-center justify-center">
-                  <ActivityIndicator size="large" color="#16a34a" />
-                  <Text className="mt-4 text-zinc-500">Loading item data...</Text>
-                </View>
-              ) : item ? (
-                <ItemForm key={item.id} isEditing={true} initialData={item} />
-              ) : (
-                <View className="h-40 items-center justify-center">
-                  <Text className="text-red-500">Item not found.</Text>
-                </View>
-              )}
-            </ContentBox>
-          </ScrollView>
-        </KeyboardAvoidingView>
-      </View>
+          <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            className="flex-1">
+            <ScrollView
+              className="flex-1"
+              contentContainerStyle={{ paddingBottom: 40 }}
+              keyboardShouldPersistTaps="handled">
+              <ContentBox>
+                {loading ? (
+                  <View className="h-60 items-center justify-center">
+                    <ActivityIndicator size="large" color="#16a34a" />
+                    <Text className="mt-4 text-zinc-500">Loading item data...</Text>
+                  </View>
+                ) : item ? (
+                  <ItemForm key={item.id} isEditing={true} initialData={item} />
+                ) : (
+                  <View className="h-40 items-center justify-center">
+                    <Text className="text-red-500">Item not found.</Text>
+                  </View>
+                )}
+              </ContentBox>
+            </ScrollView>
+          </KeyboardAvoidingView>
+        </View>
+      </ScrollView>
     </Container>
   );
 }

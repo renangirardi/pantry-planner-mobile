@@ -23,23 +23,24 @@ export default function CreateNewShoppingList() {
         title="Plan Your Trip"
         message="Give your list a name and choose a Market to have your items automatically sorted by aisles. Then, tap to add items!"
       />
+      <ScrollView>
+        <View className="flex-1 p-6">
+          <StatusBar barStyle="default" />
 
-      <View className="flex-1 p-6">
-        <StatusBar barStyle="default" />
-
-        <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-          className="flex-1">
-          <ScrollView
-            className="flex-1"
-            contentContainerStyle={{ paddingBottom: 40 }}
-            keyboardShouldPersistTaps="handled">
-            <ContentBox>
-              <ShoppingListForm key={formKey} />
-            </ContentBox>
-          </ScrollView>
-        </KeyboardAvoidingView>
-      </View>
+          <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            className="flex-1">
+            <ScrollView
+              className="flex-1"
+              contentContainerStyle={{ paddingBottom: 40 }}
+              keyboardShouldPersistTaps="handled">
+              <ContentBox>
+                <ShoppingListForm key={formKey} />
+              </ContentBox>
+            </ScrollView>
+          </KeyboardAvoidingView>
+        </View>
+      </ScrollView>
     </Container>
   );
 }
