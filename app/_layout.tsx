@@ -37,7 +37,12 @@ export default function Layout() {
               fontWeight: 'bold',
             },
             drawerInactiveTintColor: '#ffffff',
-            drawerStyle: { backgroundColor: '#18181b' },
+            drawerStyle: { backgroundColor: '#18181b', width: 300 },
+            drawerItemStyle: {
+              borderRadius: 6,
+              paddingHorizontal: 8,
+              marginVertical: 4,
+            },
           }}>
           {/* ==================== HOME ==================== */}
           <Drawer.Screen
