@@ -4,7 +4,7 @@
 .env.production.local
 .env.local
 
-data
+data/
 node_modules/
 .expo/
 dist/
