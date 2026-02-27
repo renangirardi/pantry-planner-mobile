@@ -40,17 +40,15 @@ As a Mid-Level Front-End Developer, I prioritized maintainability, clean code, s
 ## 🚀 How to Run Locally
 
 1. **Clone the repository:**
-   ```bash
-   git clone [https://github.com/your-username/pantry-planner-mobile.git](https://github.com/your-username/pantry-planner-mobile.git)
-   cd pantry-planner-mobile
-
-2. **Install dependencies:**
+   git clone https://github.com/your-username/pantry-planner-mobile.git
+   
+3. **Install dependencies:**
    npm install
 
-3. **Start the Expo development server:**
+4. **Start the Expo development server:**
    npx expo start
 
-4. **Run on your device:**
+5. **Run on your device:**
    Download the **Expo Go** app on your iOS or Android device and scan the QR code displayed in your terminal.
 
 ## 📄 License
