@@ -4,7 +4,11 @@
 .env.production.local
 .env.local
 
-data/
+data/mock-data.json
+data/pt-br-data.json
+data/en-us-data.json
+data/renan-data.json
+
 node_modules/
 .expo/
 dist/
