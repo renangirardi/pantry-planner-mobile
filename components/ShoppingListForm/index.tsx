@@ -27,6 +27,7 @@ import ContextualShortcutModal from 'components/ContextualShortcutModal';
 
 import MarketForm from 'components/MarketForm';
 import ItemForm from 'components/ItemForm';
+import MiniButton from 'components/MiniButton';
 
 interface ShoppingListFormProps {
   isEditing?: boolean;
@@ -267,12 +268,13 @@ export default function ShoppingListForm({
               )}
             </View>
 
-            <Pressable
+            <MiniButton
+              label="Add Items"
               onPress={() => setItemSelectorOpen(true)}
-              className="mt-4 flex-row items-center justify-center gap-2 rounded-md border border-dashed border-zinc-600 p-4 active:bg-zinc-800">
-              <Feather name="plus-circle" size={20} color="#a1a1aa" />
-              <Text className="font-semibold text-zinc-400">Add Items</Text>
-            </Pressable>
+              icon="plus-circle"
+              area="shopping"
+              className="mt-6"
+            />
           </View>
 
           <View className="mt-4 flex-row gap-4">
@@ -299,7 +301,7 @@ export default function ShoppingListForm({
         onClose={() => setMarketSelectorOpen(false)}
         onSelect={handleMarketSelect}
         onCreateNew={() => setShowMarketModal(true)}
-        createNewText="Add Market"
+        createNewText="Register New Market"
         area="market"
       />
 
@@ -313,7 +315,7 @@ export default function ShoppingListForm({
         onClose={() => setItemSelectorOpen(false)}
         onToggle={handleItemToggle}
         onCreateNew={() => setShowItemModal(true)}
-        createNewText="Add Item"
+        createNewText="Register New Item"
         area="pantry"
       />
 

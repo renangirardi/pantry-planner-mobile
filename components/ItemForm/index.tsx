@@ -24,6 +24,7 @@ import CategoryForm from 'components/CategoryForm';
 import MarketForm from 'components/MarketForm';
 
 import ItemLocationCard from './ItemLocationCard';
+import MiniButton from 'components/MiniButton';
 
 interface ItemFormProps {
   isEditing?: boolean;
@@ -310,12 +311,13 @@ export default function ItemForm({
               ))}
             </View>
 
-            <Pressable
+            <MiniButton
+              label="Add location"
               onPress={handleAddLocation}
-              className="mt-4 flex-row items-center justify-center gap-2 rounded-md border border-dashed border-zinc-600 p-4 active:bg-zinc-800 active:opacity-70">
-              <Feather name="plus-circle" size={20} color="#a1a1aa" />
-              <Text className="font-semibold text-zinc-400">Add Location</Text>
-            </Pressable>
+              icon="plus-circle"
+              area="pantry"
+              className="mt-6"
+            />
           </View>
 
           <View className="mt-4 flex-row gap-4">
@@ -356,9 +358,9 @@ export default function ItemForm({
         }
         createNewText={
           selectorState.type === 'MARKET'
-            ? 'Add Market'
+            ? 'Register New Market'
             : selectorState.type === 'CATEGORY'
-              ? 'Add Category'
+              ? 'Register New Category'
               : undefined
         }
         area={

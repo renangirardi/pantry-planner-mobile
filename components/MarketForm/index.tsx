@@ -10,6 +10,7 @@ import { Aisle } from 'interfaces/Aisle';
 import Button from 'components/Button';
 import Input from 'components/Input';
 import Modal from 'components/Modal';
+import MiniButton from 'components/MiniButton';
 
 interface MarketFormProps {
   isEditing?: boolean;
@@ -192,12 +193,13 @@ export default function MarketForm({
             ))}
           </View>
 
-          <Pressable
+          <MiniButton
+            label="Add aisle"
             onPress={handleAddAisle}
-            className="mt-4 flex-row items-center justify-center gap-2 rounded-md border border-dashed border-zinc-600 p-4 active:bg-zinc-800">
-            <Feather name="plus-circle" size={20} color="#a1a1aa" />
-            <Text className="font-semibold text-zinc-400">Add another aisle</Text>
-          </Pressable>
+            icon="plus-circle"
+            area="market"
+            className="mt-6"
+          />
         </View>
 
         <View className="mt-4 flex-row gap-4">

@@ -62,7 +62,7 @@ export default function ShoppingLists() {
               variant="primary"
               icon="plus"
               onPress={() => router.push('/shopping-list/create-new')}>
-              Start a New Shopping List
+              Start New Shopping List
             </Button>
           </View>
 

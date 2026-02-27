@@ -55,7 +55,7 @@ export default function Markets() {
               variant="primary"
               icon="plus"
               onPress={() => router.push('/markets/create-new')}>
-              Enter a New Market
+              Register New Market
             </Button>
           </View>
 

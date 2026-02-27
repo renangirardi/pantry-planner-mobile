@@ -54,7 +54,7 @@ export default function Categories() {
               variant="primary"
               icon="plus"
               onPress={() => router.push('/categories/create-new')}>
-              Create New Category
+              Register New Category
             </Button>
           </View>
 

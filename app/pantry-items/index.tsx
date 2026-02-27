@@ -55,7 +55,7 @@ export default function Markets() {
               variant="primary"
               icon="plus"
               onPress={() => router.push('/pantry-items/create-new')}>
-              Register a New Item
+              Register New Item
             </Button>
           </View>
 
