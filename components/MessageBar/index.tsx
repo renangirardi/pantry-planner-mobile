@@ -17,7 +17,6 @@ export default function MessageBar({ id, title, message }: MessageBarProps) {
     useCallback(() => {
       async function checkStatus() {
         const dismissed = await hasDismissedTutorial(id);
-        // Toda vez que a tela abrir, ele reavalia se deve ou não mostrar
         setIsVisible(!dismissed);
       }
       checkStatus();

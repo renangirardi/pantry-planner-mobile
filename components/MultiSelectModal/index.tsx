@@ -22,7 +22,6 @@ interface MultiSelectModalProps {
   onClose: () => void;
   onToggle: (id: string) => void;
   onQuantityChange?: (id: string, value: string) => void;
-  // Novas propriedades para o atalho contextual
   onCreateNew?: () => void;
   createNewText?: string;
   area?: 'default' | 'market' | 'pantry' | 'shopping' | 'categories';
@@ -39,7 +38,7 @@ export default function MultiSelectModal({
   onQuantityChange,
   onCreateNew,
   createNewText,
-  area = 'default', // Caso você queira usar as cores temáticas no futuro
+  area = 'default',
 }: MultiSelectModalProps) {
   const [searchQuery, setSearchQuery] = useState('');
 

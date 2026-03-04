@@ -8,12 +8,11 @@ import Container from 'components/Container';
 import ContentBox from 'components/ContentBox';
 import Button from 'components/Button';
 import Modal from 'components/Modal';
-import MessageBar from 'components/MessageBar'; // <-- Added MessageBar import
+import MessageBar from 'components/MessageBar';
 import ExportButton from 'components/ExportButton';
 
 import { exportDataToShare, exportDataToDevice, importDataFromFile } from 'services/backup-service';
-import { resetAllTutorials } from 'services/tutorial-service'; // <-- Added service import
-
+import { resetAllTutorials } from 'services/tutorial-service';
 export default function Settings() {
   const router = useRouter();
 
@@ -21,7 +20,7 @@ export default function Settings() {
 
   const [isImportModalOpen, setIsImportModalOpen] = useState(false);
   const [isExportModalOpen, setIsExportModalOpen] = useState(false);
-  const [isResetTutorialModalOpen, setIsResetTutorialModalOpen] = useState(false); // <-- Added state for reset modal
+  const [isResetTutorialModalOpen, setIsResetTutorialModalOpen] = useState(false);
 
   const handleExportShare = async () => {
     setIsProcessing(true);

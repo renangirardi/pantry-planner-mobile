@@ -6,31 +6,28 @@ import { Feather } from '@expo/vector-icons';
 type Props = {
   placeholder: string;
   onChange?: (text: string) => void;
-  useUrlParams?: boolean; // Se false, não mexe na URL (perfeito para modais)
+  useUrlParams?: boolean;
   initialValue?: string;
 };
 
 export default function Search({
   placeholder,
   onChange,
-  useUrlParams = true, // Mantém true por padrão para não quebrar suas páginas atuais
+  useUrlParams = true,
   initialValue = '',
 }: Props) {
   const router = useRouter();
   const params = useLocalSearchParams();
 
   const handleSearch = useDebouncedCallback((term: string) => {
-    // Só altera a URL se for permitido
     if (useUrlParams) {
       router.setParams({ query: term });
     }
-    // Dispara a função de callback local (se existir)
     if (onChange) {
       onChange(term);
     }
   }, 300);
 
-  // Define o valor inicial baseado na URL ou no estado local
   const defaultValue = useUrlParams ? params.query?.toString() : initialValue;
 
   return (

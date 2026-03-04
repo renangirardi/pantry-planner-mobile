@@ -9,7 +9,7 @@ import Search from 'components/Search';
 import Container from 'components/Container';
 import PageDescription from 'components/PageDescription';
 import Button from 'components/Button';
-import CategoryList from 'components/CategoryList'; // <-- Importando a nova lista
+import CategoryList from 'components/CategoryList';
 import MessageBar from 'components/MessageBar';
 
 export default function Categories() {

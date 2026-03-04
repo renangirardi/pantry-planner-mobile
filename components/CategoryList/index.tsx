@@ -39,7 +39,7 @@ export default function CategoryList({ categories }: CategoryListProps) {
     } catch (error) {
       console.error(error);
       Toast.show({
-        type: 'error', // ou 'customError' se você configurou assim
+        type: 'error',
         text1: 'Error',
         text2: 'Could not delete category.',
       });

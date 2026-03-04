@@ -53,7 +53,6 @@ export default function ShoppingListForm({
   const [markets, setMarkets] = useState<Market[]>([]);
   const [allItems, setAllItems] = useState<Item[]>([]);
 
-  // Estados dos Modais Contextuais
   const [showMarketModal, setShowMarketModal] = useState(false);
   const [showItemModal, setShowItemModal] = useState(false);
 
@@ -64,7 +63,6 @@ export default function ShoppingListForm({
   const [marketSelectorOpen, setMarketSelectorOpen] = useState(false);
   const [itemSelectorOpen, setItemSelectorOpen] = useState(false);
 
-  // Função isolada para recarregar dados
   const loadData = async () => {
     const fetchedMarkets = await getMarkets();
     const fetchedItems = await getItems();
