@@ -25,7 +25,6 @@ export default function CreateNewItem() {
       />
       <ScrollView>
         <View className="flex-1 p-6">
-          x
           <StatusBar barStyle="default" />
           <KeyboardAvoidingView
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
