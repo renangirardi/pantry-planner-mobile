@@ -3,15 +3,17 @@ import mockData from 'data/default-data.json';
 
 export async function populateDatabaseWhenEmpty() {
   try {
-    const markets = (await getStorageData(STORAGE_KEYS.MARKETS)) || [];
+    const items = (await getStorageData(STORAGE_KEYS.ITEMS)) || [];
 
-    if (markets.length === 0) {
+    if (items.length === 0) {
       console.log('Empty database, creating mass mock...');
 
-      await setStorageData(STORAGE_KEYS.MARKETS, mockData.markets);
-      await setStorageData(STORAGE_KEYS.CATEGORIES, mockData.categories);
-      await setStorageData(STORAGE_KEYS.ITEMS, mockData.items);
-      await setStorageData(STORAGE_KEYS.SHOPPINGLISTS, mockData.shoppingLists);
+      if (mockData.categories) {
+        await setStorageData(STORAGE_KEYS.CATEGORIES, mockData.categories);
+      }
+      if (mockData.items) {
+        await setStorageData(STORAGE_KEYS.ITEMS, mockData.items);
+      }
 
       console.log('Massive Mock created successfully! 🎉');
     } else {
