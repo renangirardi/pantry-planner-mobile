@@ -34,6 +34,7 @@ export default function EditCategory() {
         const data = await getCategoryById(catId);
         setCategory(data);
       } catch (error) {
+        console.log('Error fetching category:', error);
         Toast.show({ type: 'customError', text1: 'Error', text2: 'Could not load category.' });
         router.back();
       } finally {

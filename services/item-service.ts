@@ -1,11 +1,9 @@
 import { STORAGE_KEYS, getStorageData, setStorageData } from './storage';
 import { Item } from 'interfaces/Item';
-import * as Crypto from 'expo-crypto';
 
 export async function getItems(): Promise<Item[]> {
   const items = (await getStorageData<Item>(STORAGE_KEYS.ITEMS)) || [];
 
-  // Apenas lê e ordena.
   return items.sort((a, b) => a.name.localeCompare(b.name));
 }
 

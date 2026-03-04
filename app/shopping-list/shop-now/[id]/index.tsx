@@ -1,8 +1,7 @@
 import React, { useState, useCallback } from 'react';
-import { View, Text, SectionList, ActivityIndicator, Pressable } from 'react-native';
+import { View, Text, SectionList, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams, useRouter, useFocusEffect } from 'expo-router';
-import { Feather } from '@expo/vector-icons';
 import Toast from 'react-native-toast-message';
 
 import { getShoppingListById, updateShoppingList } from 'services/shopping-list-service';

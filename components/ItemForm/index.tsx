@@ -1,8 +1,7 @@
 import React, { useState, useMemo, useCallback } from 'react';
-import { View, Text, Pressable, ScrollView, Modal as RNModal } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import { useFocusEffect, useRouter } from 'expo-router';
 import Toast from 'react-native-toast-message';
-import { Feather } from '@expo/vector-icons';
 import * as Crypto from 'expo-crypto';
 
 import { createItem, updateItem, deleteItem } from 'services/item-service';
@@ -55,7 +54,6 @@ export default function ItemForm({
   const [availableMarkets, setAvailableMarkets] = useState<Market[]>([]);
   const [availableCategories, setAvailableCategories] = useState<Category[]>([]);
 
-  // Estados dos Modais Contextuais
   const [showCategoryModal, setShowCategoryModal] = useState(false);
   const [showMarketModal, setShowMarketModal] = useState(false);
 
@@ -69,7 +67,6 @@ export default function ItemForm({
     rowIndex: number | null;
   }>({ isOpen: false, type: null, rowIndex: null });
 
-  // Isolamos a busca para podermos chamar sob demanda
   const loadData = async () => {
     const [markets, categories] = await Promise.all([getMarkets(), getCategories()]);
     setAvailableMarkets(markets);
